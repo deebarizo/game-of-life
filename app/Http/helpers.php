@@ -1,17 +1,31 @@
 <?php
 
 /****************************************************************************************
-HOME
+PRINT VARIABLE
 ****************************************************************************************/
 
-Route::get('/', function() {
+function ddAll($var) {
 
-	return redirect('/daily_tasks');
-});
+	echo '<pre>';
+	print_r($var);
+	echo '</pre>';
+
+	exit();
+}
+
+function prf($var) {
+
+    echo '<pre>';
+    print_r($var);
+    echo '</pre>';
+}
 
 
 /****************************************************************************************
-DAILY TASKS
+SET ACTIVE TAB
 ****************************************************************************************/
 
-Route::resource('daily_tasks', 'DailyTasksController');
+function setActive($path, $active = 'active') {
+
+	return Request::is($path) ? $active : '';
+}
