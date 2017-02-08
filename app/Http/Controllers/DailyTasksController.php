@@ -14,9 +14,8 @@ class DailyTasksController extends Controller
     public function index()
     {
         $h2Tag = 'Daily Tasks'; 
-        $titleTag = $h2Tag.' | ';
            
-        return view('daily_tasks/index', compact('h2Tag', 'titleTag'));
+        return view('daily_tasks/index', compact('h2Tag'));
     }
 
     /**
@@ -26,7 +25,9 @@ class DailyTasksController extends Controller
      */
     public function create()
     {
-        //
+        $h2Tag = 'Create Daily Task';
+
+        return view('daily_tasks/create', compact('h2Tag'));
     }
 
     /**

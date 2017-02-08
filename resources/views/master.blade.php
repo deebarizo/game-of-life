@@ -19,7 +19,7 @@
 
 		<?php $siteName = 'Game of Life'; ?>
 
-		<title>{{ $titleTag }}{{ $siteName }}</title>
+		<title>{{ $h2Tag.' | ' }}{{ $siteName }}</title>
 	</head>
 
 	<body>
