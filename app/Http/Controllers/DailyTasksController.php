@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Input;
+
+use App\UseCases\FileUploader;
+
+use App\Models\DailyTask;
+
 class DailyTasksController extends Controller
 {
     /**
@@ -38,7 +44,19 @@ class DailyTasksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dailyTask = new DailyTask;
+
+        $dailyTask->name = trim($request->input('name'));
+        $dailyTask->link = (trim($request->input('link')) == '' ? null : trim($request->input('link')));
+        $dailyTask->image_url = 'test';
+
+        $dailyTask->save();
+
+        # $fileUploader = new FileUploader;
+
+        # $imageFile = $fileUploader->uploadImageFile($request);
+
+        return redirect()->route('daily_tasks.index')->with('message', 'Success!'); 
     }
 
     /**

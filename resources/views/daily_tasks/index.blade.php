@@ -1,11 +1,14 @@
 @extends('master')
 
 @section('content')
-	<div class="row">
-		<div class="col-lg-12">
-			<h2>{{ $h2Tag }}</h2>
 
-			<hr>
+	@include('_form_heading')
+	
+	<div class="row">
+
+		<div class="col-lg-12">
+
+			<p><a href="/daily_tasks/create">Create Daily Task</a></p>
 
 		</div>
 	</div>

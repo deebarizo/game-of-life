@@ -6,7 +6,7 @@
 
 	<div class="row">
 
-		<form method="POST" action="/events" accept-charset="UTF-8">
+		<form method="POST" action="/daily_tasks" accept-charset="UTF-8" enctype="multipart/form-data">
 			{{ csrf_field() }}
 
 			<div class="col-lg-6"> 
@@ -23,10 +23,10 @@
 				</div>
 			</div>
 
-			<div class="col-lg-9"> 
+			<div class="col-lg-4" style="margin-bottom: 20px"> 
 				<div class="form-group">
-					<label for="image_url">Image URL:</label>
-						<input class="form-control" name="image_url" type="text" value="" id="image_url">
+					<label for="image">Image:</label>
+					<input name="image" type="file" id="image">
 				</div>
 			</div>
 
