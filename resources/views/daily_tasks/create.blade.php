@@ -18,7 +18,7 @@
 
 			<div class="col-lg-9"> 
 				<div class="form-group">
-					<label for="link">Link:</label>
+					<label for="link">Link (Optional):</label>
 						<input class="form-control" name="link" type="text" value="" id="link">
 				</div>
 			</div>

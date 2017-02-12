@@ -48,13 +48,17 @@ class DailyTasksController extends Controller
 
         $dailyTask->name = trim($request->input('name'));
         $dailyTask->link = (trim($request->input('link')) == '' ? null : trim($request->input('link')));
-        $dailyTask->image_url = 'test';
+        $dailyTask->image_url = '';
 
         $dailyTask->save();
 
-        # $fileUploader = new FileUploader;
+        $fileUploader = new FileUploader;
 
-        # $imageFile = $fileUploader->uploadImageFile($request);
+        $imageUrl = $fileUploader->uploadImageFile($request, 'daily_task', $dailyTask->id);
+
+        $dailyTask->image_url = $imageUrl;
+
+        $dailyTask->save();
 
         return redirect()->route('daily_tasks.index')->with('message', 'Success!'); 
     }
