@@ -51,9 +51,9 @@ class DailyTasksController extends Controller
         $dailyTask = new DailyTask;
 
         $dailyTask->name = trim($request->input('name'));
+        $dailyTask->description = (trim($request->input('description')) == '' ? null : trim($request->input('description')));
         $dailyTask->link = (trim($request->input('link')) == '' ? null : trim($request->input('link')));
-        $dailyTask->image_url = '';
-
+ 
         $dailyTask->save();
 
         $fileUploader = new FileUploader;
