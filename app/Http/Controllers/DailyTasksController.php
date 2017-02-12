@@ -75,7 +75,7 @@ class DailyTasksController extends Controller
      */
     public function show($id)
     {
-        //
+        // Don't need this
     }
 
     /**
@@ -86,7 +86,11 @@ class DailyTasksController extends Controller
      */
     public function edit($id)
     {
-        //
+        $h2Tag = 'Edit Daily Task';
+
+        $dailyTask = DailyTask::find($id);
+
+        return view('daily_tasks/edit', compact('h2Tag', 'dailyTask'));
     }
 
     /**
@@ -98,7 +102,15 @@ class DailyTasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dailyTask = DailyTask::find($id);
+
+        $dailyTask->name = trim($request->input('name'));
+        $dailyTask->description = (trim($request->input('description')) == '' ? null : trim($request->input('description')));
+        $dailyTask->link = (trim($request->input('link')) == '' ? null : trim($request->input('link')));
+ 
+        $dailyTask->save();
+
+        return redirect()->route('daily_tasks.index')->with('message', 'Success!'); 
     }
 
     /**
