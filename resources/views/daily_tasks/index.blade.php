@@ -14,7 +14,7 @@
 
 		@foreach ($dailyTasks as $dailyTask)
 
-			<div class="col-lg-3">
+			<div class="col-lg-4">
 
 				<div style="height: 250px; border: 1px solid">
 					<h4 class="text-center" style="margin: 18px 18px">{{ $dailyTask->name }}</h4>
