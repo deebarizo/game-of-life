@@ -16,8 +16,9 @@
 
 			<?php 
 
-				$description = ($dailyTask->description == '' ? '' : '<img src="'.url('/files/icons/text-lines.png').'">');
+				$description = ($dailyTask->description == '' ? '' : '<a class="description" href="#"><img src="'.url('/files/icons/text-lines.png').'"></a><div style="display: none" class="tool-tip-description">'.$dailyTask->description.'</div>');
 				$link = ($dailyTask->link == '' ? '' : '<a target="_blank" href="'.$dailyTask->link.'"><img src="'.url('/files/icons/link.png').'"></a>');
+			
 			?>
 
 			<div class="col-lg-4">
@@ -35,4 +36,38 @@
 		@endforeach
 
 	</div>
+
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+
+			/****************************************************************************************
+			TOOLTIPS (DESCRIPTIONS)
+			****************************************************************************************/
+
+			$('a.description').on('mouseenter', function(event) {
+
+		        $(this).qtip({
+		        
+		            content: {
+		        
+		                text: $(this).next('.tool-tip-description')
+					},
+
+					position: {
+
+						my: 'left center',
+						at: 'center right',
+						target: $(this)
+					},
+					overwrite: false,
+		            show: {
+		                event: event.type,
+		                ready: true
+		            }
+		        });
+			});
+		});		
+
+	</script>
 @stop
