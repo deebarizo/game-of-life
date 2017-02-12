@@ -25,8 +25,9 @@
 
 			<div class="col-lg-4" style="margin-bottom: 20px"> 
 				<div class="form-group">
-					<label for="image">Image:</label>
+					<label for="image">Image (<a target="_blank" href="http://www.flaticon.com/">Link</a>):</label>
 					<input name="image" type="file" id="image">
+					
 				</div>
 			</div>
 

@@ -20,8 +20,12 @@ class DailyTasksController extends Controller
     public function index()
     {
         $h2Tag = 'Daily Tasks'; 
+
+        $dailyTasks = DailyTask::all();
+
+        # ddAll($dailyTasks);
            
-        return view('daily_tasks/index', compact('h2Tag'));
+        return view('daily_tasks/index', compact('h2Tag', 'dailyTasks'));
     }
 
     /**
