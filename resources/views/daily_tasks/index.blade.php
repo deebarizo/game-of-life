@@ -28,7 +28,7 @@
 
 					<img class="center-block" style="margin-bottom: 27px" src="<?php echo url($dailyTask->image_url); ?>">
 
-					<div class="text-center"><a href="#">Focus</a> | <a href="/daily_tasks/{{ $dailyTask->id }}/edit">Edit</a> | <a href="#">Complete</a></div>
+					<div class="text-center"><a href="#"><img src="<?php echo url('/files/icons/target.png'); ?>"></a> <a href="/daily_tasks/{{ $dailyTask->id }}/edit"><img src="<?php echo url('/files/icons/edit.png'); ?>"></a> <a href="#"><img src="<?php echo url('/files/icons/checked.png'); ?>"></a> <a href="#"><img src="<?php echo url('/files/icons/trash.png'); ?>"></a></div>
 				</div>
 
 			</div>
