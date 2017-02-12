@@ -31,6 +31,7 @@
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
 						<li class="{!! setActive('daily_tasks*') !!}"><a href="/daily_tasks">Daily Tasks</a></li>
+						<li class="{!! setActive('sitemap*') !!}"><a href="/sitemap">Sitemap</a></li>
 					</ul>
 				</div>
 			</div>

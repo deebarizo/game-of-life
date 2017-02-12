@@ -1,12 +1,19 @@
 <?php
 
 /****************************************************************************************
-HOME
+HOME AND SITEMAP
 ****************************************************************************************/
 
 Route::get('/', function() {
 
 	return redirect('/daily_tasks');
+});
+
+Route::get('/sitemap', function() {
+
+	$h2Tag = 'Sitemap';
+
+	return view('/sitemap', compact('h2Tag'));
 });
 
 
