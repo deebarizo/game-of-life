@@ -21,7 +21,7 @@
 
 					<img class="center-block" style="margin-bottom: 27px" src="<?php echo url($dailyTask->image_url); ?>">
 
-					<div class="text-center">Focus | Link | Complete</div>
+					<div class="text-center"><a href="#">Focus</a> | <a href="/daily_tasks/{{ $dailyTask->id }}/edit">Edit</a> <?php echo ($dailyTask->link ? '| <a target="_blank" href="'.$dailyTasks->link.'">Link</a>' : ''); ?> | <a href="#">Complete</a></div>
 				</div>
 
 			</div>
