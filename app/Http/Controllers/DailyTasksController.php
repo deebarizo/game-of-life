@@ -23,8 +23,6 @@ class DailyTasksController extends Controller
 
         $dailyTasks = DailyTask::all();
 
-        # ddAll($dailyTasks);
-           
         return view('daily_tasks/index', compact('h2Tag', 'dailyTasks'));
     }
 
@@ -114,7 +112,7 @@ class DailyTasksController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Soft delete the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
