@@ -119,6 +119,10 @@ class DailyTasksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dailyTask = DailyTask::find($id);
+
+        $dailyTask->delete();
+        
+        return redirect()->route('daily_tasks.index')->with('message', 'Success!'); 
     }
 }
