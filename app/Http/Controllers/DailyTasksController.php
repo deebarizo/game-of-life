@@ -10,6 +10,9 @@ use App\UseCases\InstanceCreator;
 use App\UseCases\FileUploader;
 
 use App\Models\DailyTask;
+use App\Models\DailyTaskInstance;
+
+use DB;
 
 class DailyTasksController extends Controller
 {
@@ -23,9 +26,23 @@ class DailyTasksController extends Controller
         $h2Tag = 'Daily Tasks'; 
 
         $instanceCreator = new InstanceCreator;
-        $instanceCreator->createInstances('Daily Task', $optionId = 1);
+        $currentDate = $instanceCreator->createInstances('Daily Task', $optionId = 1);
 
-        $dailyTasks = DailyTask::with('daily_task_instances')->get();
+        $dailyTasks = DailyTask::select(DB::raw('daily_tasks.id, 
+                                                    daily_tasks.name,
+                                                    daily_tasks.description,
+                                                    daily_tasks.link,
+                                                    daily_tasks.image_url,
+                                                    daily_tasks.order,
+                                                    daily_task_instances.id as daily_task_instance_id, 
+                                                    daily_task_instances.date,
+                                                    daily_task_instances.is_complete'))
+                                    ->join('daily_task_instances', function($join) {
+      
+                                        $join->on('daily_task_instances.daily_task_id', '=', 'daily_tasks.id');
+                                    })
+                                    ->where('date', $currentDate)
+                                    ->get();
 
         # ddAll($dailyTasks);
 

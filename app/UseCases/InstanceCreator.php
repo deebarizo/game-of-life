@@ -14,7 +14,7 @@ class InstanceCreator {
      * Create (if needed) new instances and store to the database.
      * @param  string $type Type of element (Daily Task, Quest, etc.)
      * @param  int $optionId 
-	 * @return void
+	 * @return string $currentDate (in date format, YYYY-MM-DD)
      */
 
     public function createInstances($type, $optionId) {
@@ -46,9 +46,9 @@ class InstanceCreator {
     					$dailyTaskInstance->save();
     				}
     			}
-
-    			return false;
     	}
+
+        return $currentDate;
     }
 
     /**
