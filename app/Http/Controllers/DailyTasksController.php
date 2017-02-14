@@ -25,7 +25,9 @@ class DailyTasksController extends Controller
         $instanceCreator = new InstanceCreator;
         $instanceCreator->createInstances('Daily Task', $optionId = 1);
 
-        $dailyTasks = DailyTask::with('daily_task_instances')->all();
+        $dailyTasks = DailyTask::with('daily_task_instances')->get();
+
+        # ddAll($dailyTasks);
 
         return view('daily_tasks/index', compact('h2Tag', 'dailyTasks'));
     }

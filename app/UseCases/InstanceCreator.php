@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 use App\Models\Option;
+use App\Models\DailyTask;
+use App\Models\DailyTaskInstance;
 
 class InstanceCreator {
 
@@ -17,20 +19,45 @@ class InstanceCreator {
 
     public function createInstances($type, $optionId) {
 
-    	$currentDate = $this->getCurrentDate($optionId);
+    	$option = Option::find($optionId);
 
-    	ddAll($currentDate);
+    	$currentDate = $this->getCurrentDate($option);
+
+    	switch ($type) {
+    		
+    		case 'Daily Task':
+
+    			$dailyTaskInstances = DailyTaskInstance::where('date', $currentDate)->get();
+
+    			if (count($dailyTaskInstances) == 0) {
+
+    				$dailyTasks = DailyTask::all();
+
+    				foreach ($dailyTasks as $dailyTask) {
+    					
+    					$dailyTaskInstance = new DailyTaskInstance;
+
+    					$dailyTaskInstance->daily_task_id = $dailyTask->id;
+    					$dailyTaskInstance->date = $currentDate;
+    					$dailyTaskInstance->start_time = $option->start_time;
+    					$dailyTaskInstance->end_time = $option->end_time;
+    					$dailyTaskInstance->is_complete = false;
+
+    					$dailyTaskInstance->save();
+    				}
+    			}
+
+    			return false;
+    	}
     }
 
     /**
      * Get current date based on options table. Look at columns, start_time and end_time.
-     * @param  int $optionId 
+     * @param  \App\Models\Option
      * @return string (in date format, YYYY-MM-DD)
      */
 
-    private function getCurrentDate($optionId) {
-
-    	$option = Option::find($optionId);
+    private function getCurrentDate($option) {
 
     	$date = new \DateTime();
 

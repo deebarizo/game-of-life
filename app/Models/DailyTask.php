@@ -7,12 +7,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DailyTask extends Model {
 
-	use SoftDeletes;
-    
+	use SoftDeletes; // https://laravel.com/docs/5.4/eloquent#soft-deleting
+
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+
+    public function daily_task_instances() {
+
+    	return $this->hasMany(DailyTaskInstance::class);
+    }   
 }
