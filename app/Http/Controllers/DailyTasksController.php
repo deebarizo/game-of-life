@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Input;
 
+use App\UseCases\InstanceCreator;
 use App\UseCases\FileUploader;
 
 use App\Models\DailyTask;
@@ -21,7 +22,10 @@ class DailyTasksController extends Controller
     {
         $h2Tag = 'Daily Tasks'; 
 
-        $dailyTasks = DailyTask::all();
+        $instanceCreator = new InstanceCreator;
+        $instanceCreator->createInstances('Daily Task', $optionId = 1);
+
+        $dailyTasks = DailyTask::with('daily_task_instances')->all();
 
         return view('daily_tasks/index', compact('h2Tag', 'dailyTasks'));
     }
