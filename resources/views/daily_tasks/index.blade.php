@@ -16,6 +16,7 @@
 
 			<?php 
 
+				$isComplete = ($dailyTask->is_complete ? 'complete' : '');
 				$description = ($dailyTask->description == '' ? '' : '<a class="description" href="#"><img src="'.url('/files/icons/text-lines.png').'"></a><div style="display: none" class="tool-tip-description">'.$dailyTask->description.'</div>');
 				$link = ($dailyTask->link == '' ? '' : '<a target="_blank" href="'.$dailyTask->link.'"><img src="'.url('/files/icons/link.png').'"></a>');
 			
@@ -23,7 +24,7 @@
 
 			<div class="col-lg-4">
 
-				<div class="daily-task" style="height: 250px; border: 1px solid; margin-bottom: 30px">
+				<div class="daily-task {{ $isComplete }}" style="height: 250px; border: 1px solid; margin-bottom: 30px" data-daily-task-instance-id="{{ $dailyTask->daily_task_instance_id }}">
 					<h4 class="text-center" style="margin: 18px 18px">{{ $dailyTask->name }} {!! $description !!} {!! $link !!}</h4>
 
 					<img class="center-block" style="margin-bottom: 27px" src="<?php echo url($dailyTask->image_url); ?>">
@@ -40,6 +41,14 @@
 	<script type="text/javascript">
 
 		$(document).ready(function() {
+
+
+			/****************************************************************************************
+			GLOBAL VARIABLES
+			****************************************************************************************/
+
+			var baseUrl = '<?php echo url('/'); ?>';
+
 
 			/****************************************************************************************
 			TOOLTIPS (DESCRIPTIONS)
@@ -68,6 +77,20 @@
 		        });
 			});
 
+
+			/****************************************************************************************
+			AJAX SETUP
+			****************************************************************************************/
+
+			$.ajaxSetup({ // http://stackoverflow.com/a/37663496/1946525
+			    
+			    headers: {
+			        
+			        'X-CSRF-Token': $('input[name="_token"]').val()
+			    }
+			});
+
+
 			/****************************************************************************************
 			COMPLETING A DAILY TASK INSTANCE
 			****************************************************************************************/
@@ -76,8 +99,26 @@
 
 				e.preventDefault(e);
 
-				$(this).closest('div.daily-task').toggleClass('completed');
+				var dailyTask = $(this).closest('div.daily-task');
+				var dailyTaskInstanceId = dailyTask.attr('data-daily-task-instance-id');
+				var isComplete = !dailyTask.hasClass('complete');
+
+				$.ajax({
+
+		            url: baseUrl+'/daily_task_instances/complete',
+		           	type: 'POST',
+		           	data: { 
+		           	
+		           		dailyTaskInstanceId: dailyTaskInstanceId,
+		           		isComplete: isComplete
+		           	},
+		            success: function() {
+
+		            	isComplete ? dailyTask.addClass('complete') : dailyTask.removeClass('complete');
+		            }
+		        });
 			})
+
 
 			/****************************************************************************************
 			DELETING A DAILY TASK
