@@ -73,7 +73,7 @@ class DailyTasksController extends Controller
      */
     public function show($id)
     {
-        // Don't need this
+        // This will be for stats once I get enough data
     }
 
     /**

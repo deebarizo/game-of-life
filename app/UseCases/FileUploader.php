@@ -9,7 +9,7 @@ class FileUploader {
 
     /**
      * Store a newly created resource in storage.
-     * @param  \Illuminate\Http\Request  $request Needed to get image
+     * @param  \Illuminate\Http\Request  $request Needed to get image using the Input facade
      * @param  string $type Type of element (daily task, quest, etc.)
 	 * @param  int $id Id of elemt (daily task, quest, etc.)
      * @return string Returns file directory + file name
