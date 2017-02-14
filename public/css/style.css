@@ -9,6 +9,11 @@ div.thumbnail img {
     margin-top: 5px;
 }
 
+div.thumbnail a:hover {
+
+	text-decoration: none;
+}
+
 div.caption h2 {
 
 	margin: 0 0 15px 0;

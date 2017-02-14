@@ -27,6 +27,6 @@ class PagesController extends Controller {
 
         $progressArray['barWidth'] = intval($progressArray['numCompleteTasks'] / $progressArray['numTasks'] * 100);
 
-		return view('pages/home', compact('h2Tag', 'progressArray	'));
+		return view('pages/home', compact('h2Tag', 'progressArray'));
 	}
 }
