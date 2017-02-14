@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="/css/bootstrap-theme.min.css">
 		<link rel="stylesheet" href="/css/jquery.dataTables.min.css">
 		<link rel="stylesheet" href="/css/jquery.qtip.min.css">
+		<link rel="stylesheet" href="/css/style.css">
 
 		<script src="/js/jquery-1.11.3.min.js"></script>
 		<script src="/js/jquery-migrate-1.2.1.min.js"></script>

@@ -23,12 +23,12 @@
 
 			<div class="col-lg-4">
 
-				<div style="height: 250px; border: 1px solid; margin-bottom: 30px">
+				<div class="daily-task" style="height: 250px; border: 1px solid; margin-bottom: 30px">
 					<h4 class="text-center" style="margin: 18px 18px">{{ $dailyTask->name }} {!! $description !!} {!! $link !!}</h4>
 
 					<img class="center-block" style="margin-bottom: 27px" src="<?php echo url($dailyTask->image_url); ?>">
 
-					<div class="text-center"><a href="#"><img src="<?php echo url('/files/icons/target.png'); ?>"></a> <a href="/daily_tasks/{{ $dailyTask->id }}/edit"><img src="<?php echo url('/files/icons/edit.png'); ?>"></a> <a href="#"><img src="<?php echo url('/files/icons/checked.png'); ?>"></a> <form style="display: inline" method="POST" action="/daily_tasks/{{ $dailyTask->id}}" accept-charset="UTF-8" id="form-delete-daily-tasks-{{ $dailyTask->id }}"><input name="_method" type="hidden" value="DELETE">{{ csrf_field() }}<a class="data-delete" data-form="daily-tasks-{{ $dailyTask->id }}" href="#"><img src="<?php echo url('/files/icons/trash.png'); ?>"></a></form></div>
+					<div class="text-center"><a href="#"><img src="<?php echo url('/files/icons/target.png'); ?>"></a> <a href="/daily_tasks/{{ $dailyTask->id }}/edit"><img src="<?php echo url('/files/icons/edit.png'); ?>"></a> <a class="complete" href="#"><img src="<?php echo url('/files/icons/checked.png'); ?>"></a> <form style="display: inline" method="POST" action="/daily_tasks/{{ $dailyTask->id}}" accept-charset="UTF-8" id="form-delete-daily-tasks-{{ $dailyTask->id }}"><input name="_method" type="hidden" value="DELETE">{{ csrf_field() }}<a class="data-delete" data-form="daily-tasks-{{ $dailyTask->id }}" href="#"><img src="<?php echo url('/files/icons/trash.png'); ?>"></a></form></div>
 				</div>
 
 			</div>
@@ -69,12 +69,23 @@
 			});
 
 			/****************************************************************************************
+			COMPLETING A DAILY TASK INSTANCE
+			****************************************************************************************/
+
+			$('a.complete').on('click', function(e) {
+
+				e.preventDefault(e);
+
+				$(this).closest('div.daily-task').toggleClass('completed');
+			})
+
+			/****************************************************************************************
 			DELETING A DAILY TASK
 			****************************************************************************************/
 
 			$(function () { // http://laraveldaily.com/resource-controller-delete-how-to-have-link-instead-of-a-submit-button/
 
-				$('.data-delete').on('click', function (e) {
+				$('.data-delete').on('click', function(e) {
 			    
 			    	if (!confirm('Are you sure you want to delete?')) return;
 			    
@@ -84,10 +95,6 @@
 			  	});
 			});
 		});		
-
-
-
-
 
 	</script>
 @stop
