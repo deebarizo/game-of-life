@@ -12,14 +12,18 @@ hr {
 HOME
 ****************************************************************************************/
 
-div.thumbnail img {
+div.thumbnail {
 
-    margin-right: 5px;
-    margin-bottom: 20px;
-    margin-top: 5px;
+	margin-top: 25px;
+	margin-bottom: 0;
 }
 
-div.thumbnail a:hover {
+div.thumbnail img {
+
+	margin: 5px 10px 20px 10px;
+}
+
+div.thumbnail-container a:hover {
 
 	text-decoration: none;
 }

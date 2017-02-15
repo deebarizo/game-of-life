@@ -20,14 +20,14 @@ class PagesController extends Controller {
         $date = new \DateTime();
         $currentDate = $instanceCreator->createInstances('Daily Task', $optionId = 1, $date);
 
-        $progressArray = [
+        $dailyTasks['progress'] = [
 
         	'numCompleteTasks' => DailyTaskInstance::where('date', $currentDate->format('Y-m-d'))->where('is_complete', true)->count(),
         	'numTasks' => DailyTaskInstance::where('date', $currentDate->format('Y-m-d'))->count(),
         ];
 
-        $progressArray['barWidth'] = intval($progressArray['numCompleteTasks'] / $progressArray['numTasks'] * 100);
+        $dailyTasks['progress']['barWidth'] = intval($dailyTasks['progress']['numCompleteTasks'] / $dailyTasks['progress']['numTasks'] * 100);
 
-		return view('pages/home', compact('h2Tag', 'progressArray'));
+		return view('pages/home', compact('h2Tag', 'dailyTasks'));
 	}
 }
