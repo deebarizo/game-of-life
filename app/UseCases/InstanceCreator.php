@@ -3,14 +3,16 @@
 use App\Models\Option;
 use App\Models\DailyTask;
 use App\Models\DailyTaskInstance;
+use App\Models\BadHabit;
+use App\Models\BadHabitInstance;
 
 class InstanceCreator {
 
     /**
      * Create (if needed) new instances and store to the database.
-     * @param  string $type Type of element (Daily Task, Quest, etc.)
+     * @param  string $type Type of element (Daily Task or Bad Habit)
      * @param  int $optionId 
-	 * @return string $currentDate (in date format, YYYY-MM-DD)
+	 * @return \DateTime $currentDate
      */
 
     public function createInstances($type, $optionId, $date) {
@@ -23,9 +25,40 @@ class InstanceCreator {
     		
     		case 'Daily Task':
 
-    			$dailyTaskInstances = DailyTaskInstance::where('date', $currentDate)->get();
+    			$instances = DailyTaskInstance::where('date', $currentDate)->get();
 
-    			if (count($dailyTaskInstances) == 0) {
+    			if (count($instances) == 0) {
+
+                    $latestInstance = DailyTaskInstance::orderBy('date', 'desc')->first();
+                    
+                    list($latestDate, $missingDays) = $this->calculateMissingDays($latestInstance, $currentDate);
+
+                    $dailyTasks = DailyTask::all();
+
+                    for ($i = 0; $i < $missingDays; $i++) { 
+                        
+                        $latestDate->modify('+1 day');
+
+                        foreach ($dailyTasks as $dailyTask) {
+                            
+                            $dailyTaskInstance = new DailyTaskInstance;
+
+                            $dailyTaskInstance->daily_task_id = $dailyTask->id;
+                            $dailyTaskInstance->date = $latestDate->format('Y-m-d');
+                            $dailyTaskInstance->start_time = $option->start_time;
+                            $dailyTaskInstance->end_time = $option->end_time;
+                            $dailyTaskInstance->is_complete = false;
+
+                            $dailyTaskInstance->save();
+                        }                             
+                    }
+                } 
+
+            case 'Bad Habit':
+/*
+                $badHabitInstances = DailyTaskInstance::where('date', $currentDate)->get();
+
+                if (count($dailyTaskInstances) == 0) {
 
                     $latestDailyTaskInstance = DailyTaskInstance::orderBy('date', 'desc')->first();
                     
@@ -63,7 +96,7 @@ class InstanceCreator {
                             $dailyTaskInstance->save();
                         }                             
                     }
-                } 
+                } */
     	}
 
         return $currentDate;
@@ -88,6 +121,29 @@ class InstanceCreator {
     	}
 
     	return $date;
+    }
+
+    /**
+     * Get $missingDays based on latest instance by date and current date.
+     * @param \App\Models\DailyTaskInstance or \App\Models\BadHabitInstance
+     * @param \DateTime $currentDate
+     * @return [\DateTime $latestDate, int $missingDays]
+     */
+
+    private function calculateMissingDays($latestInstance, $currentDate) {
+
+        if (count($latestInstance) == 0) { // database has zero rows
+
+            $latestDate = $currentDate->modify('-1 day');
+
+            return [$latestDate, 1];
+        }
+
+        $latestDate = new \DateTime($latestInstance->date);
+
+        $difference = $latestDate->diff($currentDate);
+
+        return [$latestDate, $difference->d];
     }
 
 }

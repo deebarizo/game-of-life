@@ -16,9 +16,9 @@ class BadHabit extends Model {
      */
     protected $dates = ['deleted_at'];
 
-/*
-    public function daily_task_instances() {
 
-    	return $this->hasMany(DailyTaskInstance::class);
-    } */
+    public function bad_habit_instances() {
+
+    	return $this->hasMany(BadHabitInstance::class);
+    } 
 }

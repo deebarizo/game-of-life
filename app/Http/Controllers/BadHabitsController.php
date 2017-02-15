@@ -24,9 +24,29 @@ class BadHabitsController extends Controller
     {
         $h2Tag = 'Bad Habits'; 
 
-        ddAll('Bad Habits');
+        $instanceCreator = new InstanceCreator;
+        $date = new \DateTime();
+        $currentDate = $instanceCreator->createInstances('Bad Habit', $optionId = 1, $date);
+        dd('die');
+        $dailyTasks = DailyTask::select(DB::raw('daily_tasks.id, 
+                                                    daily_tasks.name,
+                                                    daily_tasks.description,
+                                                    daily_tasks.link,
+                                                    daily_tasks.image_url,
+                                                    daily_tasks.order,
+                                                    daily_task_instances.id as daily_task_instance_id, 
+                                                    daily_task_instances.date,
+                                                    daily_task_instances.is_complete'))
+                                    ->join('daily_task_instances', function($join) {
+      
+                                        $join->on('daily_task_instances.daily_task_id', '=', 'daily_tasks.id');
+                                    })
+                                    ->where('date', $currentDate->format('Y-m-d'))
+                                    ->get();
 
-        return view('bad_habits/index', compact('h2Tag', 'badHabits'));
+        ddAll($dailyTasks);
+
+        return view('daily_tasks/index', compact('h2Tag', 'dailyTasks'));
     }
 
     /**
