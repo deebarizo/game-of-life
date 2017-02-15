@@ -18,7 +18,12 @@ class InstanceCreatorTest extends TestCase {
 
 
 	/****************************************************************************************
-	ZERO START TIME
+	SET UP DAILY TASKS AND DAILY TASK INSTANCES
+	****************************************************************************************/
+
+
+	/****************************************************************************************
+	TEST OPTION WITH ZERO START TIME
 	****************************************************************************************/
 
     private function setUpZeroStartTime() {
@@ -49,7 +54,7 @@ class InstanceCreatorTest extends TestCase {
 
 
 	/****************************************************************************************
-	NEGATE START TIME
+	TEST OPTION WITH NEGATIVE START TIME
 	****************************************************************************************/
 
     private function setUpNegativeStartTime() {

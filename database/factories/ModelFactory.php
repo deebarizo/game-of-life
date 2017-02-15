@@ -11,6 +11,37 @@
 |
 */
 
+$factory->define(App\Models\DailyTask::class, function ($faker) {
+    
+    return [
+        
+        'id' => 1,
+        'name' => $faker->name,
+        'description' => $faker->name,
+        'link' => 'http://google.com',
+        'image_url' => url('/files/images/daily_task_10.png'),
+        'order' => 0,
+        'created_at' => '2015-03-13',
+        'updated_at' => '2015-03-13',
+        'deleted_at' => null
+    ];
+});
+
+$factory->define(App\Models\DailyTaskInstance::class, function ($faker) {
+    
+    return [
+        
+        'id' => 1,
+        'daily_task_id' => 1,
+        'date' => '2015-03-13',
+        'start_time' => 0,
+        'end_time' => 24,
+        'is_complete' => 0,
+        'created_at' => '2015-03-13',
+        'updated_at' => '2015-03-13'
+    ];
+});
+
 $factory->define(App\Models\Option::class, function ($faker) {
     
     return [
