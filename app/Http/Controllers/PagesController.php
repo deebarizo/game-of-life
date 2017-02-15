@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Option;
 use App\Models\DailyTaskInstance;
 
+use App\UseCases\DateCalculator;
 use App\UseCases\InstanceCreator;
 use App\UseCases\StreakCalculator;
 
@@ -17,9 +19,14 @@ class PagesController extends Controller {
 
 		$h2Tag = '';
 
-		$instanceCreator = new InstanceCreator;
+        $option = Option::find(1);
+
+        $dateCalculator = new DateCalculator;
         $date = new \DateTime();
-        $currentDate = $instanceCreator->createInstances('Daily Task', $optionId = 1, $date);
+        $currentDate = $dateCalculator->getCurrentDate($option, $date);
+
+        $instanceCreator = new InstanceCreator;
+        $instanceCreator->createInstances('Daily Task', $currentDate, $option);
 
         $dailyTasks['progress'] = [
 
