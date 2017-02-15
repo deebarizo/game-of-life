@@ -1,9 +1,5 @@
 <?php namespace App\UseCases;
 
-use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Input;
-
 use App\Models\Option;
 use App\Models\DailyTask;
 use App\Models\DailyTaskInstance;
@@ -21,7 +17,9 @@ class InstanceCreator {
 
     	$option = Option::find($optionId);
 
-    	$currentDate = $this->getCurrentDate($option);
+        $date = new \DateTime();
+
+    	$currentDate = $this->getCurrentDate($option, $date);
 
     	switch ($type) {
     		
@@ -57,9 +55,7 @@ class InstanceCreator {
      * @return string (in date format, YYYY-MM-DD)
      */
 
-    private function getCurrentDate($option) {
-
-    	$date = new \DateTime();
+    public function getCurrentDate($option, $date) {
 
     	if ($option->start_time < 0) { // negative start_time means current date may be tomorrow
 
