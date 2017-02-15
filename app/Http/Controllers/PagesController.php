@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Option;
 use App\Models\DailyTaskInstance;
+use App\Models\BadHabitInstance;
 
 use App\UseCases\DateCalculator;
 use App\UseCases\InstanceCreator;
