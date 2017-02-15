@@ -15,7 +15,7 @@ class InstanceCreator {
 	 * @return void
      */
 
-    public function createInstances($type, $currentDate) {
+    public function createInstances($type, \DateTime $currentDate, Option $option) {
 
     	switch ($type) {
     		
@@ -89,7 +89,7 @@ class InstanceCreator {
      * @return [\DateTime $latestDate, int $missingDays]
      */
 
-    private function calculateMissingDays($latestInstance, $currentDate) {
+    private function calculateMissingDays($latestInstance, \DateTime $currentDate) {
 
         if (count($latestInstance) == 0) { // database has zero rows
 

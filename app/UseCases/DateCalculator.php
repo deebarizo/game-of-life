@@ -6,14 +6,12 @@ class DateCalculator {
 
     /**
      * Get current date based on options table. Look at columns, start_time and end_time.
-     * @param int $optionId
+     * @param \App\Models\Option
      * @param \DateTime $date
      * @return \DateTime $currentDate
      */
 
-    public function getCurrentDate($optionId, $date) {
-
-    	$option = Option::find($optionId);
+    public function getCurrentDate(Option $option, $date) {
 
     	if ($option->start_time < 0) { // negative start_time means current date may be tomorrow
 

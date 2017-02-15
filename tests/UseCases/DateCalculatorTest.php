@@ -37,8 +37,10 @@ class DateCalculatorTest extends TestCase {
         $date = new \DateTime('2017-02-13');
 
         $dateCalculator = new DateCalculator;
+
+        $option = Option::find(1);
         
-        $currentDate = $dateCalculator->getCurrentDate($optionId = 1, $date);
+        $currentDate = $dateCalculator->getCurrentDate($option, $date);
 
         $this->assertContains($currentDate->format('Y-m-d'), '2017-02-13');
     }
@@ -67,8 +69,10 @@ class DateCalculatorTest extends TestCase {
         $date->setTime(15, 0); // 15 < 24 + -8
 
         $dateCalculator = new DateCalculator;
+
+        $option = Option::find(1);
         
-        $currentDate = $dateCalculator->getCurrentDate($optionId = 1, $date);
+        $currentDate = $dateCalculator->getCurrentDate($option, $date);
 
         $this->assertContains($currentDate->format('Y-m-d'), '2017-02-13');
     }
@@ -82,8 +86,10 @@ class DateCalculatorTest extends TestCase {
         $date->setTime(22, 0); // 22 > 24 + -8
 
         $dateCalculator = new DateCalculator;
+
+        $option = Option::find(1);
         
-        $currentDate = $dateCalculator->getCurrentDate($optionId = 1, $date);
+        $currentDate = $dateCalculator->getCurrentDate($option, $date);
 
         $this->assertContains($currentDate->format('Y-m-d'), '2017-02-14');
     }
@@ -97,8 +103,10 @@ class DateCalculatorTest extends TestCase {
         $date->setTime(16, 0); // 16 = 24 + -8
 
         $dateCalculator = new DateCalculator;
+
+        $option = Option::find(1);
         
-        $currentDate = $dateCalculator->getCurrentDate($optionId = 1, $date);
+        $currentDate = $dateCalculator->getCurrentDate($option, $date);
 
         $this->assertContains($currentDate->format('Y-m-d'), '2017-02-14');
     }

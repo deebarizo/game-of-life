@@ -20,6 +20,21 @@ class InstanceCreatorTest extends TestCase {
     use DatabaseTransactions;
 
 
+    /****************************************************************************************
+    SET UP OPTION
+    ****************************************************************************************/
+
+    private function setUpOption() {
+
+        factory(Option::class)->create([
+        
+            'id' => 1,
+            'start_time' => 0,
+            'end_time' => 24
+        ]);
+    }
+
+
 	/****************************************************************************************
 	SET UP DAILY TASKS AND DAILY TASK INSTANCES
 	****************************************************************************************/
@@ -36,7 +51,7 @@ class InstanceCreatorTest extends TestCase {
 
     private function setUpDailyTaskInstances() {
 
-        factory(DailyTaskInstance::class)->create([
+        factory(DailyTaskInstance::class)->create([ 
         
             'id' => 1,
             'daily_task_id' => 1,
@@ -47,17 +62,16 @@ class InstanceCreatorTest extends TestCase {
     /** @test */
     public function does_not_store_any_daily_task_instances_because_date_exists() {
 
+        $this->setUpOption();
     	$this->setUpDailyTasks();
     	$this->setUpDailyTaskInstances();
 
-    	$this->setUpZeroStartTime();
-
     	$instanceCreator = new InstanceCreator;
-    	$date = new \DateTime('2017-02-14');
+    	$currentDate = new \DateTime('2017-02-14');
 
-    	$currentDate = $instanceCreator->createInstances($type = 'Daily Task', $optionId = 1, $date);
+        $option = Option::find(1);
 
-    	$this->assertContains($currentDate->format('Y-m-d'), '2017-02-14');
+    	$instanceCreator->createInstances($type = 'Daily Task', $currentDate, $option);
 
     	$dailyTaskInstances = DailyTaskInstance::orderBy('date', 'asc')->get();
 
@@ -68,16 +82,15 @@ class InstanceCreatorTest extends TestCase {
     /** @test */
     public function stores_one_daily_task_instance_because_no_daily_task_instances_in_database() {
 
+        $this->setUpOption();
     	$this->setUpDailyTasks();
 
-    	$this->setUpZeroStartTime();
-
     	$instanceCreator = new InstanceCreator;
-    	$date = new \DateTime('2017-02-15');
+    	$currentDate = new \DateTime('2017-02-15');
 
-    	$currentDate = $instanceCreator->createInstances($type = 'Daily Task', $optionId = 1, $date);
+        $option = Option::find(1);
 
-    	$this->assertContains($currentDate->format('Y-m-d'), '2017-02-15');
+    	$instanceCreator->createInstances($type = 'Daily Task', $currentDate, $option);
 
     	$dailyTaskInstances = DailyTaskInstance::orderBy('date', 'asc')->get();
 
@@ -88,17 +101,16 @@ class InstanceCreatorTest extends TestCase {
     /** @test */
     public function stores_one_daily_task_instance_because_date_does_not_exist() {
 
+        $this->setUpOption();
     	$this->setUpDailyTasks();
     	$this->setUpDailyTaskInstances();
 
-    	$this->setUpZeroStartTime();
-
     	$instanceCreator = new InstanceCreator;
-    	$date = new \DateTime('2017-02-15');
+    	$currentDate = new \DateTime('2017-02-15');
 
-    	$currentDate = $instanceCreator->createInstances($type = 'Daily Task', $optionId = 1, $date);
+        $option = Option::find(1);
 
-    	$this->assertContains($currentDate->format('Y-m-d'), '2017-02-15');
+    	$instanceCreator->createInstances($type = 'Daily Task', $currentDate, $option);
 
     	$dailyTaskInstances = DailyTaskInstance::orderBy('date', 'asc')->get();
 
@@ -110,19 +122,18 @@ class InstanceCreatorTest extends TestCase {
     /** @test */
     public function stores_five_daily_task_instances_because_date_does_not_exist() {
 
+        $this->setUpOption();
     	$this->setUpDailyTasks();
     	$this->setUpDailyTaskInstances();
 
-    	$this->setUpZeroStartTime();
-
     	$instanceCreator = new InstanceCreator;
-    	$date = new \DateTime('2017-02-19');
+    	$currentDate = new \DateTime('2017-02-19');
 
-    	$currentDate = $instanceCreator->createInstances($type = 'Daily Task', $optionId = 1, $date);
+        $option = Option::find(1);
 
-    	$this->assertContains($currentDate->format('Y-m-d'), '2017-02-19');
+    	$instanceCreator->createInstances($type = 'Daily Task', $currentDate, $option);
 
-    	$dailyTaskInstances = DailyTaskInstance::orderBy('date', 'asc')->get();
+       	$dailyTaskInstances = DailyTaskInstance::orderBy('date', 'asc')->get();
 
     	$this->assertCount(6, $dailyTaskInstances);
     	$this->assertContains('2017-02-14', $dailyTaskInstances[0]->date);
@@ -158,17 +169,16 @@ class InstanceCreatorTest extends TestCase {
     /** @test */
     public function does_not_store_any_bad_habit_instances_because_date_exists() {
 
+        $this->setUpOption();
         $this->setUpBadHabits();
         $this->setUpBadHabitInstances();
 
-        $this->setUpZeroStartTime();
-
         $instanceCreator = new InstanceCreator;
-        $date = new \DateTime('2017-02-14');
+        $currentDate = new \DateTime('2017-02-14');
 
-        $currentDate = $instanceCreator->createInstances($type = 'Bad Habit', $optionId = 1, $date);
+        $option = Option::find(1);
 
-        $this->assertContains($currentDate->format('Y-m-d'), '2017-02-14');
+        $instanceCreator->createInstances($type = 'Bad Habit', $currentDate, $option);
 
         $badHabitInstances = BadHabitInstance::orderBy('date', 'asc')->get();
 
@@ -179,16 +189,15 @@ class InstanceCreatorTest extends TestCase {
     /** @test */
     public function stores_one_bad_habit_instance_because_no_bad_habit_instances_in_database() {
 
+        $this->setUpOption();
         $this->setUpBadHabits();
 
-        $this->setUpZeroStartTime();
-
         $instanceCreator = new InstanceCreator;
-        $date = new \DateTime('2017-02-15');
+        $currentDate = new \DateTime('2017-02-15');
 
-        $currentDate = $instanceCreator->createInstances($type = 'Bad Habit', $optionId = 1, $date);
+        $option = Option::find(1);
 
-        $this->assertContains($currentDate->format('Y-m-d'), '2017-02-15');
+        $instanceCreator->createInstances($type = 'Bad Habit', $currentDate, $option);
 
         $badHabitInstances = BadHabitInstance::orderBy('date', 'asc')->get();
 
@@ -199,17 +208,16 @@ class InstanceCreatorTest extends TestCase {
     /** @test */
     public function stores_one_bad_habit_instance_because_date_does_not_exist() {
 
+        $this->setUpOption();
         $this->setUpBadHabits();
         $this->setUpBadHabitInstances();
 
-        $this->setUpZeroStartTime();
-
         $instanceCreator = new InstanceCreator;
-        $date = new \DateTime('2017-02-15');
+        $currentDate = new \DateTime('2017-02-15');
 
-        $currentDate = $instanceCreator->createInstances($type = 'Bad Habit', $optionId = 1, $date);
+        $option = Option::find(1);
 
-        $this->assertContains($currentDate->format('Y-m-d'), '2017-02-15');
+        $instanceCreator->createInstances($type = 'Bad Habit', $currentDate, $option);
 
         $badHabitInstances = BadHabitInstance::orderBy('date', 'asc')->get();
 
@@ -221,17 +229,16 @@ class InstanceCreatorTest extends TestCase {
     /** @test */
     public function stores_five_bad_habit_instances_because_date_does_not_exist() {
 
+        $this->setUpOption();
         $this->setUpBadHabits();
         $this->setUpBadHabitInstances();
 
-        $this->setUpZeroStartTime();
-
         $instanceCreator = new InstanceCreator;
-        $date = new \DateTime('2017-02-19');
+        $currentDate = new \DateTime('2017-02-19');
 
-        $currentDate = $instanceCreator->createInstances($type = 'Bad Habit', $optionId = 1, $date);
+        $option = Option::find(1);
 
-        $this->assertContains($currentDate->format('Y-m-d'), '2017-02-19');
+        $instanceCreator->createInstances($type = 'Bad Habit', $currentDate, $option);
 
         $badHabitInstances = BadHabitInstance::orderBy('date', 'asc')->get();
 
