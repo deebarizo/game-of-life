@@ -135,6 +135,10 @@ class BadHabitsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $badHabit = BadHabit::find($id);
+
+        $badHabit->delete();
+        
+        return redirect()->route('bad_habits.index')->with('message', 'Success!'); 
     }
 }
