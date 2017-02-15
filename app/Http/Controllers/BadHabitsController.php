@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Input;
 
+use App\UseCases\DateCalculator;
 use App\UseCases\InstanceCreator;
 use App\UseCases\FileUploader;
 
+use App\Models\Option;
 use App\Models\BadHabit;
 
 use DB;
@@ -24,9 +26,14 @@ class BadHabitsController extends Controller
     {
         $h2Tag = 'Bad Habits'; 
 
-        $instanceCreator = new InstanceCreator;
+        $option = Option::find(1);
+
+        $dateCalculator = new DateCalculator;
         $date = new \DateTime();
-        $currentDate = $instanceCreator->createInstances('Bad Habit', $optionId = 1, $date);
+        $currentDate = $dateCalculator->getCurrentDate($option, $date);
+
+        $instanceCreator = new InstanceCreator;
+        $instanceCreator->createInstances('Bad Habit', $currentDate, $option);
 
         $badHabits = BadHabit::select(DB::raw('bad_habits.id, 
                                                     bad_habits.name,

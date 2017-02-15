@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Input;
 
+use App\UseCases\DateCalculator;
 use App\UseCases\InstanceCreator;
 use App\UseCases\FileUploader;
 
+use App\Models\Option;
 use App\Models\DailyTask;
 use App\Models\DailyTaskInstance;
 
@@ -25,9 +27,14 @@ class DailyTasksController extends Controller
     {
         $h2Tag = 'Daily Tasks'; 
 
-        $instanceCreator = new InstanceCreator;
+        $option = Option::find(1);
+
+        $dateCalculator = new DateCalculator;
         $date = new \DateTime();
-        $currentDate = $instanceCreator->createInstances('Daily Task', $optionId = 1, $date);
+        $currentDate = $dateCalculator->getCurrentDate($option, $date);
+
+        $instanceCreator = new InstanceCreator;
+        $instanceCreator->createInstances('Daily Task', $currentDate, $option);
 
         $dailyTasks = DailyTask::select(DB::raw('daily_tasks.id, 
                                                     daily_tasks.name,
