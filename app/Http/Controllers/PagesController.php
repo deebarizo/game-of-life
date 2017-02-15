@@ -17,7 +17,8 @@ class PagesController extends Controller {
 		$h2Tag = '';
 
 		$instanceCreator = new InstanceCreator;
-        $currentDate = $instanceCreator->createInstances('Daily Task', $optionId = 1);
+        $date = new \DateTime();
+        $currentDate = $instanceCreator->createInstances('Daily Task', $optionId = 1, $date);
 
         $progressArray = [
 

@@ -26,7 +26,8 @@ class DailyTasksController extends Controller
         $h2Tag = 'Daily Tasks'; 
 
         $instanceCreator = new InstanceCreator;
-        $currentDate = $instanceCreator->createInstances('Daily Task', $optionId = 1);
+        $date = new \DateTime();
+        $currentDate = $instanceCreator->createInstances('Daily Task', $optionId = 1, $date);
 
         $dailyTasks = DailyTask::select(DB::raw('daily_tasks.id, 
                                                     daily_tasks.name,
@@ -41,7 +42,7 @@ class DailyTasksController extends Controller
       
                                         $join->on('daily_task_instances.daily_task_id', '=', 'daily_tasks.id');
                                     })
-                                    ->where('date', $currentDate)
+                                    ->where('date', $currentDate->format('Y-m-d'))
                                     ->get();
 
         # ddAll($dailyTasks);

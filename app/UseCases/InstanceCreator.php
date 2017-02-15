@@ -13,11 +13,9 @@ class InstanceCreator {
 	 * @return string $currentDate (in date format, YYYY-MM-DD)
      */
 
-    public function createInstances($type, $optionId) {
+    public function createInstances($type, $optionId, $date) {
 
     	$option = Option::find($optionId);
-
-        $date = new \DateTime();
 
     	$currentDate = $this->getCurrentDate($option, $date);
 
@@ -29,21 +27,43 @@ class InstanceCreator {
 
     			if (count($dailyTaskInstances) == 0) {
 
-    				$dailyTasks = DailyTask::all();
+                    $latestDailyTaskInstance = DailyTaskInstance::orderBy('date', 'desc')->first();
+                    
+                    if (count($latestDailyTaskInstance) == 0) { // database has zero rows
 
-    				foreach ($dailyTasks as $dailyTask) {
-    					
-    					$dailyTaskInstance = new DailyTaskInstance;
+                        $latestDate = $currentDate->modify('-1 day');
 
-    					$dailyTaskInstance->daily_task_id = $dailyTask->id;
-    					$dailyTaskInstance->date = $currentDate;
-    					$dailyTaskInstance->start_time = $option->start_time;
-    					$dailyTaskInstance->end_time = $option->end_time;
-    					$dailyTaskInstance->is_complete = false;
+                        $missingDays = 1;
+                    
+                    } else {
 
-    					$dailyTaskInstance->save();
-    				}
-    			}
+                        $latestDate = new \DateTime($latestDailyTaskInstance->date);
+
+                        $difference = $latestDate->diff($currentDate);
+
+                        $missingDays = $difference->d;
+                    }
+
+                    $dailyTasks = DailyTask::all();
+
+                    for ($i = 0; $i < $missingDays; $i++) { 
+                        
+                        $latestDate->modify('+1 day');
+
+                        foreach ($dailyTasks as $dailyTask) {
+                            
+                            $dailyTaskInstance = new DailyTaskInstance;
+
+                            $dailyTaskInstance->daily_task_id = $dailyTask->id;
+                            $dailyTaskInstance->date = $latestDate->format('Y-m-d');
+                            $dailyTaskInstance->start_time = $option->start_time;
+                            $dailyTaskInstance->end_time = $option->end_time;
+                            $dailyTaskInstance->is_complete = false;
+
+                            $dailyTaskInstance->save();
+                        }                             
+                    }
+                } 
     	}
 
         return $currentDate;
@@ -63,11 +83,11 @@ class InstanceCreator {
 
     			$date->modify('+1 day');
 
-    			return $date->format('Y-m-d');
+    			return $date;
     		}
     	}
 
-    	return $date->format('Y-m-d');
+    	return $date;
     }
 
 }
