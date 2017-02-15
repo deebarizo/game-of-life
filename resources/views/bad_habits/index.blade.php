@@ -62,29 +62,29 @@
 
 
 			/****************************************************************************************
-			COMPLETING A DAILY TASK INSTANCE
+			FAILING A BAD HABIT INSTANCE
 			****************************************************************************************/
 
 			$('a.fail').on('click', function(e) {
 
 				e.preventDefault(e);
 
-				var dailyTask = $(this).closest('div.daily-task');
-				var dailyTaskInstanceId = dailyTask.attr('data-daily-task-instance-id');
-				var isComplete = !dailyTask.hasClass('complete');
+				var badHabit = $(this).closest('div.bad-habit');
+				var badHabitInstanceId = badHabit.attr('data-bad-habit-instance-id');
+				var isSuccess = !badHabit.hasClass('success');
 
 				$.ajax({
 
-		            url: baseUrl+'/daily_task_instances/complete',
+		            url: baseUrl+'/bad_habit_instances/fail',
 		           	type: 'POST',
 		           	data: { 
 		           	
-		           		dailyTaskInstanceId: dailyTaskInstanceId,
-		           		isComplete: isComplete
+		           		badHabitInstanceId: badHabitInstanceId,
+		           		isSuccess: isSuccess
 		           	},
 		            success: function() {
 
-		            	isComplete ? dailyTask.addClass('complete') : dailyTask.removeClass('complete');
+		            	isSuccess ? badHabit.addClass('success') : badHabit.removeClass('success');
 		            }
 		        });
 			})
