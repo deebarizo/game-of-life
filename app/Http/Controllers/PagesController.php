@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DailyTaskInstance;
 
 use App\UseCases\InstanceCreator;
+use App\UseCases\StreakCalculator;
 
 class PagesController extends Controller {
 

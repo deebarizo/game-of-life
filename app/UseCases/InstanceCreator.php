@@ -11,15 +11,11 @@ class InstanceCreator {
     /**
      * Create (if needed) new instances and store to the database.
      * @param  string $type Type of element (Daily Task or Bad Habit)
-     * @param  int $optionId 
-	 * @return \DateTime $currentDate
+     * @param  \DateTime $currentDate
+	 * @return void
      */
 
-    public function createInstances($type, $optionId, $date) {
-
-    	$option = Option::find($optionId);
-
-    	$currentDate = $this->getCurrentDate($option, $date);
+    public function createInstances($type, $currentDate) {
 
     	switch ($type) {
     		
@@ -83,30 +79,8 @@ class InstanceCreator {
                     }
                 } 
     	}
-
-        return $currentDate;
     }
 
-    /**
-     * Get current date based on options table. Look at columns, start_time and end_time.
-     * @param  \App\Models\Option
-     * @return string (in date format, YYYY-MM-DD)
-     */
-
-    public function getCurrentDate($option, $date) {
-
-    	if ($option->start_time < 0) { // negative start_time means current date may be tomorrow
-
-    		if ($date->format('H') >= 24 + $option->start_time) {
-
-    			$date->modify('+1 day');
-
-    			return $date;
-    		}
-    	}
-
-    	return $date;
-    }
 
     /**
      * Get $missingDays based on latest instance by date and current date.
