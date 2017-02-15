@@ -37,6 +37,17 @@ class PagesController extends Controller {
 
         $dailyTasks['progress']['barWidth'] = intval($dailyTasks['progress']['numCompleteTasks'] / $dailyTasks['progress']['numTasks'] * 100);
 
-		return view('pages/home', compact('h2Tag', 'dailyTasks'));
+        $streakCalculator = new StreakCalculator;
+        $badHabitInstanceStreak = $streakCalculator->calculateBadHabitInstanceStreak($currentDate);
+        $badHabitInstanceGoal = 10;
+
+        $badHabits['progress'] = [
+
+            'streak' => $badHabitInstanceStreak,
+            'goal' => $badHabitInstanceGoal,
+            'barWidth' => intval($badHabitInstanceStreak / $badHabitInstanceGoal * 100)
+        ];
+
+		return view('pages/home', compact('h2Tag', 'dailyTasks', 'badHabits'));
 	}
 }

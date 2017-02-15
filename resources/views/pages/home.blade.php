@@ -42,10 +42,10 @@
 	
 			           	<h2>Bad Habits</h2>
 		
-			           	<p>{{ $dailyTasks['progress']['numCompleteTasks'] }}/{{ $dailyTasks['progress']['numTasks'] }} Tasks Completed</p>
+			           	<p>{{ $badHabits['progress']['streak'] }}/{{ $badHabits['progress']['goal'] }} Streak Progress</p>
 		
 						<div class="progress">
-							<div class="progress-bar" role="progressbar" style="width: {{ $dailyTasks['progress']['barWidth'] }}%;"></div>
+							<div class="progress-bar" role="progressbar" style="width: {{ $badHabits['progress']['barWidth'] }}%;"></div>
 						</div>
 		
 			        </div>
