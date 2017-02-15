@@ -42,9 +42,7 @@ class BadHabitsController extends Controller
                                     ->where('date', $currentDate->format('Y-m-d'))
                                     ->get();
 
-        ddAll($badHabits);
-
-        return view('bad_habits/index', compact('h2Tag', 'dailyTasks'));
+        return view('bad_habits/index', compact('h2Tag', 'badHabits'));
     }
 
     /**
