@@ -91,7 +91,7 @@ class BadHabitsController extends Controller
      */
     public function show($id)
     {
-        //
+        // This will be for stats once I get enough data
     }
 
     /**
@@ -102,7 +102,11 @@ class BadHabitsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $h2Tag = 'Edit Bad Habit';
+
+        $badHabit = BadHabit::find($id);
+
+        return view('bad_habits/edit', compact('h2Tag', 'badHabit'));
     }
 
     /**
@@ -114,7 +118,13 @@ class BadHabitsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $badHabit = BadHabit::find($id);
+
+        $badHabit->name = trim($request->input('name'));
+ 
+        $badHabit->save();
+
+        return redirect()->route('bad_habits.index')->with('message', 'Success!'); 
     }
 
     /**

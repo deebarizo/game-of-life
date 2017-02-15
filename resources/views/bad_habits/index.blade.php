@@ -27,7 +27,7 @@
 
 					<img class="center-block" style="margin-bottom: 27px" src="<?php echo url($badHabit->image_url); ?>">
 
-					<div class="text-center"><a href="/bad_habit/{{ $badHabit->id }}/edit"><img src="<?php echo url('/files/icons/edit.png'); ?>"></a> <a class="fail" href="#"><img src="<?php echo url('/files/icons/fail.png'); ?>"></a> <form style="display: inline" method="POST" action="/bad_habits/{{ $badHabit->id}}" accept-charset="UTF-8" id="form-delete-bad-habits-{{ $badHabit->id }}"><input name="_method" type="hidden" value="DELETE">{{ csrf_field() }}<a class="data-delete" data-form="bad-habits-{{ $badHabit->id }}" href="#"><img src="<?php echo url('/files/icons/trash.png'); ?>"></a></form></div>
+					<div class="text-center"><a href="/bad_habits/{{ $badHabit->id }}/edit"><img src="<?php echo url('/files/icons/edit.png'); ?>"></a> <a class="fail" href="#"><img src="<?php echo url('/files/icons/fail.png'); ?>"></a> <form style="display: inline" method="POST" action="/bad_habits/{{ $badHabit->id}}" accept-charset="UTF-8" id="form-delete-bad-habits-{{ $badHabit->id }}"><input name="_method" type="hidden" value="DELETE">{{ csrf_field() }}<a class="data-delete" data-form="bad-habits-{{ $badHabit->id }}" href="#"><img src="<?php echo url('/files/icons/trash.png'); ?>"></a></form></div>
 				</div>
 
 			</div>
