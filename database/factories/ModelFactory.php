@@ -42,6 +42,33 @@ $factory->define(App\Models\DailyTaskInstance::class, function ($faker) {
     ];
 });
 
+$factory->define(App\Models\BadHabit::class, function ($faker) {
+    
+    return [
+        
+        'id' => 1,
+        'name' => $faker->name,
+        'description' => $faker->name,
+        'image_url' => url('/files/images/daily_task_10.png'),
+        'created_at' => '2015-03-13',
+        'updated_at' => '2015-03-13',
+        'deleted_at' => null
+    ];
+});
+
+$factory->define(App\Models\BadHabitInstance::class, function ($faker) {
+    
+    return [
+        
+        'id' => 1,
+        'bad_habit_id' => 1,
+        'date' => '2015-03-13',
+        'is_success' => 1,
+        'created_at' => '2015-03-13',
+        'updated_at' => '2015-03-13'
+    ];
+});
+
 $factory->define(App\Models\Option::class, function ($faker) {
     
     return [

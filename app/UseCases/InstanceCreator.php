@@ -55,48 +55,33 @@ class InstanceCreator {
                 } 
 
             case 'Bad Habit':
-/*
-                $badHabitInstances = DailyTaskInstance::where('date', $currentDate)->get();
 
-                if (count($dailyTaskInstances) == 0) {
+                $instances = BadHabitInstance::where('date', $currentDate)->get();
 
-                    $latestDailyTaskInstance = DailyTaskInstance::orderBy('date', 'desc')->first();
+                if (count($instances) == 0) {
+
+                    $latestInstance = BadHabitInstance::orderBy('date', 'desc')->first();
                     
-                    if (count($latestDailyTaskInstance) == 0) { // database has zero rows
+                    list($latestDate, $missingDays) = $this->calculateMissingDays($latestInstance, $currentDate);
 
-                        $latestDate = $currentDate->modify('-1 day');
-
-                        $missingDays = 1;
-                    
-                    } else {
-
-                        $latestDate = new \DateTime($latestDailyTaskInstance->date);
-
-                        $difference = $latestDate->diff($currentDate);
-
-                        $missingDays = $difference->d;
-                    }
-
-                    $dailyTasks = DailyTask::all();
+                    $badHabits = BadHabit::all();
 
                     for ($i = 0; $i < $missingDays; $i++) { 
                         
                         $latestDate->modify('+1 day');
 
-                        foreach ($dailyTasks as $dailyTask) {
-                            
-                            $dailyTaskInstance = new DailyTaskInstance;
+                        foreach ($badHabits as $badHabit) {
 
-                            $dailyTaskInstance->daily_task_id = $dailyTask->id;
-                            $dailyTaskInstance->date = $latestDate->format('Y-m-d');
-                            $dailyTaskInstance->start_time = $option->start_time;
-                            $dailyTaskInstance->end_time = $option->end_time;
-                            $dailyTaskInstance->is_complete = false;
+                            $badHabitInstance = new BadHabitInstance;
 
-                            $dailyTaskInstance->save();
+                            $badHabitInstance->bad_habit_id = $badHabit->id;
+                            $badHabitInstance->date = $latestDate->format('Y-m-d');
+                            $badHabitInstance->is_success = true;
+
+                            $badHabitInstance->save();
                         }                             
                     }
-                } */
+                } 
     	}
 
         return $currentDate;
