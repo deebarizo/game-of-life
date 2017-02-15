@@ -22,8 +22,8 @@ class PagesController extends Controller {
 
         $progressArray = [
 
-        	'numCompleteTasks' => DailyTaskInstance::where('date', $currentDate)->where('is_complete', true)->count(),
-        	'numTasks' => DailyTaskInstance::where('date', $currentDate)->count(),
+        	'numCompleteTasks' => DailyTaskInstance::where('date', $currentDate->format('Y-m-d'))->where('is_complete', true)->count(),
+        	'numTasks' => DailyTaskInstance::where('date', $currentDate->format('Y-m-d'))->count(),
         ];
 
         $progressArray['barWidth'] = intval($progressArray['numCompleteTasks'] / $progressArray['numTasks'] * 100);
