@@ -12,8 +12,8 @@ class StreakCalculator {
 
     public function calculateBadHabitInstanceStreak(\DateTime $currentDate) {
 
-    	$currentDate->modify('-1 day');
-    	$yesterdayDate = $currentDate;
+    	$yesterdayDate = $currentDate->modify('-1 day');
+    	$currentDate->modify('+1 day');
 
     	if (BadHabitInstance::where('bad_habit_id', 1)->where('date', $yesterdayDate->format('Y-m-d'))->where('is_success', 1)->count() > 0 &&
     		BadHabitInstance::where('bad_habit_id', 1)->where('date', $currentDate->format('Y-m-d'))->where('is_success', 1)->count() > 0) {

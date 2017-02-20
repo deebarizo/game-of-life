@@ -270,7 +270,7 @@ class StreakCalculatorTest extends TestCase {
         
             'id' => 1,
             'bad_habit_id' => 1,
-            'is_success' => 1,
+            'is_success' => 0,
             'date' => '2017-02-12'
         ]);
 
