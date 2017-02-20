@@ -29,8 +29,7 @@ class BadHabitsController extends Controller
         $option = Option::find(1);
 
         $dateCalculator = new DateCalculator;
-        $date = new \DateTime();
-        $currentDate = $dateCalculator->getCurrentDate($option, $date);
+        $currentDate = $dateCalculator->getCurrentDate($option, $date = new \DateTime());
 
         $instanceCreator = new InstanceCreator;
         $instanceCreator->createInstances('Bad Habit', $currentDate, $option);

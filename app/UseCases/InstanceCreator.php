@@ -31,6 +31,8 @@ class InstanceCreator {
 
                     $dailyTasks = DailyTask::all();
 
+                    # ddAll($missingDays);
+
                     for ($i = 0; $i < $missingDays; $i++) { 
                         
                         $latestDate->modify('+1 day');
@@ -48,7 +50,9 @@ class InstanceCreator {
                             $dailyTaskInstance->save();
                         }                             
                     }
-                } 
+                }
+
+                break; 
 
             case 'Bad Habit':
 
@@ -78,6 +82,8 @@ class InstanceCreator {
                         }                             
                     }
                 } 
+
+                break;
     	}
     }
 

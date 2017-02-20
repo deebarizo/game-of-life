@@ -23,8 +23,7 @@ class PagesController extends Controller {
         $option = Option::find(1);
 
         $dateCalculator = new DateCalculator;
-        $date = new \DateTime();
-        $currentDate = $dateCalculator->getCurrentDate($option, $date);
+        $currentDate = $dateCalculator->getCurrentDate($option, $date = new \DateTime());
 
         $instanceCreator = new InstanceCreator;
         $instanceCreator->createInstances('Daily Task', $currentDate, $option);
@@ -36,6 +35,8 @@ class PagesController extends Controller {
         ];
 
         $dailyTasks['progress']['barWidth'] = intval($dailyTasks['progress']['numCompleteTasks'] / $dailyTasks['progress']['numTasks'] * 100);
+
+        $instanceCreator->createInstances('Bad Habit', $currentDate, $option);
 
         $streakCalculator = new StreakCalculator;
         $badHabitInstanceStreak = $streakCalculator->calculateBadHabitInstanceStreak($currentDate);
