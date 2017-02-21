@@ -12,11 +12,11 @@ class StreakCalculator {
 
     public function calculateBadHabitInstanceStreak(\DateTime $currentDate) {
 
-    	$yesterdayDate = $currentDate->modify('-1 day');
-    	$currentDate->modify('+1 day');
+    	$yesterdayDateString = $currentDate->modify('-1 day')->format('Y-m-d');
+    	$currentDateString = $currentDate->modify('+1 day')->format('Y-m-d');
 
-    	if (BadHabitInstance::where('bad_habit_id', 1)->where('date', $yesterdayDate->format('Y-m-d'))->where('is_success', 1)->count() > 0 &&
-    		BadHabitInstance::where('bad_habit_id', 1)->where('date', $currentDate->format('Y-m-d'))->where('is_success', 1)->count() > 0) {
+    	if (BadHabitInstance::where('bad_habit_id', 1)->where('date', $yesterdayDateString)->where('is_success', 1)->count() > 0 &&
+    		BadHabitInstance::where('bad_habit_id', 1)->where('date', $currentDateString)->where('is_success', 1)->count() > 0) {
 
     		$streakExists = true;
 
@@ -24,10 +24,10 @@ class StreakCalculator {
 
     		if (!$latestFail) {
 
-    			return BadHabitInstance::where('bad_habit_id', 1)->where('date', '<=', $yesterdayDate->format('Y-m-d'))->where('is_success', 1)->count();
+    			return BadHabitInstance::where('bad_habit_id', 1)->where('date', '<=', $yesterdayDateString)->where('is_success', 1)->count();
     		}
 
-    		return BadHabitInstance::where('bad_habit_id', 1)->where('date', '<=', $yesterdayDate->format('Y-m-d'))->where('date', '>', $latestFail->date)->where('is_success', 1)->count();
+    		return BadHabitInstance::where('bad_habit_id', 1)->where('date', '<=', $yesterdayDateString)->where('date', '>', $latestFail->date)->where('is_success', 1)->count();
     	
     	} else {
 
