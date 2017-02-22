@@ -42,6 +42,8 @@ class PagesController extends Controller {
         $badHabitInstanceStreak = $streakCalculator->calculateBadHabitInstanceStreak($currentDate);
         $badHabitInstanceGoal = 10;
 
+        # ddAll($badHabitInstanceStreak);
+
         $badHabits['progress'] = [
 
             'streak' => $badHabitInstanceStreak,
