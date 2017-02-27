@@ -21,8 +21,8 @@ class InstanceCreator {
     		
     		case 'Daily Task':
 
-    			$instances = DailyTaskInstance::where('date', $currentDate)->get();
-
+    			$instances = DailyTaskInstance::where('date', $currentDate->format('Y-m-d'))->get();
+                
     			if (count($instances) == 0) {
 
                     $latestInstance = DailyTaskInstance::orderBy('date', 'desc')->first();
@@ -56,7 +56,7 @@ class InstanceCreator {
 
             case 'Bad Habit':
 
-                $instances = BadHabitInstance::where('date', $currentDate)->get();
+                $instances = BadHabitInstance::where('date', $currentDate->format('Y-m-d'))->get();
 
                 if (count($instances) == 0) {
 
