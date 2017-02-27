@@ -31,7 +31,9 @@ class InstanceCreator {
 
                     $dailyTasks = DailyTask::all();
 
-                    # ddAll($missingDays);
+                    # prf('$latestDate: ');
+                    # prf($latestDate);
+                    # prf('$missingDays: '.$missingDays);
 
                     for ($i = 0; $i < $missingDays; $i++) { 
                         
@@ -48,8 +50,12 @@ class InstanceCreator {
                             $dailyTaskInstance->is_complete = false;
 
                             $dailyTaskInstance->save();
-                        }                             
+                        }
+
+                        # prf('loop1');                             
                     }
+
+                    
                 }
 
                 break; 
@@ -79,7 +85,9 @@ class InstanceCreator {
                             $badHabitInstance->is_success = true;
 
                             $badHabitInstance->save();
-                        }                             
+                        }   
+
+                        # prf('loop2');                          
                     }
                 } 
 

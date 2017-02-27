@@ -51,6 +51,8 @@ class PagesController extends Controller {
             'barWidth' => intval($badHabitInstanceStreak / $badHabitInstanceGoal * 100)
         ];
 
+        # ddAll('stop');
+
 		return view('pages/home', compact('h2Tag', 'dailyTasks', 'badHabits'));
 	}
 }
