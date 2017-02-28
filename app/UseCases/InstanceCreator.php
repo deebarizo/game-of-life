@@ -34,6 +34,7 @@ class InstanceCreator {
                     # prf('$latestDate: ');
                     # prf($latestDate);
                     # prf('$missingDays: '.$missingDays);
+                    # prf($dailyTasks);
 
                     for ($i = 0; $i < $missingDays; $i++) { 
                         
