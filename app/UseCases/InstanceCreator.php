@@ -22,7 +22,7 @@ class InstanceCreator {
     		case 'Daily Task':
 
     			$instances = DailyTaskInstance::where('date', $currentDate->format('Y-m-d'))->get();
-                
+
     			if (count($instances) == 0) {
 
                     $latestInstance = DailyTaskInstance::orderBy('date', 'desc')->first();
@@ -30,6 +30,13 @@ class InstanceCreator {
                     list($latestDate, $missingDays) = $this->calculateMissingDays($latestInstance, $currentDate);
 
                     $dailyTasks = DailyTask::all();
+
+                    if (count($dailyTasks) > 6) {
+
+                        prf('dailyTasks count is '.count($dailyTasks));
+                        prf('\n');
+                        ddAll($dailyTasks);
+                    }
 
                     # prf('$latestDate: ');
                     # prf($latestDate);
