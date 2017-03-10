@@ -24,6 +24,16 @@ class DailyTaskInstancesController extends Controller {
 
 		$dailyTaskInstance->is_complete = $isComplete;
 
+		if ($isComplete) {
+
+			$date = new \DateTime();
+			$dailyTaskInstance->completed_at = $date->format("Y-m-d H:i:s");
+
+		} else {
+
+			$dailyTaskInstance->completed_at = null;
+		}
+
 		$dailyTaskInstance->save();
 	}
 }

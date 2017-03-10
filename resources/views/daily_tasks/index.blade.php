@@ -103,6 +103,7 @@
 				var dailyTaskInstanceId = dailyTask.attr('data-daily-task-instance-id');
 				var isComplete = !dailyTask.hasClass('complete');
 
+
 				$.ajax({
 
 		            url: baseUrl+'/daily_task_instances/complete',
