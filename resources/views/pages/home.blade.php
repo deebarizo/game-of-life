@@ -42,7 +42,7 @@
 	
 			           	<h2>Bad Habits</h2>
 		
-			           	<p>{{ $badHabits['progress']['streak'] }}/{{ $badHabits['progress']['goal'] }} Streak Progress</p>
+			           	<p>{{ $badHabits['progress']['streak'] }}/{{ $badHabits['progress']['goal'] }} Streak Progress | Success Rate: {{ $badHabits['percentage'] }}%</p>
 		
 						<div class="progress">
 							<div class="progress-bar" role="progressbar" style="width: {{ $badHabits['progress']['barWidth'] }}%;"></div>

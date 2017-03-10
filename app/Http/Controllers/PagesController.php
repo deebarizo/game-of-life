@@ -9,6 +9,7 @@ use App\Models\BadHabitInstance;
 use App\UseCases\DateCalculator;
 use App\UseCases\InstanceCreator;
 use App\UseCases\StreakCalculator;
+use App\UseCases\PercentageCalculator;
 
 class PagesController extends Controller {
 
@@ -50,6 +51,10 @@ class PagesController extends Controller {
             'goal' => $badHabitInstanceGoal,
             'barWidth' => intval($badHabitInstanceStreak / $badHabitInstanceGoal * 100)
         ];
+
+        $percentageCalculator = new PercentageCalculator;
+
+        $badHabits['percentage'] = $percentageCalculator->calculateBadHabitPercentage($currentDate);
 
         # ddAll('stop');
 

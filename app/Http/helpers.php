@@ -29,3 +29,15 @@ function setActive($path, $active = 'active') {
 
 	return Request::is($path) ? $active : '';
 }
+
+
+/****************************************************************************************
+NUMBER FORMAT
+****************************************************************************************/
+
+function numFormat($number, $decimalPlaces = 2) {
+	$number = number_format(round($number, $decimalPlaces), $decimalPlaces);
+
+	return $number;
+}
+	
