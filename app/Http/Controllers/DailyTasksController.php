@@ -92,6 +92,28 @@ class DailyTasksController extends Controller
 
         $dailyTask->save();
 
+
+        /****************************************************************************************
+        STORE DAILY TASK INSTANCE
+        ****************************************************************************************/
+
+        $dailyTaskInstance = new DailyTaskInstance;
+
+        $dailyTaskInstance->daily_task_id = $dailyTask->id;
+
+        $option = Option::find(1);
+
+        $dateCalculator = new DateCalculator;
+        $currentDate = $dateCalculator->getCurrentDate($option, $date = new \DateTime());
+        $dailyTaskInstance->date = $currentDate->format('Y-m-d');
+
+        $dailyTaskInstance->start_time = $option->start_time;
+        $dailyTaskInstance->end_time = $option->end_time;
+        $dailyTaskInstance->is_complete = 0;
+        $dailyTaskInstance->completed_at = null;
+
+        $dailyTaskInstance->save();
+
         return redirect()->route('daily_tasks.index')->with('message', 'Success!'); 
     }
 
