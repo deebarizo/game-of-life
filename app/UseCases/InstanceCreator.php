@@ -38,10 +38,13 @@ class InstanceCreator {
                         ddAll($dailyTasks);
                     }
 
-                    if ($latestInstance->date === $currentDate->format('Y-m-d')) {
+                    if ($latestInstance) {
 
-                        prf("latestInstance->date is the same as currentDate->format('Y-m-d')");
-                        ddAll($dailyTasks);
+                        if ($latestInstance->date === $currentDate->format('Y-m-d')) {
+
+                            prf("latestInstance->date is the same as currentDate->format('Y-m-d')");
+                            ddAll($dailyTasks);                       
+                        }
                     }
 
                     # prf('$latestDate: ');
