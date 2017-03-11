@@ -26,7 +26,8 @@ class FocusController extends Controller
         	
         	case 'daily_task':
         		
-                $instance = DailyTask::select(DB::raw('daily_tasks.name,
+                $instance = DailyTask::select(DB::raw('daily_task_instances.id as id,
+                                                        daily_tasks.name,
                                                         daily_tasks.description,
                                                         daily_tasks.link,
                                                         daily_tasks.image_url,
@@ -51,7 +52,7 @@ class FocusController extends Controller
 
         # ddAll($instance);
 
-		return view('focus/index', compact('h2Tag', 'instance'));
+		return view('focus/index', compact('h2Tag', 'instance', 'instanceType'));
     }
 
 }
