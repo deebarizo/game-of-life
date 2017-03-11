@@ -29,7 +29,7 @@
 
 					<img class="center-block" style="margin-bottom: 27px" src="<?php echo url($task->image_url); ?>">
 
-					<div class="text-center"><a href="#"><img src="<?php echo url('/files/icons/target.png'); ?>"></a> <a href="/daily_tasks/{{ $task->id }}/edit"><img src="<?php echo url('/files/icons/edit.png'); ?>"></a> <a class="complete" href="#"><img src="<?php echo url('/files/icons/checked.png'); ?>"></a> <form style="display: inline" method="POST" action="/daily_tasks/{{ $task->id}}" accept-charset="UTF-8" id="form-delete-daily-tasks-{{ $task->id }}"><input name="_method" type="hidden" value="DELETE">{{ csrf_field() }}<a class="data-delete" data-form="daily-tasks-{{ $task->id }}" href="#"><img src="<?php echo url('/files/icons/trash.png'); ?>"></a></form></div>
+					<div class="text-center"><a href="#"><img src="<?php echo url('/files/icons/target.png'); ?>"></a> <a href="/tasks/{{ $task->id }}/edit"><img src="<?php echo url('/files/icons/edit.png'); ?>"></a> <a class="complete" href="#"><img src="<?php echo url('/files/icons/checked.png'); ?>"></a> <form style="display: inline" method="POST" action="/tasks/{{ $task->id}}" accept-charset="UTF-8" id="form-delete-tasks-{{ $task->id }}"><input name="_method" type="hidden" value="DELETE">{{ csrf_field() }}<a class="data-delete" data-form="tasks-{{ $task->id }}" href="#"><img src="<?php echo url('/files/icons/trash.png'); ?>"></a></form></div>
 				</div>
 
 			</div>

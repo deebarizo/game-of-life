@@ -101,7 +101,7 @@ class TaskInstancesController extends Controller
      */
     public function show($id)
     {
-        //
+        // Not applicable
     }
 
     /**
@@ -112,7 +112,11 @@ class TaskInstancesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $h2Tag = 'Edit Task';
+
+        $task = TaskInstance::find($id);
+
+        return view('tasks/edit', compact('h2Tag', 'task'));
     }
 
     /**
@@ -124,7 +128,20 @@ class TaskInstancesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            
+            'name' => 'required'
+        ]);
+
+        $taskInstance = TaskInstance::find($id);
+
+        $taskInstance->name = trim($request->input('name'));
+        $taskInstance->description = (trim($request->input('description')) == '' ? null : trim($request->input('description')));
+        $taskInstance->link = (trim($request->input('link')) == '' ? null : trim($request->input('link')));
+
+        $taskInstance->save();
+
+        return redirect()->route('tasks.index')->with('message', 'Success!'); 
     }
 
     /**
