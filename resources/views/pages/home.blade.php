@@ -32,6 +32,32 @@
 
 	  	<div class="col-lg-6 thumbnail-container">	
 	
+	  		<a href="/tasks">
+	
+		    	<div class="thumbnail clearfix">
+	
+		        	<img src="<?php echo url('/files/icons/tasks.png'); ?>" class="pull-left">
+	
+		         	<div class="caption" class="pull-right">
+	
+			           	<h2>Tasks</h2>
+
+			           	<p>{{ $tasks['progress']['numCompleteTasks'] }}/{{ $tasks['progress']['numTasks'] }} Tasks Completed</p>
+		
+						<div class="progress">
+							<div class="progress-bar" role="progressbar" style="width: {{ $tasks['progress']['barWidth'] }}%;"></div>
+						</div>
+		
+			        </div>
+
+			    </div>
+	
+		    </a>
+	
+	    </div>
+
+	  	<div class="col-lg-6 thumbnail-container">	
+	
 	  		<a href="/bad_habits">
 	
 		    	<div class="thumbnail clearfix">
@@ -47,26 +73,6 @@
 						<div class="progress">
 							<div class="progress-bar" role="progressbar" style="width: {{ $badHabits['progress']['barWidth'] }}%;"></div>
 						</div>
-		
-			        </div>
-
-			    </div>
-	
-		    </a>
-	
-	    </div>
-
-	  	<div class="col-lg-6 thumbnail-container">	
-	
-	  		<a href="/tasks">
-	
-		    	<div class="thumbnail clearfix">
-	
-		        	<img src="<?php echo url('/files/icons/tasks.png'); ?>" class="pull-left">
-	
-		         	<div class="caption" class="pull-right">
-	
-			           	<h2>Tasks</h2>
 		
 			        </div>
 

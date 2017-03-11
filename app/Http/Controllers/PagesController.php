@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Option;
 use App\Models\DailyTaskInstance;
 use App\Models\BadHabitInstance;
+use App\Models\TaskInstance;
 
 use App\UseCases\DateCalculator;
 use App\UseCases\InstanceCreator;
@@ -26,16 +27,39 @@ class PagesController extends Controller {
         $dateCalculator = new DateCalculator;
         $currentDate = $dateCalculator->getCurrentDate($option, $date = new \DateTime());
 
+
+        /****************************************************************************************
+        DAILY TASKS
+        ****************************************************************************************/
+
         $instanceCreator = new InstanceCreator;
         $instanceCreator->createInstances('Daily Task', $currentDate, $option);
 
         $dailyTasks['progress'] = [
 
         	'numCompleteTasks' => DailyTaskInstance::where('date', $currentDate->format('Y-m-d'))->where('is_complete', true)->count(),
-        	'numTasks' => DailyTaskInstance::where('date', $currentDate->format('Y-m-d'))->count(),
+        	'numTasks' => DailyTaskInstance::where('date', $currentDate->format('Y-m-d'))->count()
         ];
 
         $dailyTasks['progress']['barWidth'] = intval($dailyTasks['progress']['numCompleteTasks'] / $dailyTasks['progress']['numTasks'] * 100);
+
+
+        /****************************************************************************************
+        TASKS
+        ****************************************************************************************/
+
+        $tasks['progress'] = [
+
+            'numCompleteTasks' => TaskInstance::where('date', $currentDate->format('Y-m-d'))->where('is_complete', 1)->count(),
+            'numTasks' => TaskInstance::where('date', $currentDate->format('Y-m-d'))->count()
+        ];
+
+        $tasks['progress']['barWidth'] = intval($tasks['progress']['numCompleteTasks'] / $tasks['progress']['numTasks'] * 100);
+
+
+        /****************************************************************************************
+        BAD HABITS
+        ****************************************************************************************/
 
         $instanceCreator->createInstances('Bad Habit', $currentDate, $option);
 
@@ -58,6 +82,6 @@ class PagesController extends Controller {
 
         # ddAll('stop');
 
-		return view('pages/home', compact('h2Tag', 'dailyTasks', 'badHabits'));
+		return view('pages/home', compact('h2Tag', 'dailyTasks', 'tasks', 'badHabits'));
 	}
 }
