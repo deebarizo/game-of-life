@@ -12,6 +12,7 @@ use App\UseCases\FileUploader;
 
 use App\Models\Option;
 use App\Models\BadHabit;
+use App\Models\BadHabitInstance;
 
 use DB;
 
@@ -91,6 +92,25 @@ class BadHabitsController extends Controller
         $badHabit->image_url = $imageUrl;
 
         $badHabit->save();
+
+
+        /****************************************************************************************
+        STORE BAD HABIT INSTANCE
+        ****************************************************************************************/
+
+        $badHabitInstance = new BadHabitInstance;
+
+        $badHabitInstance->bad_habit_id = $badHabit->id;
+
+        $option = Option::find(1);
+
+        $dateCalculator = new DateCalculator;
+        $currentDate = $dateCalculator->getCurrentDate($option, $date = new \DateTime());
+        $badHabitInstance->date = $currentDate->format('Y-m-d');
+
+        $badHabitInstance->is_success = 1;
+
+        $badHabitInstance->save();
 
         return redirect()->route('bad_habits.index')->with('message', 'Success!'); 
     }
