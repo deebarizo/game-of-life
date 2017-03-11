@@ -76,6 +76,12 @@ class DailyTasksController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            
+            'name' => 'required|unique:daily_tasks',
+            'image' => 'required'
+        ]);
+
         $dailyTask = new DailyTask;
 
         $dailyTask->name = trim($request->input('name'));

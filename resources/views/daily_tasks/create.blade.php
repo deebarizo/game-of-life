@@ -12,21 +12,21 @@
 			<div class="col-lg-6"> 
 				<div class="form-group">
 					<label for="name">Name:</label>
-					<input class="form-control" name="name" type="text" value="" id="name">
+					<input class="form-control" name="name" type="text" value="{{ old('name') }}" id="name">
 				</div>
 			</div>
 
 			<div class="col-lg-9"> 
 				<div class="form-group">
 					<label for="description">Description (Optional):</label>
-					<input class="form-control" name="description" type="text" value="" id="description">
+					<input class="form-control" name="description" type="text" value="{{ old('description') }}" id="description">
 				</div>
 			</div>
 
 			<div class="col-lg-9"> 
 				<div class="form-group">
 					<label for="link">Link (Optional):</label>
-					<input class="form-control" name="link" type="text" value="" id="link">
+					<input class="form-control" name="link" type="text" value="{{ old('link') }}" id="link">
 				</div>
 			</div>
 

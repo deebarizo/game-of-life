@@ -71,6 +71,12 @@ class BadHabitsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            
+            'name' => 'required|unique:bad_habits',
+            'image' => 'required'
+        ]);        
+
         $badHabit = new BadHabit;
 
         $badHabit->name = trim($request->input('name'));
