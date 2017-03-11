@@ -152,6 +152,12 @@ class TaskInstancesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $task = TaskInstance::find($id);
+
+        unlink($task->image_url);
+
+        $task->delete();
+        
+        return redirect()->route('tasks.index')->with('message', 'Success!'); 
     }
 }
