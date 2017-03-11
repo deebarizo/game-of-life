@@ -31,10 +31,9 @@ class InstanceCreator {
 
                     $dailyTasks = DailyTask::all();
 
-                    if (count($dailyTasks) > 6) {
+                    if (count($dailyTasks) > 7) {
 
                         prf('dailyTasks count is '.count($dailyTasks));
-                        prf('\n');
                         ddAll($dailyTasks);
                     }
 

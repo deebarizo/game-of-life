@@ -29,7 +29,7 @@
 
 					<img class="center-block" style="margin-bottom: 27px" src="<?php echo url($dailyTask->image_url); ?>">
 
-					<div class="text-center"><a href="#"><img src="<?php echo url('/files/icons/target.png'); ?>"></a> <a href="/daily_tasks/{{ $dailyTask->id }}/edit"><img src="<?php echo url('/files/icons/edit.png'); ?>"></a> <a class="complete" href="#"><img src="<?php echo url('/files/icons/checked.png'); ?>"></a> <form style="display: inline" method="POST" action="/daily_tasks/{{ $dailyTask->id}}" accept-charset="UTF-8" id="form-delete-daily-tasks-{{ $dailyTask->id }}"><input name="_method" type="hidden" value="DELETE">{{ csrf_field() }}<a class="data-delete" data-form="daily-tasks-{{ $dailyTask->id }}" href="#"><img src="<?php echo url('/files/icons/trash.png'); ?>"></a></form></div>
+					<div class="text-center"><a href="/focus/daily_task/{{ $dailyTask->daily_task_instance_id }}"><img src="<?php echo url('/files/icons/target.png'); ?>"></a> <a href="/daily_tasks/{{ $dailyTask->id }}/edit"><img src="<?php echo url('/files/icons/edit.png'); ?>"></a> <a class="complete" href="#"><img src="<?php echo url('/files/icons/checked.png'); ?>"></a> <form style="display: inline" method="POST" action="/daily_tasks/{{ $dailyTask->id}}" accept-charset="UTF-8" id="form-delete-daily-tasks-{{ $dailyTask->id }}"><input name="_method" type="hidden" value="DELETE">{{ csrf_field() }}<a class="data-delete" data-form="daily-tasks-{{ $dailyTask->id }}" href="#"><img src="<?php echo url('/files/icons/trash.png'); ?>"></a></form></div>
 				</div>
 
 			</div>
