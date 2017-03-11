@@ -36,4 +36,5 @@ class DailyTaskInstancesController extends Controller {
 
 		$dailyTaskInstance->save();
 	}
+	
 }

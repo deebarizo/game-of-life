@@ -160,4 +160,37 @@ class TaskInstancesController extends Controller
         
         return redirect()->route('tasks.index')->with('message', 'Success!'); 
     }
+
+
+    /****************************************************************************************
+    AJAX
+    ****************************************************************************************/
+
+    /**
+     * Mark task instance complete or not complete. Uses AJAX.
+     * @param  \Illuminate\Http\Request $request
+     * @return void
+     */
+    public function complete(Request $request) {
+
+        $id = $request->input('taskInstanceId');
+        $isComplete = ($request->input('isComplete') == 'true' ? 1 : 0);
+
+        $taskInstance = TaskInstance::find($id);
+
+        $taskInstance->is_complete = $isComplete;
+
+        if ($isComplete) {
+
+            $date = new \DateTime();
+            $taskInstance->completed_at = $date->format("Y-m-d H:i:s");
+
+        } else {
+
+            $taskInstance->completed_at = null;
+        }
+
+        $taskInstance->save();
+    }
+
 }

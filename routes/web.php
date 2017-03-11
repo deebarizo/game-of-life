@@ -26,6 +26,7 @@ TASK INSTANCES
 ****************************************************************************************/
 
 Route::resource('tasks', 'TaskInstancesController');
+Route::post('/tasks/complete', 'TaskInstancesController@complete');
 
 
 /****************************************************************************************
