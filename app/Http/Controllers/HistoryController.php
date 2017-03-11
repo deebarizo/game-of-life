@@ -91,23 +91,21 @@ class HistoryController extends Controller {
 				                                    ->get()
 				                                    ->toArray();
 
-			$mergedInstances = array_merge($dailyTaskInstances, $taskInstances);
+			$mergedDailyInstances = array_merge($dailyTaskInstances, $taskInstances);
 
 			// http://php.net/manual/en/function.array-multisort.php
 
-			foreach ($mergedInstances as $key => $row) {
+			foreach ($mergedDailyInstances as $key => $row) {
 
 			    $unixTimestamp[$key] = $row['unix_timestamp'];
 			}
 
-			array_multisort($unixTimestamp, SORT_ASC, $mergedInstances);
+			array_multisort($unixTimestamp, SORT_ASC, $mergedDailyInstances);
 
-    		$instances[] = [
-
-    			'date' => $dateString,
-    			'instances' => $mergedInstances
-    		];
+    		$instances[$dateString] = $mergedDailyInstances;
     	}
+
+    	# ddAll($instances);
 
 		return view('history/index', compact('h2Tag', 'instances'));
     }
