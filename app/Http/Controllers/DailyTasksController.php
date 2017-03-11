@@ -87,6 +87,7 @@ class DailyTasksController extends Controller
         $dailyTask->name = trim($request->input('name'));
         $dailyTask->description = (trim($request->input('description')) == '' ? null : trim($request->input('description')));
         $dailyTask->link = (trim($request->input('link')) == '' ? null : trim($request->input('link')));
+        $dailyTask->is_in_history = $request->input('is_in_history');
  
         $dailyTask->save();
 
@@ -163,6 +164,7 @@ class DailyTasksController extends Controller
         $dailyTask->name = trim($request->input('name'));
         $dailyTask->description = (trim($request->input('description')) == '' ? null : trim($request->input('description')));
         $dailyTask->link = (trim($request->input('link')) == '' ? null : trim($request->input('link')));
+        $dailyTask->is_in_history = $request->input('is_in_history');
  
         $dailyTask->save();
 

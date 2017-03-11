@@ -10,10 +10,26 @@
 			{{ csrf_field() }}
 			<input type="hidden" name="_method" value="PUT">
 
-			<div class="col-lg-6"> 
+			<div class="col-lg-12"> 
 				<div class="form-group">
 					<label for="name">Name:</label>
-						<input class="form-control" name="name" type="text" value="{{ $dailyTask->name }}" id="name">
+						<input style="width: 50%" class="form-control" name="name" type="text" value="{{ $dailyTask->name }}" id="name">
+				</div>
+			</div>
+
+			<div class="col-lg-6"> 
+
+				<?php 
+
+					$checked['yes'] = ($dailyTask->is_in_history ? 'checked="checked"' : '');
+					$checked['no'] = ($dailyTask->is_in_history ? '' : 'checked="checked"');
+
+				?>
+
+				<div class="form-group">
+					<label for="name">Show In History:</label><br>
+					<label class="radio-inline"><input type="radio" name="is_in_history" value="1" {{ $checked['yes'] }}>Yes</label>
+					<label class="radio-inline"><input type="radio" name="is_in_history" value="0" {{ $checked['no'] }}>No</label>
 				</div>
 			</div>
 

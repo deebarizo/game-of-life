@@ -9,10 +9,18 @@
 		<form method="POST" action="/daily_tasks" accept-charset="UTF-8" enctype="multipart/form-data">
 			{{ csrf_field() }}
 
-			<div class="col-lg-6"> 
+			<div class="col-lg-12"> 
 				<div class="form-group">
 					<label for="name">Name:</label>
-					<input class="form-control" name="name" type="text" value="{{ old('name') }}" id="name">
+					<input style="width: 50%" class="form-control" name="name" type="text" value="{{ old('name') }}" id="name">
+				</div>
+			</div>
+
+			<div class="col-lg-6"> 
+				<div class="form-group">
+					<label for="name">Show In History:</label><br>
+					<label class="radio-inline"><input type="radio" name="is_in_history" value="1" checked="checked">Yes</label>
+					<label class="radio-inline"><input type="radio" name="is_in_history" value="0">No</label>
 				</div>
 			</div>
 
