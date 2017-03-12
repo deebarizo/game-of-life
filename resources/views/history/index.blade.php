@@ -27,8 +27,10 @@
 
 								@foreach ($mergedDailyInstances as $mergedDailyInstance)
 
+									<?php $star = (isset($mergedDailyInstance['is_in_history']) ? '' : '<img src="'.url('/files/icons/star.png').'">'); ?>
+
 									<tr>
-										<td>{{ $mergedDailyInstance['name'] }}</td>
+										<td>{{ $mergedDailyInstance['name'] }} {!! $star !!}</td>
 										<td>{{ $mergedDailyInstance['completed_at'] }}</td>
 									</tr>
 
