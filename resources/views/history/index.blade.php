@@ -10,7 +10,7 @@
 
 			<div class="col-lg-12">
 
-				<div class="panel panel-info">
+				<div class="panel panel-success">
 				  
 				  	<div class="panel-heading">{{ $date }}</div>
 

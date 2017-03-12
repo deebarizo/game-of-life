@@ -93,6 +93,13 @@ class HistoryController extends Controller {
 
 			$mergedDailyInstances = array_merge($dailyTaskInstances, $taskInstances);
 
+			if (empty($mergedDailyInstances)) {
+
+				$instances[$dateString] = [];
+
+				continue;
+			}
+
 			// http://php.net/manual/en/function.array-multisort.php
 
 			foreach ($mergedDailyInstances as $key => $row) {

@@ -27,6 +27,8 @@ class PagesController extends Controller {
         $dateCalculator = new DateCalculator;
         $currentDate = $dateCalculator->getCurrentDate($option, $date = new \DateTime());
 
+        # ddAll($currentDate);
+
 
         /****************************************************************************************
         DAILY TASKS
@@ -54,7 +56,7 @@ class PagesController extends Controller {
             'numTasks' => TaskInstance::where('date', $currentDate->format('Y-m-d'))->count()
         ];
 
-        $tasks['progress']['barWidth'] = intval($tasks['progress']['numCompleteTasks'] / $tasks['progress']['numTasks'] * 100);
+        $tasks['progress']['barWidth'] = ($tasks['progress']['numTasks'] > 0 ? intval($tasks['progress']['numCompleteTasks'] / $tasks['progress']['numTasks'] * 100) : 0);
 
 
         /****************************************************************************************

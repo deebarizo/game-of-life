@@ -31,25 +31,10 @@ class InstanceCreator {
 
                     $dailyTasks = DailyTask::all();
 
-                    if (count($dailyTasks) > 7) {
-
-                        prf('dailyTasks count is '.count($dailyTasks));
-                        ddAll($dailyTasks);
-                    }
-
-                    if ($latestInstance) {
-
-                        if ($latestInstance->date === $currentDate->format('Y-m-d')) {
-
-                            prf("latestInstance->date is the same as currentDate->format('Y-m-d')");
-                            ddAll($dailyTasks);                       
-                        }
-                    }
-
-                    # prf('$latestDate: ');
-                    # prf($latestDate);
-                    # prf('$missingDays: '.$missingDays);
-                    # prf($dailyTasks);
+                    # prf('$currentDate: '.$currentDate->format('Y-m-d'));
+                    # prf('$latestInstance: '.$latestInstance);
+                    # prf('$latestDate: '.$latestDate->format('Y-m-d'));
+                    # ddAll('$missingDays: '.$missingDays);
 
                     for ($i = 0; $i < $missingDays; $i++) { 
                         
