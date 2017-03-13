@@ -18,8 +18,8 @@
 
 							<thead>
 								<tr>
-									<th>Name</th> 
-									<th>Date/Time</th> 
+									<th style="width: 60%">Name</th> 
+									<th style="width: 40%">Date/Time</th> 
 								</tr> 
 							</thead> 
 
