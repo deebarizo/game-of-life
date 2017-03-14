@@ -34,7 +34,7 @@ class InstanceCreator {
                     prf('$currentDate: '.$currentDate->format('Y-m-d'));
                     prf('$latestInstance: '.$latestInstance);
                     prf('$latestDate: '.$latestDate->format('Y-m-d'));
-                    ddAll('$missingDays: '.$missingDays);
+                    prf('$missingDays: '.$missingDays);
 
                     for ($i = 0; $i < $missingDays; $i++) { 
                         

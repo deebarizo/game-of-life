@@ -50,6 +50,7 @@ class DailyTasksController extends Controller
                                         $join->on('daily_task_instances.daily_task_id', '=', 'daily_tasks.id');
                                     })
                                     ->where('date', $currentDate->format('Y-m-d'))
+                                    ->orderBy('is_complete', 'desc')
                                     ->get();
 
         # ddAll($dailyTasks);

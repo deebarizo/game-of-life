@@ -30,7 +30,7 @@ class TaskInstancesController extends Controller
         $dateCalculator = new DateCalculator;
         $currentDate = $dateCalculator->getCurrentDate($option, $date = new \DateTime());
 
-        $tasks = TaskInstance::select('*')->where('date', $currentDate->format('Y-m-d'))->get();
+        $tasks = TaskInstance::select('*')->where('date', $currentDate->format('Y-m-d'))->orderBy('is_complete', 'desc')->get();
 
         # ddAll($tasks);
 
