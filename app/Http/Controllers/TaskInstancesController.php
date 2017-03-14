@@ -59,8 +59,7 @@ class TaskInstancesController extends Controller
     {
         $this->validate($request, [
             
-            'name' => 'required',
-            'image' => 'required'
+            'name' => 'required'
         ]);
 
         $taskInstance = new TaskInstance;
@@ -156,7 +155,10 @@ class TaskInstancesController extends Controller
     {
         $task = TaskInstance::find($id);
 
-        unlink($task->image_url);
+        if ($task->image_url !== 'files/images/experiment.png') {
+
+            unlink($task->image_url);
+        }
 
         $task->delete();
         

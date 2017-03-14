@@ -19,17 +19,24 @@ class FileUploader {
 
         $file = Input::file('image');
 
-        $fileName = $file->getClientOriginalName();
+        $fileDirectory = 'files/images/';
 
-        $fileExtension = preg_replace("/(.+)(\.\w\w\w$)/", "$2", $fileName); // $example = '.png';
+        if ($file != null) {
 
-    	$fileDirectory = 'files/images/';
+            $fileName = $file->getClientOriginalName();
 
-        $fileName = $type.'_'.$id.$fileExtension;
+            $fileExtension = preg_replace("/(.+)(\.\w\w\w$)/", "$2", $fileName); // $example = '.png';
 
-       	Input::file('image')->move($fileDirectory, $fileName);    
+            
 
-        return $fileDirectory . $fileName;   
+            $fileName = $type.'_'.$id.$fileExtension;
+
+            Input::file('image')->move($fileDirectory, $fileName);  
+
+            return $fileDirectory . $fileName;   
+        }
+
+        return $fileDirectory.'experiment.png';
     }
 
 }
