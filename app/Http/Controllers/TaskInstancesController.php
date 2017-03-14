@@ -68,6 +68,7 @@ class TaskInstancesController extends Controller
         $taskInstance->name = trim($request->input('name'));
         $taskInstance->description = (trim($request->input('description')) == '' ? null : trim($request->input('description')));
         $taskInstance->link = (trim($request->input('link')) == '' ? null : trim($request->input('link')));
+        $taskInstance->is_in_history = $request->input('is_in_history');
 
         $taskInstance->save();
  
@@ -138,6 +139,7 @@ class TaskInstancesController extends Controller
         $taskInstance->name = trim($request->input('name'));
         $taskInstance->description = (trim($request->input('description')) == '' ? null : trim($request->input('description')));
         $taskInstance->link = (trim($request->input('link')) == '' ? null : trim($request->input('link')));
+        $taskInstance->is_in_history = $request->input('is_in_history');
 
         $taskInstance->save();
 

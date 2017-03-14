@@ -84,6 +84,7 @@ class HistoryController extends Controller {
 															date,
 															completed_at,
 															unix_timestamp(completed_at) as unix_timestamp'))
+				                                    ->where('is_in_history', 1)
 				                                    ->where('is_complete', 1)
 				                                    ->where('date', $dateString)
 				                                    ->orderBy('date', 'desc')
