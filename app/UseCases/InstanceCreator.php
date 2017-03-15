@@ -31,32 +31,28 @@ class InstanceCreator {
 
                     $dailyTasks = DailyTask::all();
 
-                    prf('$currentDate: '.$currentDate->format('Y-m-d'));
-                    prf('$latestInstance: '.$latestInstance);
-                    prf('$latestDate: '.$latestDate->format('Y-m-d'));
-                    prf('$missingDays: '.$missingDays);
-
                     for ($i = 0; $i < $missingDays; $i++) { 
                         
                         $latestDate->modify('+1 day');
 
                         foreach ($dailyTasks as $dailyTask) {
-                            
-                            $dailyTaskInstance = new DailyTaskInstance;
 
-                            $dailyTaskInstance->daily_task_id = $dailyTask->id;
-                            $dailyTaskInstance->date = $latestDate->format('Y-m-d');
-                            $dailyTaskInstance->start_time = $option->start_time;
-                            $dailyTaskInstance->end_time = $option->end_time;
-                            $dailyTaskInstance->is_complete = false;
+                            if (DailyTaskInstance::where('daily_task_id', $dailyTask->id)->where('date', $latestDate->format('Y-m-d'))->count() === 0) {
 
-                            $dailyTaskInstance->save();
+                                $dailyTaskInstance = new DailyTaskInstance;
+
+                                $dailyTaskInstance->daily_task_id = $dailyTask->id;
+                                $dailyTaskInstance->date = $latestDate->format('Y-m-d');
+                                $dailyTaskInstance->start_time = $option->start_time;
+                                $dailyTaskInstance->end_time = $option->end_time;
+                                $dailyTaskInstance->is_complete = false;
+
+                                $dailyTaskInstance->save();
+                            }
                         }
 
                         # prf('loop1');                             
                     }
-
-                    
                 }
 
                 break; 
@@ -79,13 +75,16 @@ class InstanceCreator {
 
                         foreach ($badHabits as $badHabit) {
 
-                            $badHabitInstance = new BadHabitInstance;
+                            if (BadHabitInstance::where('bad_habit_id', $badHabit->id)->where('date', $latestDate->format('Y-m-d'))->count() === 0) {
 
-                            $badHabitInstance->bad_habit_id = $badHabit->id;
-                            $badHabitInstance->date = $latestDate->format('Y-m-d');
-                            $badHabitInstance->is_success = true;
+                                $badHabitInstance = new BadHabitInstance;
 
-                            $badHabitInstance->save();
+                                $badHabitInstance->bad_habit_id = $badHabit->id;
+                                $badHabitInstance->date = $latestDate->format('Y-m-d');
+                                $badHabitInstance->is_success = true;
+
+                                $badHabitInstance->save();
+                            }
                         }   
 
                         # prf('loop2');                          
