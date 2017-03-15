@@ -44,7 +44,8 @@ class DailyTasksController extends Controller
                                                     daily_tasks.order,
                                                     daily_task_instances.id as daily_task_instance_id, 
                                                     daily_task_instances.date,
-                                                    daily_task_instances.is_complete'))
+                                                    daily_task_instances.is_complete,
+                                                    daily_tasks.is_in_history'))
                                     ->join('daily_task_instances', function($join) {
       
                                         $join->on('daily_task_instances.daily_task_id', '=', 'daily_tasks.id');

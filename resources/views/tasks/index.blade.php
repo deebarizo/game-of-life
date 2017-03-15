@@ -19,13 +19,14 @@
 				$isComplete = ($task->is_complete ? 'complete' : '');
 				$description = ($task->description == '' ? '' : '<a class="description" href="#"><img src="'.url('/files/icons/text-lines.png').'"></a><div style="display: none" class="tool-tip-description">'.$task->description.'</div>');
 				$link = ($task->link == '' ? '' : '<a target="_blank" href="'.$task->link.'"><img src="'.url('/files/icons/link.png').'"></a>');
-			
+				$star = ($task->is_in_history ===  1 ? '<img src="'.url('/files/icons/star.png').'">' : '');
+
 			?>
 
 			<div class="col-lg-4">
 
 				<div class="task {{ $isComplete }}" style="height: 250px; border: 1px solid; margin-bottom: 30px" data-task-instance-id="{{ $task->id }}">
-					<h4 class="text-center" style="margin: 18px 18px">{{ $task->name }} {!! $description !!} {!! $link !!}</h4>
+					<h4 class="text-center" style="margin: 18px 18px">{{ $task->name }} {!! $description !!} {!! $link !!} {!! $star !!}</h4>
 
 					<img class="center-block" style="margin-bottom: 27px" src="<?php echo url($task->image_url); ?>">
 

@@ -31,7 +31,8 @@ class FocusController extends Controller
                                                         daily_tasks.description,
                                                         daily_tasks.link,
                                                         daily_tasks.image_url,
-                                                        daily_task_instances.is_complete'))
+                                                        daily_task_instances.is_complete,
+                                                        daily_tasks.is_in_history'))
                                             ->join('daily_task_instances', function($join) {
               
                                                 $join->on('daily_task_instances.daily_task_id', '=', 'daily_tasks.id');

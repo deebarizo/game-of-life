@@ -19,13 +19,14 @@
 				$isComplete = ($dailyTask->is_complete ? 'complete' : '');
 				$description = ($dailyTask->description == '' ? '' : '<a class="description" href="#"><img src="'.url('/files/icons/text-lines.png').'"></a><div style="display: none" class="tool-tip-description">'.$dailyTask->description.'</div>');
 				$link = ($dailyTask->link == '' ? '' : '<a target="_blank" href="'.$dailyTask->link.'"><img src="'.url('/files/icons/link.png').'"></a>');
-			
+				$star = ($dailyTask->is_in_history ===  1 ? '<img src="'.url('/files/icons/star.png').'">' : '');
+
 			?>
 
 			<div class="col-lg-4">
 
 				<div class="daily-task {{ $isComplete }}" style="height: 250px; border: 1px solid; margin-bottom: 30px" data-daily-task-instance-id="{{ $dailyTask->daily_task_instance_id }}">
-					<h4 class="text-center" style="margin: 18px 18px">{{ $dailyTask->name }} {!! $description !!} {!! $link !!}</h4>
+					<h4 class="text-center" style="margin: 18px 18px">{{ $dailyTask->name }} {!! $description !!} {!! $link !!} {!! $star !!}</h4>
 
 					<img class="center-block" style="margin-bottom: 27px" src="<?php echo url($dailyTask->image_url); ?>">
 

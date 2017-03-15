@@ -16,13 +16,14 @@
 			$isComplete = ($instance->is_complete ? 'complete' : '');
 			$description = ($instance->description == '' ? '' : '<a class="description" href="#"><img src="'.url('/files/icons/text-lines.png').'"></a><div style="display: none" class="tool-tip-description">'.$instance->description.'</div>');
 			$link = ($instance->link == '' ? '' : '<a target="_blank" href="'.$instance->link.'"><img src="'.url('/files/icons/link.png').'"></a>');
-		
+			$star = ($instance->is_in_history ===  1 ? '<img src="'.url('/files/icons/star.png').'">' : '');
+
 		?>
 
 		<div class="col-lg-offset-4 col-lg-4">
 
 			<div class="instance {{ $isComplete }}" style="height: 250px; border: 1px solid; margin-bottom: 30px; margin-top: 20px" data-instance-id="{{ $instance->id }}" data-instance-type="{{ $instanceType }}">
-				<h4 class="text-center" style="margin: 18px 18px">{{ $instance->name }} {!! $description !!} {!! $link !!}</h4>
+				<h4 class="text-center" style="margin: 18px 18px">{{ $instance->name }} {!! $description !!} {!! $link !!} {!! $star !!}</h4>
 
 				<img class="center-block" style="margin-bottom: 27px" src="<?php echo url($instance->image_url); ?>">
 
