@@ -37,7 +37,9 @@ class InstanceCreator {
 
                         foreach ($dailyTasks as $dailyTask) {
 
-                            if (DailyTaskInstance::where('daily_task_id', $dailyTask->id)->where('date', $latestDate->format('Y-m-d'))->count() === 0) {
+                            $dailyTaskInstanceExists = DailyTaskInstance::where('daily_task_id', $dailyTask->id)->where('date', $latestDate->format('Y-m-d'))->count();
+
+                            if (!$dailyTaskInstanceExists) {
 
                                 $dailyTaskInstance = new DailyTaskInstance;
 
@@ -75,7 +77,9 @@ class InstanceCreator {
 
                         foreach ($badHabits as $badHabit) {
 
-                            if (BadHabitInstance::where('bad_habit_id', $badHabit->id)->where('date', $latestDate->format('Y-m-d'))->count() === 0) {
+                            $badHabitInstanceExists = BadHabitInstance::where('bad_habit_id', $badHabit->id)->where('date', $latestDate->format('Y-m-d'))->count();
+
+                            if (!$badHabitInstanceExists) {
 
                                 $badHabitInstance = new BadHabitInstance;
 
