@@ -13,10 +13,10 @@
 
 $factory->define(App\Task::class, function($faker) {
     return [
-        'name' => $faker->word.' '.$faker->word,
+        'name' => ucfirst($faker->word).' '.ucfirst($faker->word).' '.ucfirst($faker->word),
         'is_complete' => 0,
         'completed_at' => null,
-        'image_url' => 'cool_image.jpg',
+        'image_url' => 'files/images/experiment.png',
         'is_in_history' => 0,
         'description' => null,
         'link' => null,

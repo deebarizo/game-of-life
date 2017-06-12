@@ -15,7 +15,11 @@ class TasksController extends Controller
      */
     public function index()
     {
-        //
+        $h2Tag = 'Tasks'; 
+
+        $tasks = Task::all();
+    
+        return view('tasks/index', compact('h2Tag', 'tasks'));
     }
 
     /**
