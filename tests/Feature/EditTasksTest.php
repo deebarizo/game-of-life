@@ -41,7 +41,8 @@ class EditTasksTest extends TestCase
     public function use_old_image_url_if_a_new_image_is_not_uploaded()
     {
         $task = factory('App\Task')->create([
-            'id' => 1
+            'id' => 1,
+            'image_url' => 'files/images/fish.png'
         ]);
 
         $newTask = factory('App\Task')->make([
@@ -53,6 +54,6 @@ class EditTasksTest extends TestCase
 
         $task = Task::find(1);
 
-        $this->assertEquals($task->image_url, 'files/images/experiment.png');
+        $this->assertEquals($task->image_url, 'files/images/fish.png');
     }
 }

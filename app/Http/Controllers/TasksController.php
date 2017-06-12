@@ -33,7 +33,11 @@ class TasksController extends Controller
     {
         $h2Tag = 'Create Task';
 
-        return view('tasks/create', compact('h2Tag'));
+        $task = new Task;
+        
+        $task->is_in_history = 1; // for view
+
+        return view('tasks/create', compact('h2Tag', 'task'));
     }
 
     /**
@@ -80,9 +84,11 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Task $task)
     {
+        $h2Tag = 'Edit Task';
 
+        return view('tasks/edit', compact('h2Tag', 'task'));
 
     }
 
@@ -96,17 +102,17 @@ class TasksController extends Controller
     public function update(Request $request, Task $task)
     {
         $fileUploader = new FileUploader;
-        $imageUrl = $fileUploader->uploadImageFile($request);
+        $imageUrl = $fileUploader->uploadImageFile($request, $task);
 
         $task->name = request('name');
-        $task->image_url = ($imageUrl == null ? $task->image_url : $imageUrl);
+        $task->image_url = $imageUrl;
         $task->is_in_history = request('is_in_history');
         $task->description = request('description');
         $task->link = request('link');
 
         $task->save();
 
-        return redirect($task->path());
+        return redirect('/tasks');
     }
 
     /**
