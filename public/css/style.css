@@ -3,7 +3,6 @@ GLOBAL
 ****************************************************************************************/
 
 hr {
-
 	border-top: 1px solid #ddd;
 }
 
@@ -13,24 +12,26 @@ HOME
 ****************************************************************************************/
 
 div.thumbnail {
-
 	margin-top: 25px;
 	margin-bottom: 0;
 }
 
 div.thumbnail img {
-
 	margin: 5px 10px 20px 10px;
 }
 
 div.thumbnail-container a:hover {
-
 	text-decoration: none;
 }
 
 div.caption h2 {
-
 	margin: 0 0 15px 0;
+}
+
+button.delete{
+	border: none;
+	color: transparent;
+	background-color: white;
 }
 
 
@@ -39,7 +40,6 @@ DAILY TASKS
 ****************************************************************************************/
 
 div.complete {
-
 	background-color: #777;
 }
 
@@ -49,11 +49,9 @@ BAD HABITS
 ****************************************************************************************/
 
 div.bad-habit {
-
 	background-color: #ff3333;
 }
 
 div.bad-habit.success {
-
 	background-color: #ffffff;
 }

@@ -12,14 +12,6 @@
 
 		</div>
 
-<style>
-    button.delete{
-    	border: none;
-    	color: transparent;
-		background-color: white;
-    }
-</style>
-
 		@foreach ($tasks as $task)
 
 			<?php 
