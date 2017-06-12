@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Task;
 
+use App\UseCases\FileUploader;
+
 class TasksController extends Controller
 {
     /**
@@ -29,7 +31,9 @@ class TasksController extends Controller
      */
     public function create()
     {
-        //
+        $h2Tag = 'Create Task';
+
+        return view('tasks/create', compact('h2Tag'));
     }
 
     /**
@@ -40,16 +44,19 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
+        $fileUploader = new FileUploader;
+        $imageUrl = $fileUploader->uploadImageFile($request);
+
         $task = new Task;
 
         $task->name = request('name');
-        $task->is_complete = request('is_complete');
-        $task->completed_at = null;
-        $task->image_url = request('image_url');
+        $task->is_complete = 0; // database defaults to this value
+        $task->completed_at = null; // database defaults to this value
+        $task->image_url = $imageUrl;
         $task->is_in_history = request('is_in_history');
-        $task->description = request('description');
-        $task->link = request('link');
-        $task->order = request('order');
+        $task->description = ($request->input('description') == '' ? null : $request->input('description'));
+        $task->link = ($request->input('link') == '' ? null : $request->input('link'));
+        $task->order = null; // database defaults to this value
 
         $task->save();
 
