@@ -82,7 +82,8 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        //
+
+
     }
 
     /**
@@ -92,9 +93,19 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Task $task)
     {
-        //
+        $task->name = request('name');
+        # $task->image_url = $imageUrl;
+        $task->is_in_history = request('is_in_history');
+        $task->description = request('description');
+        $task->link = request('link');
+        # $task->description = ($request->input('description') == '' ? null : $request->input('description'));
+        # $task->link = ($request->input('link') == '' ? null : $request->input('link'));
+
+        $task->save();
+
+        return redirect($task->path());
     }
 
     /**
