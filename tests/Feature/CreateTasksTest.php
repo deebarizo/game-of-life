@@ -13,7 +13,7 @@ class CreateTasksTest extends TestCase
     {
         $task = factory('App\Task')->make([
         	'name' => 'Wash Dishes',
-            'image_url' => null,
+            'image_url' => null, // this is needed because we are posting an http request and the method uses the FileUploader use case
             'is_in_history' => 1,
             'description' => 'Test description',
             'link' => 'http://test.com',

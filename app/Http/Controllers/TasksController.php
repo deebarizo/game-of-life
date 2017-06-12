@@ -54,8 +54,8 @@ class TasksController extends Controller
         $task->completed_at = null; // database defaults to this value
         $task->image_url = $imageUrl;
         $task->is_in_history = request('is_in_history');
-        $task->description = ($request->input('description') == '' ? null : $request->input('description'));
-        $task->link = ($request->input('link') == '' ? null : $request->input('link'));
+        $task->description = request('description');
+        $task->link = request('link');
         $task->order = null; // database defaults to this value
 
         $task->save();
@@ -95,13 +95,14 @@ class TasksController extends Controller
      */
     public function update(Request $request, Task $task)
     {
+        $fileUploader = new FileUploader;
+        $imageUrl = $fileUploader->uploadImageFile($request);
+
         $task->name = request('name');
-        # $task->image_url = $imageUrl;
+        $task->image_url = ($imageUrl == null ? $task->image_url : $imageUrl);
         $task->is_in_history = request('is_in_history');
         $task->description = request('description');
         $task->link = request('link');
-        # $task->description = ($request->input('description') == '' ? null : $request->input('description'));
-        # $task->link = ($request->input('link') == '' ? null : $request->input('link'));
 
         $task->save();
 
