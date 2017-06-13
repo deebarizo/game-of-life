@@ -13,7 +13,9 @@
 		</div>
 
 		@foreach ($tasks as $task)
-			@include('tasks.task')
+			<div class="col-lg-4">
+				@include('tasks.task')
+			</div>
 		@endforeach
 
 	</div>
