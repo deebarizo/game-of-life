@@ -17,7 +17,11 @@ class TasksController extends Controller
      */
     public function index()
     {
+        $h2Tag = 'Tasks'; 
 
+        $tasks = Task::all();
+    
+        return view('tasks/index', compact('h2Tag', 'tasks'));
     }
 
     /**
@@ -60,7 +64,7 @@ class TasksController extends Controller
 
         $task->save();
 
-        return redirect('/tasks');
+        return redirect('/');
     }
 
     /**
@@ -108,7 +112,7 @@ class TasksController extends Controller
 
         $task->save();
 
-        return redirect('/tasks');
+        return redirect('/');
     }
 
     /**
@@ -121,7 +125,7 @@ class TasksController extends Controller
     {
         $task->delete();
 
-        return redirect('/tasks');
+        return redirect('/');
     }
     
     
