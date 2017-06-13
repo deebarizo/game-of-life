@@ -128,10 +128,44 @@ class TasksController extends Controller
         return redirect('/tasks');
     }
 
+
+    /****************************************************************************************
+    FOCUS MODE
+    ****************************************************************************************/
+
     public function focus(Task $task)
     {
         $h2Tag = 'Focus Mode - '.$task->name;
 
         return view('tasks/focus', compact('h2Tag', 'task'));
+    }
+
+
+    /****************************************************************************************
+    AJAX
+    ****************************************************************************************/
+
+    /**
+     * Mark task instance complete or not complete. Uses AJAX.
+     * @param  \Illuminate\Http\Request $request
+     * @return void
+     */
+    public function complete(Request $request) {
+
+        $taskId = $request->input('taskId');
+        $isComplete = ($request->input('isComplete') == 'true' ? 1 : 0);
+
+        $task = Task::find($taskId);
+
+        $task->is_complete = $isComplete;
+
+        if ($isComplete) {
+            $date = new \DateTime();
+            $task->completed_at = $date->format("Y-m-d H:i:s");
+        } else {
+            $task->completed_at = null;
+        }
+
+        $task->save();
     }
 }

@@ -35,9 +35,7 @@ button.delete {
 	padding: 0;
 }
 
-button.delete.complete {
-	border: none;
-	color: transparent;
+div.complete button.delete {
 	background-color: #777;
 }
 
