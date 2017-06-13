@@ -6,7 +6,7 @@
 
 	<div class="row">
 
-		@foreach ($tasks as $date => $dailyTasks) 
+		@foreach ($tasksGroupedByDate as $date => $tasks) 
 
 			<div class="col-lg-12">
 
@@ -24,11 +24,11 @@
 						</thead> 
 
 						<tbody> 
-							@if (count($dailyTasks) > 0)
-								@foreach ($dailyTasks as $dailyTask)
+							@if (count($tasks) > 0)
+								@foreach ($tasks as $task)
 									<tr>
-										<td><a href="{{ $dailyTask->path().'/edit' }}">{{ $dailyTask->name }}</a> {!! ($dailyTask->is_in_history ? '<img src="'.url('/files/icons/star.png').'">' : '') !!}</td>
-										<td>{{ $dailyTask->completed_at }}</td>
+										<td><a style="{!! $task->is_complete_html() !!}" href="{{ $task->path().'/edit' }}">{{ $task->name }}</a> @include('tasks.task_icons')</td>
+										<td>{{ $task->completed_at }}</td>
 									</tr>
 								@endforeach
 							@else
@@ -48,4 +48,6 @@
 		@endforeach
 
 	</div>
+
+	@include('tasks.js')
 @stop

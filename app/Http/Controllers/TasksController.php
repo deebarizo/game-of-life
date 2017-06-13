@@ -21,9 +21,9 @@ class TasksController extends Controller
 
         $todayDate = new \DateTime();
 
-        $tasks = Task::groupByDate(5, $todayDate);
+        $tasksGroupedByDate = Task::groupByDate(5, $todayDate);
     
-        return view('tasks/index', compact('h2Tag', 'tasks'));
+        return view('tasks/index', compact('h2Tag', 'tasksGroupedByDate'));
     }
 
     /**

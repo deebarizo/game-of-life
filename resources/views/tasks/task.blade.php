@@ -1,11 +1,5 @@
-<?php 
-	$description = ($task->description == '' ? '' : '<a class="description" href="#"><img src="'.url('/files/icons/text-lines.png').'"></a><div style="display: none" class="tool-tip-description">'.$task->description.'</div>');
-	$link = ($task->link == '' ? '' : '<a target="_blank" href="'.$task->link.'"><img src="'.url('/files/icons/link.png').'"></a>');
-	$star = ($task->is_in_history ===  1 ? '<img src="'.url('/files/icons/star.png').'">' : '');
-?>
-
 <div class="task {{ ($task->is_complete ? 'complete' : '') }}" style="height: 250px; border: 1px solid; margin-bottom: 30px" data-task-id="{{ $task->id }}">
-	<h4 class="text-center" style="margin: 18px 18px">{{ $task->name }} {!! $description !!} {!! $link !!} {!! $star !!}</h4>
+	<h4 class="text-center" style="margin: 18px 18px">{{ $task->name }} @include('tasks.task_icons')</h4>
 
 	<img class="center-block" style="margin-bottom: 27px" src="<?php echo url($task->image_url); ?>">
 
