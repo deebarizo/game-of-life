@@ -4,6 +4,8 @@
 TASKS
 ****************************************************************************************/
 
+Route::get('/', 'TasksController@daily_tasks');
+
 Route::resource('tasks', 'TasksController');
 
 Route::get('/tasks/{task}/focus', 'TasksController@focus');
