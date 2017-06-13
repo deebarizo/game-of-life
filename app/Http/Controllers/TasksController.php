@@ -17,11 +17,7 @@ class TasksController extends Controller
      */
     public function index()
     {
-        $h2Tag = 'Tasks'; 
 
-        $tasks = Task::all();
-    
-        return view('tasks/index', compact('h2Tag', 'tasks'));
     }
 
     /**
@@ -127,7 +123,21 @@ class TasksController extends Controller
 
         return redirect('/tasks');
     }
+    
+    
+    /****************************************************************************************
+    DAILY TASKS (HOME)
+    ****************************************************************************************/
+    
+    public function daily_tasks()
+    {
+        $h2Tag = 'Daily Tasks'; 
 
+        $tasks = Task::all();
+    
+        return view('tasks/daily_tasks', compact('h2Tag', 'tasks'));
+    }
+    
 
     /****************************************************************************************
     FOCUS MODE
