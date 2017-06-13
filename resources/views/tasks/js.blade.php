@@ -74,6 +74,7 @@
 		            success: function() {
 
 		            	isComplete ? task.addClass('complete') : task.removeClass('complete');
+		            	$('div.earned-link').show();
 		            }
 		        });
 			})
