@@ -6,7 +6,7 @@
 
 	<div class="row">
 
-		@foreach ($tasks as $task) 
+		@foreach ($tasks as $date => $dailyTasks) 
 
 			<div class="col-lg-12">
 
@@ -14,36 +14,35 @@
 				  
 				  	<div class="panel-heading">{{ $date }}</div>
 
-						<table class="table">
+					<table class="table">
 
-							<thead>
-								<tr>
-									<th style="width: 60%">Name</th> 
-									<th style="width: 40%">Date/Time</th> 
-								</tr> 
-							</thead> 
+						<thead>
+							<tr>
+								<th style="width: 60%">Name</th> 
+								<th style="width: 40%">Completed At</th> 
+							</tr> 
+						</thead> 
 
-							<tbody> 
-
-								@foreach ($mergedDailyInstances as $mergedDailyInstance)
-
-									<?php $star = (isset($mergedDailyInstance['is_in_history']) ? '' : '<img src="'.url('/files/icons/star.png').'">'); ?>
-
+						<tbody> 
+							@if (count($dailyTasks) > 0)
+								@foreach ($dailyTasks as $dailyTask)
 									<tr>
-										<td>{{ $mergedDailyInstance['name'] }} {!! $star !!}</td>
-										<td>{{ $mergedDailyInstance['completed_at'] }}</td>
+										<td><a href="{{ $dailyTask->path().'/edit' }}">{{ $dailyTask->name }}</a> {!! ($dailyTask->is_in_history ? '<img src="'.url('/files/icons/star.png').'">' : '') !!}</td>
+										<td>{{ $dailyTask->completed_at }}</td>
 									</tr>
-
 								@endforeach
+							@else
+								<tr>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+								</tr>								
+							@endif
+						</tbody>
 
-							</tbody>
+					</table>
 
-						</table>
-
-					</div>
-					
 				</div>
-
+					
 			</div>
 
 		@endforeach

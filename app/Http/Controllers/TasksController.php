@@ -19,7 +19,9 @@ class TasksController extends Controller
     {
         $h2Tag = 'Tasks'; 
 
-        $tasks = Task::all();
+        $todayDate = new \DateTime();
+
+        $tasks = Task::groupByDate(5, $todayDate);
     
         return view('tasks/index', compact('h2Tag', 'tasks'));
     }
