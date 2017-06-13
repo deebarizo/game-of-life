@@ -14,7 +14,7 @@ class FileUploader {
      * @return string Returns file directory + file name
      */
 
-    public function uploadImageFile($request, $task = null) {
+    public function uploadImageFile($request, $task) {
 
         $file = Input::file('image');
 

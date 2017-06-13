@@ -51,20 +51,11 @@ class TasksController extends Controller
     public function store(Request $request)
     {
         $fileUploader = new FileUploader;
-        $imageUrl = $fileUploader->uploadImageFile($request);
+        $imageUrl = $fileUploader->uploadImageFile($request, $task = null);
 
         $task = new Task;
 
-        $task->name = request('name');
-        $task->is_complete = 0; // database defaults to this value
-        $task->completed_at = null; // database defaults to this value
-        $task->image_url = $imageUrl;
-        $task->is_in_history = request('is_in_history');
-        $task->description = request('description');
-        $task->link = request('link');
-        $task->order = null; // database defaults to this value
-
-        $task->save();
+        $this->process_form_submission($task, $imageUrl, $request);
 
         return redirect('/');
     }
@@ -106,13 +97,7 @@ class TasksController extends Controller
         $fileUploader = new FileUploader;
         $imageUrl = $fileUploader->uploadImageFile($request, $task);
 
-        $task->name = request('name');
-        $task->image_url = $imageUrl;
-        $task->is_in_history = request('is_in_history');
-        $task->description = request('description');
-        $task->link = request('link');
-
-        $task->save();
+        $this->process_form_submission($task, $imageUrl, $request);
 
         return redirect('/');
     }
@@ -128,6 +113,23 @@ class TasksController extends Controller
         $task->delete();
 
         return redirect('/');
+    }
+
+
+    /****************************************************************************************
+    FORM HELPER
+    ****************************************************************************************/
+
+    private function process_form_submission($task, $imageUrl, $request)
+    {
+        $task->name = request('name');
+        $task->image_url = $imageUrl;
+        $task->is_in_history = request('is_in_history');
+        $task->description = request('description');
+        $task->link = request('link');
+        $task->order = (trim($request->input('order')) == '' ? 0 : trim($request->input('order')));
+
+        $task->save();
     }
     
     
