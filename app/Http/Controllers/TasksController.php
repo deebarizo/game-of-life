@@ -127,4 +127,11 @@ class TasksController extends Controller
 
         return redirect('/tasks');
     }
+
+    public function focus(Task $task)
+    {
+        $h2Tag = 'Focus Mode - '.$task->name;
+
+        return view('tasks/focus', compact('h2Tag', 'task'));
+    }
 }

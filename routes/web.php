@@ -5,3 +5,5 @@ TASKS
 ****************************************************************************************/
 
 Route::resource('tasks', 'TasksController');
+
+Route::get('/tasks/{task}/focus', 'TasksController@focus');
