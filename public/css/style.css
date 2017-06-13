@@ -32,6 +32,13 @@ button.delete {
 	border: none;
 	color: transparent;
 	background-color: white;
+	padding: 0;
+}
+
+button.delete.complete {
+	border: none;
+	color: transparent;
+	background-color: #777;
 }
 
 
