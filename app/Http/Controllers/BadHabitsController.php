@@ -30,6 +30,8 @@ class BadHabitsController extends Controller
         $h2Tag = 'Create Bad Habit';
 
         $badHabit = new BadHabit;
+
+        $badHabit->is_success = 0; // for view
         
         return view('bad_habits/create', compact('h2Tag', 'badHabit'));
     }
@@ -71,7 +73,9 @@ class BadHabitsController extends Controller
      */
     public function edit(BadHabit $badHabit)
     {
+        $h2Tag = 'Edit Bad Habit';
 
+        return view('bad_habits/edit', compact('h2Tag', 'badHabit'));
     }
 
     /**

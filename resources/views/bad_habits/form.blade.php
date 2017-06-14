@@ -1,12 +1,20 @@
 {{ csrf_field() }}
 
-<input type="hidden" name="is_success" value="0">
-
 <div class="row">
 	<div class="col-lg-3"> 
 		<div class="form-group">
 			<label for="name">Name:</label>
 			<input class="form-control" name="name" type="text" value="{{ old('name', $badHabit->name) }}" id="name">
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-3"> 
+		<div class="form-group">
+			<label for="is_success">Is This a Successful Task?</label><br>
+			<label class="radio-inline"><input type="radio" name="is_success" value="1" {{ (old('is_success', $badHabit->is_success) == 1) ? 'checked="checked"' : '' }}>Yes</label>
+			<label class="radio-inline"><input type="radio" name="is_success" value="0" {{ (old('is_success', $badHabit->is_success) == 0) ? 'checked="checked"' : '' }}>No</label>
 		</div>
 	</div>
 </div>
