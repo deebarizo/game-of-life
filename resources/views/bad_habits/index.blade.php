@@ -18,8 +18,9 @@
 
 						<thead>
 							<tr>
-								<th style="width: 60%">Name</th> 
+								<th style="width: 40%">Name</th> 
 								<th style="width: 40%">Description</th> 
+								<th style="width: 20%">Delete</th> 
 							</tr> 
 						</thead> 
 
@@ -29,10 +30,12 @@
 									<tr>
 										<td><a style="{!! $badHabit->is_success_html() !!}" href="{{ $badHabit->path().'/edit' }}">{{ $badHabit->name }}</a></td>
 										<td>{{ $badHabit->description }}</td>
+										<td><form style="display: inline" method="POST" action="{{ $badHabit->path() }}" accept-charset="UTF-8"><input name="_method" type="hidden" value="DELETE">{{ csrf_field() }}<button class="delete" type="submit"><img src="/files/icons/trash.png"></button></form></td>
 									</tr>
 								@endforeach
 							@else
 								<tr>
+									<td>&nbsp;</td>
 									<td>&nbsp;</td>
 									<td>&nbsp;</td>
 								</tr>								
