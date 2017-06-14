@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\BadHabit;
 use Illuminate\Http\Request;
 
-class BadHabitController extends Controller
+use App\BadHabit;
+
+use App\UseCases\FileUploader;
+
+class BadHabitsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +38,14 @@ class BadHabitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fileUploader = new FileUploader;
+        $imageUrl = $fileUploader->uploadImageFile($request, $badHabit = null);
+
+        $badHabit = new BadHabit;
+
+        $this->process_form_submission($badHabit, $imageUrl, $request);
+
+        return redirect('/');
     }
 
     /**
@@ -81,5 +91,22 @@ class BadHabitController extends Controller
     public function destroy(BadHabit $badHabit)
     {
         //
+    }
+
+
+    /****************************************************************************************
+    FORM HELPER
+    ****************************************************************************************/
+
+    private function process_form_submission($badHabit, $imageUrl, $request)
+    {
+        # dd($request);
+
+        $badHabit->name = request('name');
+        $badHabit->description = request('description');
+        $badHabit->image_url = $imageUrl;
+        $badHabit->is_success = request('is_success');
+
+        $badHabit->save();
     }
 }

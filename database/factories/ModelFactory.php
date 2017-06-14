@@ -11,6 +11,15 @@
 |
 */
 
+$factory->define(App\BadHabit::class, function($faker) {
+    return [
+        'name' => ucfirst($faker->word).' '.ucfirst($faker->word).' '.ucfirst($faker->word),
+        'description' => null,
+        'image_url' => '/files/images/experiment.png',
+        'is_success' => 0
+    ];
+});
+
 $factory->define(App\Task::class, function($faker) {
     return [
         'name' => ucfirst($faker->word).' '.ucfirst($faker->word).' '.ucfirst($faker->word),
