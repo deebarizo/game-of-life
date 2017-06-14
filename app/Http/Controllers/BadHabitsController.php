@@ -17,7 +17,7 @@ class BadHabitsController extends Controller
      */
     public function index()
     {
-        //
+        return 'index';
     }
 
     /**
@@ -27,7 +27,11 @@ class BadHabitsController extends Controller
      */
     public function create()
     {
-        //
+        $h2Tag = 'Create Bad Habit';
+
+        $badHabit = new BadHabit;
+        
+        return view('bad_habits/create', compact('h2Tag', 'badHabit'));
     }
 
     /**
@@ -45,7 +49,7 @@ class BadHabitsController extends Controller
 
         $this->process_form_submission($badHabit, $imageUrl, $request);
 
-        return redirect('/');
+        return redirect('/bad_habits');
     }
 
     /**
@@ -56,9 +60,7 @@ class BadHabitsController extends Controller
      */
     public function show(BadHabit $badHabit)
     {
-        ddAll($badHabit);
 
-        return 'Bad Habit '.$badHabit->id;
     }
 
     /**
@@ -86,7 +88,7 @@ class BadHabitsController extends Controller
 
         $this->process_form_submission($badHabit, $imageUrl, $request);
 
-        return redirect('/');
+        return redirect('/bad_habits');
     }
 
     /**
