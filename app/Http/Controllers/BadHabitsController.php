@@ -109,7 +109,9 @@ class BadHabitsController extends Controller
      */
     public function destroy(BadHabit $badHabit)
     {
-        //
+        $badHabit->delete();
+
+        return redirect('/bad_habits');
     }
 
 
