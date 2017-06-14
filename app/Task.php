@@ -28,6 +28,11 @@ class Task extends Model
         return ($this->is_in_history ===  1 ? '<img src="'.url('/files/icons/star.png').'">' : '');
     }
 
+    public function is_daily_html()
+    {
+        return ($this->is_daily ===  1 ? '<img src="'.url('/files/icons/daily.png').'">' : '');
+    }
+
     public function is_complete_html()
     {
         return ($this->is_complete ===  1 ? 'text-decoration: line-through' : '');
