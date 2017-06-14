@@ -18,4 +18,14 @@ Route::post('/tasks/complete', 'TasksController@complete');
 BAD HABITS
 ****************************************************************************************/
 
-Route::resource('bad_habits', 'BadHabitsController');
+Route::resource('bad_habits', 'BadHabitsController', ['except' => [
+    'show', 'edit', 'update', 'destroy'
+]]);
+
+Route::get('/bad_habits/{badHabit}', 'BadHabitsController@show');
+
+Route::get('/bad_habits/{badHabit}/edit', 'BadHabitsController@edit');
+
+Route::put('/bad_habits/{badHabit}', 'BadHabitsController@update');
+
+Route::delete('/bad_habits/{badHabit}', 'BadHabitsController@destroy');

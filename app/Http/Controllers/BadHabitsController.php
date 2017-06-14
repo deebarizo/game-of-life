@@ -56,7 +56,9 @@ class BadHabitsController extends Controller
      */
     public function show(BadHabit $badHabit)
     {
-        //
+        ddAll($badHabit);
+
+        return 'Bad Habit '.$badHabit->id;
     }
 
     /**
@@ -67,7 +69,7 @@ class BadHabitsController extends Controller
      */
     public function edit(BadHabit $badHabit)
     {
-        //
+
     }
 
     /**
@@ -79,7 +81,12 @@ class BadHabitsController extends Controller
      */
     public function update(Request $request, BadHabit $badHabit)
     {
-        //
+        $fileUploader = new FileUploader;
+        $imageUrl = $fileUploader->uploadImageFile($request, $badHabit);
+
+        $this->process_form_submission($badHabit, $imageUrl, $request);
+
+        return redirect('/');
     }
 
     /**
@@ -100,8 +107,6 @@ class BadHabitsController extends Controller
 
     private function process_form_submission($badHabit, $imageUrl, $request)
     {
-        # dd($request);
-
         $badHabit->name = request('name');
         $badHabit->description = request('description');
         $badHabit->image_url = $imageUrl;
