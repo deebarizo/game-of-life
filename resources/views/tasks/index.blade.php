@@ -6,6 +6,12 @@
 
 	<div class="row">
 
+		<div class="col-lg-12">
+
+			<p style="margin-bottom: 20px"><a href="/tasks/create">Create Task</a></p>
+
+		</div>
+
 		@foreach ($tasksGroupedByDate as $date => $tasks) 
 
 			<div class="col-lg-12">

@@ -6,6 +6,12 @@
 
 	<div class="row">
 
+		<div class="col-lg-12">
+
+			<p style="margin-bottom: 20px"><a href="/bad_habits/create">Create Bad Habit</a></p>
+
+		</div>
+
 		@foreach ($badHabitsGroupedByDate as $date => $badHabits) 
 
 			<div class="col-lg-12">
