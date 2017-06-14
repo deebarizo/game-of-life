@@ -6,7 +6,7 @@
 
 	<div class="row">
 
-		@foreach ($tasksGroupedByDate as $date => $tasks) 
+		@foreach ($badHabitsGroupedByDate as $date => $badHabits) 
 
 			<div class="col-lg-12">
 
@@ -19,16 +19,16 @@
 						<thead>
 							<tr>
 								<th style="width: 60%">Name</th> 
-								<th style="width: 40%">Completed At</th> 
+								<th style="width: 40%">Description</th> 
 							</tr> 
 						</thead> 
 
 						<tbody> 
-							@if (count($tasks) > 0)
-								@foreach ($tasks as $task)
+							@if (count($badHabits) > 0)
+								@foreach ($badHabits as $badHabit)
 									<tr>
-										<td><a style="{!! $task->is_complete_html() !!}" href="{{ $task->path().'/edit' }}">{{ $task->name }}</a> @include('tasks.task_icons')</td>
-										<td>{{ $task->completed_at }}</td>
+										<td><a style="{!! $badHabit->is_success_html() !!}" href="{{ $badHabit->path().'/edit' }}">{{ $badHabit->name }}</a></td>
+										<td>{{ $badHabit->description }}</td>
 									</tr>
 								@endforeach
 							@else

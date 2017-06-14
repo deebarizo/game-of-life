@@ -17,7 +17,13 @@ class BadHabitsController extends Controller
      */
     public function index()
     {
-        return 'index';
+        $h2Tag = 'Bad Habits'; 
+
+        $todayDate = new \DateTime();
+
+        $badHabitsGroupedByDate = BadHabit::groupByDate(5, $todayDate);
+    
+        return view('bad_habits/index', compact('h2Tag', 'badHabitsGroupedByDate'));
     }
 
     /**

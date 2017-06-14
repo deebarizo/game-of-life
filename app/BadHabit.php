@@ -13,6 +13,11 @@ class BadHabit extends Model
     	return '/bad_habits/'.$this->id;
     }
 
+    public function is_success_html()
+    {
+        return ($this->is_success ===  1 ? 'text-decoration: line-through' : '');
+    }
+
     public static function groupByDate($numOfDays, $todayDate)
     {
         $collectionGrouper = new CollectionGrouper;
