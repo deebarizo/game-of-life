@@ -14,6 +14,7 @@
 $factory->define(App\Task::class, function($faker) {
     return [
         'name' => ucfirst($faker->word).' '.ucfirst($faker->word).' '.ucfirst($faker->word),
+        'is_daily' => 0, 
         'is_complete' => 0,
         'completed_at' => null,
         'image_url' => '/files/images/experiment.png',

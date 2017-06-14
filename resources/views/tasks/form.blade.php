@@ -11,7 +11,17 @@
 <div class="row">
 	<div class="col-lg-3"> 
 		<div class="form-group">
-			<label for="name">Show In History:</label><br>
+			<label for="is_daily">Is This a Daily Task?</label><br>
+			<label class="radio-inline"><input type="radio" name="is_daily" value="1" {{ (old('is_daily', $task->is_daily) == 1) ? 'checked="checked"' : '' }}>Yes</label>
+			<label class="radio-inline"><input type="radio" name="is_daily" value="0" {{ (old('is_daily', $task->is_daily) == 0) ? 'checked="checked"' : '' }}>No</label>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-3"> 
+		<div class="form-group">
+			<label for="is_in_history">Show In History?</label><br>
 			<label class="radio-inline"><input type="radio" name="is_in_history" value="1" {{ (old('is_in_history', $task->is_in_history) == 1) ? 'checked="checked"' : '' }}>Yes</label>
 			<label class="radio-inline"><input type="radio" name="is_in_history" value="0" {{ (old('is_in_history', $task->is_in_history) == 0) ? 'checked="checked"' : '' }}>No</label>
 		</div>
@@ -21,7 +31,7 @@
 <div class="row">
 	<div class="col-lg-2"> 
 		<div class="form-group">
-			<label for="Order">Order (Optional):</label>
+			<label for="order">Order (Optional):</label>
 			<input class="form-control" name="order" type="text" value="{{ old('order', $task->order) }}" id="order">
 		</div>
 	</div>

@@ -14,6 +14,7 @@ class EditTasksTest extends TestCase
         $task = factory('App\Task')->create([
         	'id' => 1,
         	'name' => 'Wash Dishes',
+            'is_daily' => 0,
             'is_in_history' => 1,
             'description' => 'Test description',
             'link' => 'http://test.com'
@@ -22,6 +23,7 @@ class EditTasksTest extends TestCase
         $newTask = factory('App\Task')->make([
         	'id' => 1,
         	'name' => 'Wash Dishes and Pots',
+            'is_daily' => 1,
             'is_in_history' => 0,
             'description' => 'Test description but different',
             'link' => 'http://test.com/different'
@@ -32,6 +34,7 @@ class EditTasksTest extends TestCase
         $task = Task::find(1);
 
         $this->assertEquals($task->name, 'Wash Dishes and Pots');
+        $this->assertEquals($task->is_daily, 1);
         $this->assertEquals($task->is_in_history, 0);
         $this->assertEquals($task->description, 'Test description but different');
         $this->assertEquals($task->link, 'http://test.com/different');

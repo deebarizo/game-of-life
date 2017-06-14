@@ -38,6 +38,7 @@ class TasksController extends Controller
         $task = new Task;
         
         $task->is_in_history = 1; // for view
+        $task->is_daily = 0; // for view
 
         return view('tasks/create', compact('h2Tag', 'task'));
     }
@@ -122,12 +123,15 @@ class TasksController extends Controller
 
     private function process_form_submission($task, $imageUrl, $request)
     {
+        # dd($request);
+
         $task->name = request('name');
+        $task->is_daily = request('is_daily');
         $task->image_url = $imageUrl;
         $task->is_in_history = request('is_in_history');
         $task->description = request('description');
         $task->link = request('link');
-        $task->order = (trim($request->input('order')) == '' ? 0 : trim($request->input('order')));
+        $task->order = (trim($request->input('order')) == '' or $request->input('order') == null ? 0 : trim($request->input('order')));
 
         $task->save();
     }
