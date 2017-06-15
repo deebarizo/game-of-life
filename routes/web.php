@@ -29,3 +29,10 @@ Route::get('/bad_habits/{badHabit}/edit', 'BadHabitsController@edit');
 Route::put('/bad_habits/{badHabit}', 'BadHabitsController@update');
 
 Route::delete('/bad_habits/{badHabit}', 'BadHabitsController@destroy');
+
+
+/****************************************************************************************
+DAILY PROCESS
+****************************************************************************************/
+
+Route::post('/run_daily_process', 'DailyProcessController@run_daily_process');

@@ -29,6 +29,7 @@ class DailyTasksProcessor {
         	if ($task->is_daily = 1) {
         		$newTask = $task->replicate();
         		$newTask->updated_at = $date->format('Y-m-d H:i:s'); 
+                $newTask->is_complete = 0;
         		$newTask->save();
         	}
         }

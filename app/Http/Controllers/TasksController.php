@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Task;
 
 use App\UseCases\FileUploader;
-use App\UseCases\DailyTasksProcessor;
 
 class TasksController extends Controller
 {
@@ -84,7 +83,6 @@ class TasksController extends Controller
         $h2Tag = 'Edit Task';
 
         return view('tasks/edit', compact('h2Tag', 'task'));
-
     }
 
     /**
@@ -153,7 +151,7 @@ class TasksController extends Controller
     
         return view('tasks/daily_tasks', compact('h2Tag', 'tasks'));
     }
-    
+
 
     /****************************************************************************************
     FOCUS MODE

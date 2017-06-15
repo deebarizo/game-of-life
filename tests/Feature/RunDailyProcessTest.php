@@ -25,6 +25,7 @@ class RunDailyProcessTest extends TestCase
         	'is_daily' => 1,
         	'name' => 'Valid Task #2',
         	'updated_at' => '2017-06-13 04:53:15',
+            'is_complete' => 1, 
         	'order' => 20
         ]);
 
@@ -41,6 +42,7 @@ class RunDailyProcessTest extends TestCase
         	'is_daily' => 1,
         	'name' => 'Valid Task #1',
         	'updated_at' => '2017-06-13 04:53:15',
+            'is_complete' => 1,
         	'order' => 10
         ]);
 
@@ -55,6 +57,9 @@ class RunDailyProcessTest extends TestCase
 
         $this->assertEquals($tasks[0]->name, 'Valid Task #1');
         $this->assertEquals($tasks[1]->name, 'Valid Task #2');
+
+        $this->assertEquals($tasks[0]->is_complete, 0);
+        $this->assertEquals($tasks[1]->is_complete, 0);
 
         $this->assertCount(2, $tasks);
     }
