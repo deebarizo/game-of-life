@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Task;
 
 use App\UseCases\FileUploader;
+use App\UseCases\DailyTasksProcessor;
 
 class TasksController extends Controller
 {
@@ -145,7 +146,10 @@ class TasksController extends Controller
     {
         $h2Tag = 'Daily Tasks'; 
 
-        $tasks = Task::all();
+        $todayDate = new \DateTime;
+        $dateString = $todayDate->format('Y-m-d');
+
+        $tasks = Task::where('updated_at', 'LIKE', $dateString.'%')->orderBy('order', 'asc')->get();
     
         return view('tasks/daily_tasks', compact('h2Tag', 'tasks'));
     }
