@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 
 use App\Task;
+use App\BadHabit;
 
 use App\UseCases\DailyTasksProcessor;
 
@@ -107,5 +108,47 @@ class RunDailyProcessTest extends TestCase
 
         $dateString = $tasks[2]->updated_at->format('Y-m-d');
         $this->assertContains($dateString, '2017-06-14');
+    }
+
+    /** @test */
+    public function add_daily_bad_habits()
+    {
+        $badHabit = factory('App\BadHabit')->create([
+            'id' => 1,
+            'name' => 'Not from Yesterday',
+            'created_at' => '2017-06-12 06:47:39',
+            'is_success' => 1
+        ]);
+
+        $badHabit = factory('App\BadHabit')->create([
+            'id' => 2,
+            'name' => 'Valid BadHabit #1',
+            'created_at' => '2017-06-13 04:53:15',
+            'is_success' => 1
+        ]);
+
+        $badHabit = factory('App\BadHabit')->create([
+            'id' => 3,
+            'name' => 'Valid BadHabit #2',
+            'created_at' => '2017-06-13 04:53:15',
+            'is_success' => 1
+        ]);
+
+        $todayDate = new \DateTime('2017-06-14');
+        $dateString = $todayDate->format('Y-m-d');
+
+        $dailyTasksProcessor = new DailyTasksProcessor;
+
+        $dailyTasksProcessor->generate_daily_tasks($todayDate);
+
+        $badHabits = BadHabit::where('created_at', 'LIKE', $dateString.'%')->orderBy('id', 'asc')->get();
+
+        $this->assertEquals($badHabits[0]->name, 'Valid BadHabit #1');
+        $this->assertEquals($badHabits[1]->name, 'Valid BadHabit #2');
+
+        $this->assertEquals($badHabits[0]->is_success, 0);
+        $this->assertEquals($badHabits[1]->is_success, 0);
+
+        $this->assertCount(2, $badHabits);
     }
 }

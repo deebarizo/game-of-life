@@ -1,6 +1,7 @@
 <?php namespace App\UseCases;
 
 use App\Task;
+use App\BadHabit;
 
 class DailyTasksProcessor {
 
@@ -17,6 +18,10 @@ class DailyTasksProcessor {
         			})
         			->orderBy('order', 'asc')->get();
 
+        $badHabits = BadHabit::where('created_at', 'LIKE', $dateString.'%')
+                        ->orderBy('id', 'asc')
+                        ->get();
+
         $date->modify('+24 hours');
 
         foreach ($tasks as $task) {
@@ -32,6 +37,13 @@ class DailyTasksProcessor {
                 $newTask->is_complete = 0;
         		$newTask->save();
         	}
+        }
+
+        foreach ($badHabits as $badHabit) {
+            $newBadHabit = $badHabit->replicate();
+            $newBadHabit->created_at = $date->format('Y-m-d H:i:s'); 
+            $newBadHabit->is_success = 0;
+            $newBadHabit->save();
         }
     }
 }
