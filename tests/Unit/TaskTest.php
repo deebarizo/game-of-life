@@ -13,22 +13,22 @@ class TaskTest extends TestCase
     {
         $task = factory('App\Task')->create([
         	'id' => 1,
-        	'created_at' => '2017-06-09 04:42:30'
+        	'updated_at' => '2017-06-09 04:42:30'
         ]);
 
         $task = factory('App\Task')->create([
         	'id' => 2,
-        	'created_at' => '2017-06-12 06:46:55'
+        	'updated_at' => '2017-06-12 06:46:55'
         ]);
 
         $task = factory('App\Task')->create([
         	'id' => 3,
-        	'created_at' => '2017-06-12 06:47:39'
+        	'updated_at' => '2017-06-12 06:47:39'
         ]);
 
         $task = factory('App\Task')->create([
         	'id' => 4,
-        	'created_at' => '2017-06-13 04:53:15'
+        	'updated_at' => '2017-06-13 04:53:15'
         ]);
 
         $todayDate = new \DateTime('2017-06-14');
