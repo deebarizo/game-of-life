@@ -22,11 +22,11 @@ class CollectionGrouper {
 
             switch ($model) {
                 case 'Task':
-                    $modelsByDate = Task::where('updated_at', 'LIKE', $dateString.'%')->get();
+                    $modelsByDate = Task::where('updated_at', 'LIKE', $dateString.'%')->orderBy('order', 'asc')->get();
                     break;
                 
                 case 'BadHabit':
-                    $modelsByDate = BadHabit::where('created_at', 'LIKE', $dateString.'%')->get();
+                    $modelsByDate = BadHabit::where('created_at', 'LIKE', $dateString.'%')->orderBy('order', 'asc')->get();
                     break;
             }
 
