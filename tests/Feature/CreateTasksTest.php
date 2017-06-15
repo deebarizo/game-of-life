@@ -17,7 +17,8 @@ class CreateTasksTest extends TestCase
             'is_in_history' => 1,
             'is_daily' => 1,
             'description' => 'Test description',
-            'link' => 'http://test.com'
+            'link' => 'http://test.com',
+            'order' => 5
         ]);
 
         $this->post('/tasks', $task->toArray());
@@ -29,6 +30,7 @@ class CreateTasksTest extends TestCase
         $this->assertEquals($task->is_daily, 1);
         $this->assertEquals($task->description, 'Test description');
         $this->assertEquals($task->link, 'http://test.com');
+        $this->assertEquals($task->order, 5);
     }
 
     /** @test */

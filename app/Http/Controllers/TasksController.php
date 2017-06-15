@@ -122,7 +122,7 @@ class TasksController extends Controller
 
     private function process_form_submission($task, $imageUrl, $request)
     {
-        # dd($request);
+        $order = trim($request->input('order'));
 
         $task->name = request('name');
         $task->is_daily = request('is_daily');
@@ -130,7 +130,7 @@ class TasksController extends Controller
         $task->is_in_history = request('is_in_history');
         $task->description = request('description');
         $task->link = request('link');
-        $task->order = (trim($request->input('order')) == '' or $request->input('order') == null ? 0 : trim($request->input('order')));
+        $task->order = ($order == '' || $order == null ? 0 : $order);
 
         $task->save();
     }

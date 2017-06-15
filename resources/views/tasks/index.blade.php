@@ -25,7 +25,7 @@
 						<thead>
 							<tr>
 								<th style="width: 60%">Name</th> 
-								<th style="width: 40%">Completed At</th> 
+								<th style="width: 40%">Order</th> 
 							</tr> 
 						</thead> 
 
@@ -34,7 +34,7 @@
 								@foreach ($tasks as $task)
 									<tr>
 										<td><a style="{!! $task->is_complete_html() !!}" href="{{ $task->path().'/edit' }}">{{ $task->name }}</a> @include('tasks.task_icons')</td>
-										<td>{{ $task->completed_at }}</td>
+										<td>{{ $task->order }}</td>
 									</tr>
 								@endforeach
 							@else
