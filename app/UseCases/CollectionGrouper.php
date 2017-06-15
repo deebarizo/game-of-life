@@ -26,7 +26,7 @@ class CollectionGrouper {
                     break;
                 
                 case 'BadHabit':
-                    $modelsByDate = BadHabit::where('created_at', 'LIKE', $dateString.'%')->orderBy('order', 'asc')->get();
+                    $modelsByDate = BadHabit::where('created_at', 'LIKE', $dateString.'%')->get();
                     break;
             }
 
