@@ -51,9 +51,6 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        $fileUploader = new FileUploader;
-        $imageUrl = $fileUploader->uploadImageFile($request, $task = null);
-
         $task = new Task;
 
         $this->process_form_submission($task, $request);
@@ -94,9 +91,6 @@ class TasksController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        $fileUploader = new FileUploader;
-        $imageUrl = $fileUploader->uploadImageFile($request, $task);
-
         $this->process_form_submission($task, $request);
 
         return redirect('/');

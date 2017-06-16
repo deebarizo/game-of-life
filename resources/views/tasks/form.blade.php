@@ -57,20 +57,16 @@
 
 <div class="row">
 	<div class="col-lg-3"> 
-		<div class="form-group">
-			<label for="image">Image (<a target="_blank" href="http://www.flaticon.com/">Link</a>):</label>
-			<input name="image" type="file" id="image">
-		</div>
+        <div class="form-group">
+            <label for="image_id">Image:</label>
+            <select name="type" class="form-control">
+            	<option value="">Non-Rank</option>
+                <option value="Non-Rank">Non-Rank</option>
+                <option value="Rank">Rank</option>
+                <option value="Non-Rank with Min">Non-Rank with Min</option>
+            </select>
+        </div>
 	</div>
-
-	@if ($task->image_url)
-		<div class="col-lg-4">
-			<div>
-				<h4>Current image</h4>
-				<img src="{!! url($task->image_url); !!}">
-			</div>
-		</div>
-	@endif
 </div>
 
 <div class="row">
