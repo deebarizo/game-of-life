@@ -29,6 +29,7 @@ class FocusTasksTest extends TestCase
             ->assertSee($this->task->name)
             ->assertSee($this->task->description)
             ->assertSee($this->task->link)
-            ->assertSee('star.png');
+            ->assertSee('star.png')
+            ->assertDontSee('target.png');
     }
 }

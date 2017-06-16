@@ -22,7 +22,9 @@
 
 		@foreach ($tasks as $task)
 			<div class="col-lg-4">
-				@include('tasks.task')
+				@include('tasks.task', [
+					'hasFocusIcon' => true
+				])
 			</div>
 		@endforeach
 
