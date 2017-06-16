@@ -1,7 +1,7 @@
 <div class="task {{ ($task->is_complete ? 'complete' : '') }}" style="height: 250px; border: 1px solid; margin-bottom: 30px" data-task-id="{{ $task->id }}">
 	<h4 class="text-center" style="margin: 18px 18px">{{ $task->name }} @include('tasks.task_icons')</h4>
 
-	<img class="center-block" style="margin-bottom: 27px" src="<?php echo url($task->image_url); ?>">
+	<img class="center-block" style="margin-bottom: 27px" src="<?php echo url('/files/images/'.$task->image->filename); ?>">
 
 	<div class="text-center">
 		@if ($hasFocusIcon)

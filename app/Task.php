@@ -13,6 +13,11 @@ class Task extends Model
     	return '/tasks/'.$this->id;
     }
 
+    public function image()
+    {
+        return $this->belongsTo('App\Image');
+    }
+
     public function description_html()
     {
         return ($this->description == '' ? '' : '<a class="description" href="#"><img src="'.url('/files/icons/text-lines.png').'"></a><div style="display: none" class="tool-tip-description">'.$this->description.'</div>');
