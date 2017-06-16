@@ -56,7 +56,7 @@ class TasksController extends Controller
 
         $task = new Task;
 
-        $this->process_form_submission($task, $imageUrl, $request);
+        $this->process_form_submission($task, $request);
 
         return redirect('/');
     }
@@ -97,7 +97,7 @@ class TasksController extends Controller
         $fileUploader = new FileUploader;
         $imageUrl = $fileUploader->uploadImageFile($request, $task);
 
-        $this->process_form_submission($task, $imageUrl, $request);
+        $this->process_form_submission($task, $request);
 
         return redirect('/');
     }
@@ -120,13 +120,13 @@ class TasksController extends Controller
     FORM HELPER
     ****************************************************************************************/
 
-    private function process_form_submission($task, $imageUrl, $request)
+    private function process_form_submission($task, $request)
     {
         $order = trim($request->input('order'));
 
         $task->name = request('name');
         $task->is_daily = request('is_daily');
-        $task->image_url = $imageUrl;
+        $task->image_id = request('image_id');
         $task->is_in_history = request('is_in_history');
         $task->description = request('description');
         $task->link = request('link');

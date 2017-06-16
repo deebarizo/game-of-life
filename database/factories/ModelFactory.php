@@ -11,6 +11,13 @@
 |
 */
 
+$factory->define(App\Image::class, function($faker) {
+    return [
+        'filename' => $faker->word,
+        'is_daily' => 0
+    ];
+});
+
 $factory->define(App\BadHabit::class, function($faker) {
     return [
         'name' => ucfirst($faker->word).' '.ucfirst($faker->word).' '.ucfirst($faker->word),
@@ -22,11 +29,13 @@ $factory->define(App\BadHabit::class, function($faker) {
 
 $factory->define(App\Task::class, function($faker) {
     return [
+        'image_id' => function () {
+            return factory('App\Image')->create()->id;
+        },
         'name' => ucfirst($faker->word).' '.ucfirst($faker->word).' '.ucfirst($faker->word),
         'is_daily' => 0, 
         'is_complete' => 0,
         'completed_at' => null,
-        'image_url' => 'files/images/experiment.png',
         'is_in_history' => 0,
         'description' => null,
         'link' => null,
