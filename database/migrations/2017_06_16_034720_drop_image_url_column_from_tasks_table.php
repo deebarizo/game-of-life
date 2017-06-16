@@ -26,7 +26,7 @@ class DropImageUrlColumnFromTasksTable extends Migration
     public function down()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->string('image_url')->after('completed_at');
+            $table->string('image_url')->after('completed_at')->default('default.png');
         });
     }
 }

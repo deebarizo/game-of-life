@@ -14,7 +14,7 @@ class CreateIsDailyColumnForImagesTable extends Migration
     public function up()
     {
         Schema::table('images', function (Blueprint $table) {
-            $table->boolean('is_daily')->after('filename');
+            $table->boolean('is_daily')->after('filename')->default(0);
         });
     }
 

@@ -25,7 +25,7 @@ class CreateTasksTest extends TestCase
             'order' => 5
         ]);
 
-        $this->post('/tasks', $task->toArray());
+        $response = $this->post('/tasks', $task->toArray());
 
         $task = Task::find(1);
 

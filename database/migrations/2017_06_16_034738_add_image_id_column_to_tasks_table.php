@@ -14,7 +14,7 @@ class AddImageIdColumnToTasksTable extends Migration
     public function up()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->unsignedInteger('image_id')->after('id');
+            $table->unsignedInteger('image_id')->after('id')->default(1);
         });
     }
 

@@ -14,7 +14,7 @@ class AddIsDailyColumnToTasksTable extends Migration
     public function up()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->boolean('is_daily')->after('name');
+            $table->boolean('is_daily')->after('name')->default(0);;
         });
     }
 

@@ -30,17 +30,17 @@ class Task extends Model
 
     public function is_in_history_html()
     {
-        return ($this->is_in_history ===  1 ? '<img src="'.url('/files/icons/star.png').'">' : '');
+        return ($this->is_in_history ==  1 ? '<img src="'.url('/files/icons/star.png').'">' : '');
     }
 
     public function is_daily_html()
     {
-        return ($this->is_daily ===  1 ? '<img src="'.url('/files/icons/daily.png').'">' : '');
+        return ($this->is_daily ==  1 ? '<img src="'.url('/files/icons/daily.png').'">' : '');
     }
 
     public function is_complete_html()
     {
-        return ($this->is_complete ===  1 ? 'text-decoration: line-through' : '');
+        return ($this->is_complete ==  1 ? 'text-decoration: line-through' : '');
     }
 
     public static function groupByDate($numOfDays, $todayDate)

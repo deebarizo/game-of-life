@@ -55,6 +55,7 @@ class TasksController extends Controller
     public function store(Request $request)
     {
         $task = new Task;
+        $task->is_complete = 0;
 
         $this->process_form_submission($task, $request);
 
@@ -125,6 +126,7 @@ class TasksController extends Controller
         $order = trim($request->input('order'));
 
         $task->name = request('name');
+        $task->is_complete = $task->is_complete;
         $task->is_daily = request('is_daily');
         $task->image_id = request('image_id');
         $task->is_in_history = request('is_in_history');
