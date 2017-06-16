@@ -28,7 +28,7 @@ class DailyTasksProcessor {
         	if ($task->is_complete == 0 && $task->is_daily == 0) {
         		$task->updated_at = $date->format('Y-m-d H:i:s');
         		$task->save();
-        		break;
+        		continue;
         	}
 
         	if ($task->is_daily = 1) {
