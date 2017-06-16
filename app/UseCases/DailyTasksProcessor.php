@@ -42,7 +42,7 @@ class DailyTasksProcessor {
         foreach ($badHabits as $badHabit) {
             $newBadHabit = $badHabit->replicate();
             $newBadHabit->created_at = $date->format('Y-m-d H:i:s'); 
-            $newBadHabit->is_success = 0;
+            $newBadHabit->is_success = 1;
             $newBadHabit->save();
         }
     }

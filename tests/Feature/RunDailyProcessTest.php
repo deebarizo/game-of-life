@@ -124,7 +124,7 @@ class RunDailyProcessTest extends TestCase
             'id' => 2,
             'name' => 'Valid BadHabit #1',
             'created_at' => '2017-06-13 04:53:15',
-            'is_success' => 1
+            'is_success' => 0
         ]);
 
         $badHabit = factory('App\BadHabit')->create([
@@ -146,8 +146,8 @@ class RunDailyProcessTest extends TestCase
         $this->assertEquals($badHabits[0]->name, 'Valid BadHabit #1');
         $this->assertEquals($badHabits[1]->name, 'Valid BadHabit #2');
 
-        $this->assertEquals($badHabits[0]->is_success, 0);
-        $this->assertEquals($badHabits[1]->is_success, 0);
+        $this->assertEquals($badHabits[0]->is_success, 1);
+        $this->assertEquals($badHabits[1]->is_success, 1);
 
         $this->assertCount(2, $badHabits);
     }
