@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Task;
 
-use App\UseCases\FileUploader;
+use App\UseCases\ImageProcessor;
 
 class TasksController extends Controller
 {
@@ -40,7 +40,10 @@ class TasksController extends Controller
         $task->is_in_history = 1; // for view
         $task->is_daily = 0; // for view
 
-        return view('tasks/create', compact('h2Tag', 'task'));
+        $imageProcessor = new ImageProcessor;
+        $images = $imageProcessor->get_without_daily();
+
+        return view('tasks/create', compact('h2Tag', 'task', 'images'));
     }
 
     /**
@@ -79,7 +82,10 @@ class TasksController extends Controller
     {
         $h2Tag = 'Edit Task';
 
-        return view('tasks/edit', compact('h2Tag', 'task'));
+        $imageProcessor = new ImageProcessor;
+        $images = $imageProcessor->get_without_daily();
+
+        return view('tasks/edit', compact('h2Tag', 'task', 'images'));
     }
 
     /**

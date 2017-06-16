@@ -59,11 +59,10 @@
 	<div class="col-lg-3"> 
         <div class="form-group">
             <label for="image_id">Image:</label>
-            <select name="type" class="form-control">
-            	<option value="">Non-Rank</option>
-                <option value="Non-Rank">Non-Rank</option>
-                <option value="Rank">Rank</option>
-                <option value="Non-Rank with Min">Non-Rank with Min</option>
+            <select name="image_id" class="form-control">
+            	@foreach ($images as $image)
+            		<option value="{{ $image->id }}" {{ (old('filename', $image->filename) == $imageFilename) ? 'selected="selected"' : '' }}>{{ $image->filename }}</option>
+            	@endforeach
             </select>
         </div>
 	</div>

@@ -8,7 +8,8 @@
 		<div class="col-lg-12"> 
 			<form method="POST" action="/tasks" accept-charset="UTF-8" enctype="multipart/form-data">
 				@include('tasks.form', [
-					'submitButtonText' => 'Create Task'
+					'submitButtonText' => 'Create Task',
+					'imageFilename' => 'default.png'
 				])
 			</form>
 		</div>
