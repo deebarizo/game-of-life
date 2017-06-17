@@ -60,9 +60,13 @@
         <div class="form-group">
             <label for="image_id">Image:</label>
             <select name="image_id" class="form-control">
+            @if ($task->is_daily)
+            	<option value="{{ $task->image_id }}" selected="selected">{{ $task->image->filename }}</option>
+            @else
             	@foreach ($images as $image)
-            		<option value="{{ $image->id }}" {{ (old('filename', $image->filename) == $imageFilename) ? 'selected="selected"' : '' }}>{{ $image->filename }}</option>
+            		<option value="{{ $image->id }}" <?php echo ($task->image_id == $image->id ? 'selected="selected"' : ''); ?>>{{ $image->filename }}</option>
             	@endforeach
+            @endif
             </select>
         </div>
 	</div>

@@ -50,4 +50,59 @@ class EditTasksTest extends TestCase
         $this->assertEquals($task->description, 'Test description but different');
         $this->assertEquals($task->link, 'http://test.com/different');
     }
+
+    /** @test */
+    public function edit_form_for_daily_task_shows_correct_image()
+    {
+        $task = factory('App\Image')->create([
+            'id' => 1,
+            'filename' => 'foo.png'
+        ]);
+
+        $task = factory('App\Image')->create([
+            'id' => 2,
+            'filename' => 'bar.png'
+        ]);
+
+        $task = factory('App\Task')->create([
+            'id' => 1,
+            'image_id' => 2,
+            'name' => 'Wash Dishes',
+            'is_daily' => 1,
+            'is_in_history' => 1,
+            'description' => 'Test description',
+            'link' => 'http://test.com'
+        ]);
+
+        $this->get($task->path().'/edit')
+            ->assertSee('<option value="2" selected="selected">bar.png</option>')
+            ->assertDontSee('foo.png');
+    }
+
+    /** @test */
+    public function edit_form_for_non_daily_task_shows_correct_image()
+    {
+        $task = factory('App\Image')->create([
+            'id' => 1,
+            'filename' => 'foo.png'
+        ]);
+
+        $task = factory('App\Image')->create([
+            'id' => 2,
+            'filename' => 'bar.png'
+        ]);
+
+        $task = factory('App\Task')->create([
+            'id' => 1,
+            'image_id' => 2,
+            'name' => 'Wash Dishes',
+            'is_daily' => 1,
+            'is_in_history' => 1,
+            'description' => 'Test description',
+            'link' => 'http://test.com'
+        ]);
+
+        $this->get($task->path().'/edit')
+            ->assertSee('<option value="2" selected="selected">bar.png</option>');
+    }
 }
