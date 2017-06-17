@@ -10,8 +10,7 @@
 				{{ method_field('PUT') }}
 				
 				@include('tasks.form', [
-					'submitButtonText' => 'Edit Task',
-					'imageFilename' => $task->image->filename
+					'submitButtonText' => 'Edit Task'
 				])
 			</form>
 		</div>

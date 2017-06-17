@@ -12,7 +12,8 @@ class CreateTasksTest extends TestCase
     public function anyone_can_create_a_task()
     {
         $task = factory('App\Image')->create([
-            'id' => 1
+            'id' => 1,
+            'filename' => 'default.png'
         ]);
 
         $task = factory('App\Task')->make([
@@ -41,7 +42,41 @@ class CreateTasksTest extends TestCase
     /** @test */
     public function show_field_for_making_task_a_daily_task()
     {
+        $task = factory('App\Image')->create([
+            'id' => 1,
+            'filename' => 'default.png'
+        ]);
+        
         $this->get('/tasks/create')
             ->assertSee('Is This a Daily Task?');
+    }
+
+    /** @test */
+    public function show_correct_defaults()
+    {
+        $task = factory('App\Image')->create([
+            'id' => 1,
+            'filename' => 'foo.png'
+        ]);
+
+        $task = factory('App\Image')->create([
+            'id' => 2,
+            'filename' => 'bar.png'
+        ]);
+
+        $task = factory('App\Image')->create([
+            'id' => 3,
+            'filename' => 'default.png'
+        ]);
+
+        $task = factory('App\Image')->create([
+            'id' => 4,
+            'filename' => 'foobar.png'
+        ]);
+
+        $this->get('/tasks/create')
+            ->assertSee('<input type="radio" name="is_daily" value="0" checked="checked">')
+            ->assertSee('<input type="radio" name="is_in_history" value="1" checked="checked">')
+            ->assertSee('<option value="3" selected="selected">default.png</option>');
     }
 }

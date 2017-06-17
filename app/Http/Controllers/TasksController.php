@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Task;
+use App\Image;
 
 use App\UseCases\ImageProcessor;
 
@@ -36,9 +37,12 @@ class TasksController extends Controller
         $h2Tag = 'Create Task';
 
         $task = new Task;
-        
+
+        $task->is_daily = 0; // for view        
         $task->is_in_history = 1; // for view
-        $task->is_daily = 0; // for view
+
+        $image = Image::where('filename', 'default.png')->first(); // for sqlite
+        $task->image_id = $image->id; // for view
 
         $imageProcessor = new ImageProcessor;
         $images = $imageProcessor->get_without_daily();

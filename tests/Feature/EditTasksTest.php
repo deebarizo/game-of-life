@@ -96,7 +96,7 @@ class EditTasksTest extends TestCase
             'id' => 1,
             'image_id' => 2,
             'name' => 'Wash Dishes',
-            'is_daily' => 1,
+            'is_daily' => 0,
             'is_in_history' => 1,
             'description' => 'Test description',
             'link' => 'http://test.com'
@@ -104,5 +104,70 @@ class EditTasksTest extends TestCase
 
         $this->get($task->path().'/edit')
             ->assertSee('<option value="2" selected="selected">bar.png</option>');
+    }
+
+    /** @test */
+    public function edit_form_for_daily_task_shows_correct_checked_radio_button()
+    {
+        $task = factory('App\Image')->create([
+            'id' => 1,
+            'filename' => 'foo.png'
+        ]);
+
+        $task = factory('App\Task')->create([
+            'id' => 1,
+            'image_id' => 1,
+            'name' => 'Wash Dishes',
+            'is_daily' => 0,
+            'is_in_history' => 0,
+            'description' => 'Test description',
+            'link' => 'http://test.com'
+        ]);
+
+        $this->get($task->path().'/edit')
+            ->assertSee('<input type="radio" name="is_daily" value="0" checked="checked">')
+            ->assertSee('<input type="radio" name="is_in_history" value="0" checked="checked">');
+
+        $task = factory('App\Task')->create([
+            'id' => 2,
+            'image_id' => 1,
+            'name' => 'Wash Dishes',
+            'is_daily' => 0,
+            'is_in_history' => 1,
+            'description' => 'Test description',
+            'link' => 'http://test.com'
+        ]);
+
+        $this->get($task->path().'/edit')
+            ->assertSee('<input type="radio" name="is_daily" value="0" checked="checked">')
+            ->assertSee('<input type="radio" name="is_in_history" value="1" checked="checked">');
+
+        $task = factory('App\Task')->create([
+            'id' => 3,
+            'image_id' => 1,
+            'name' => 'Wash Dishes',
+            'is_daily' => 1,
+            'is_in_history' => 0,
+            'description' => 'Test description',
+            'link' => 'http://test.com'
+        ]);
+
+        $this->get($task->path().'/edit')
+            ->assertSee('<input type="radio" name="is_daily" value="1" checked="checked">')
+            ->assertSee('<input type="radio" name="is_in_history" value="0" checked="checked">');
+
+        $task = factory('App\Task')->create([
+            'id' => 4,
+            'image_id' => 1,
+            'name' => 'Wash Dishes',
+            'is_daily' => 1,
+            'is_in_history' => 1,
+            'description' => 'Test description',
+            'link' => 'http://test.com'
+        ]);
+
+        $this->get($task->path().'/edit')
+            ->assertSee('<input type="radio" name="is_daily" value="1" checked="checked">')
+            ->assertSee('<input type="radio" name="is_in_history" value="1" checked="checked">');
     }
 }
