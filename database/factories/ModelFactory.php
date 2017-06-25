@@ -11,72 +11,34 @@
 |
 */
 
-$factory->define(App\Models\DailyTask::class, function ($faker) {
-    
+$factory->define(App\Image::class, function($faker) {
     return [
-        
-        'id' => 1,
-        'name' => $faker->name,
-        'description' => $faker->name,
-        'link' => 'http://google.com',
-        'image_url' => url('/files/images/daily_task_10.png'),
-        'order' => 0,
-        'created_at' => '2015-03-13',
-        'updated_at' => '2015-03-13',
-        'deleted_at' => null
+        'filename' => $faker->word,
+        'is_daily' => 0
     ];
 });
 
-$factory->define(App\Models\DailyTaskInstance::class, function ($faker) {
-    
+$factory->define(App\BadHabit::class, function($faker) {
     return [
-        
-        'id' => 1,
-        'daily_task_id' => 1,
-        'date' => '2015-03-13',
-        'start_time' => 0,
-        'end_time' => 24,
+        'name' => ucfirst($faker->word).' '.ucfirst($faker->word).' '.ucfirst($faker->word),
+        'description' => null,
+        'image_url' => 'files/images/experiment.png',
+        'is_success' => 0
+    ];
+});
+
+$factory->define(App\Task::class, function($faker) {
+    return [
+        'image_id' => function () {
+            return factory('App\Image')->create()->id;
+        },
+        'name' => ucfirst($faker->word).' '.ucfirst($faker->word).' '.ucfirst($faker->word),
+        'is_daily' => 0, 
         'is_complete' => 0,
-        'created_at' => '2015-03-13',
-        'updated_at' => '2015-03-13'
-    ];
-});
-
-$factory->define(App\Models\BadHabit::class, function ($faker) {
-    
-    return [
-        
-        'id' => 1,
-        'name' => $faker->name,
-        'description' => $faker->name,
-        'image_url' => url('/files/images/daily_task_10.png'),
-        'created_at' => '2015-03-13',
-        'updated_at' => '2015-03-13',
-        'deleted_at' => null
-    ];
-});
-
-$factory->define(App\Models\BadHabitInstance::class, function ($faker) {
-    
-    return [
-        
-        'id' => 1,
-        'bad_habit_id' => 1,
-        'date' => '2015-03-13',
-        'is_success' => 1,
-        'created_at' => '2015-03-13',
-        'updated_at' => '2015-03-13'
-    ];
-});
-
-$factory->define(App\Models\Option::class, function ($faker) {
-    
-    return [
-        
-        'id' => 1,
-        'start_time' => 0,
-        'end_time' => 24,
-        'created_at' => '2015-03-13',
-        'updated_at' => '2015-03-13'
+        'completed_at' => null,
+        'is_in_history' => 0,
+        'description' => null,
+        'link' => null,
+        'order' => null
     ];
 });

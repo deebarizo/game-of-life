@@ -1,64 +1,38 @@
 <?php
 
-/****************************************************************************************
-HOME
-****************************************************************************************/
-
-Route::get('/', 'PagesController@home');
-
 
 /****************************************************************************************
-DAILY TASKS
+TASKS
 ****************************************************************************************/
 
-Route::resource('daily_tasks', 'DailyTasksController');
+Route::get('/', 'TasksController@daily_tasks');
 
+Route::resource('tasks', 'TasksController');
 
-/****************************************************************************************
-DAILY TASK INSTANCES
-****************************************************************************************/
+Route::get('/tasks/{task}/focus', 'TasksController@focus');
 
-Route::post('/daily_task_instances/complete', 'DailyTaskInstancesController@complete');
-
-
-/****************************************************************************************
-TASK INSTANCES
-****************************************************************************************/
-
-Route::resource('tasks', 'TaskInstancesController');
-Route::post('/tasks/complete', 'TaskInstancesController@complete');
+Route::post('/tasks/complete', 'TasksController@complete');
 
 
 /****************************************************************************************
 BAD HABITS
 ****************************************************************************************/
 
-Route::resource('bad_habits', 'BadHabitsController');
+Route::resource('bad_habits', 'BadHabitsController', ['except' => [
+    'show', 'edit', 'update', 'destroy'
+]]);
+
+Route::get('/bad_habits/{badHabit}', 'BadHabitsController@show');
+
+Route::get('/bad_habits/{badHabit}/edit', 'BadHabitsController@edit');
+
+Route::put('/bad_habits/{badHabit}', 'BadHabitsController@update');
+
+Route::delete('/bad_habits/{badHabit}', 'BadHabitsController@destroy');
 
 
 /****************************************************************************************
-BAD HABIT INSTANCES
+DAILY PROCESS
 ****************************************************************************************/
 
-Route::post('/bad_habit_instances/fail', 'BadHabitInstancesController@fail');
-
-
-/****************************************************************************************
-HISTORY
-****************************************************************************************/
-
-Route::get('/history', 'HistoryController@index');
-
-
-/****************************************************************************************
-OPTIONS
-****************************************************************************************/
-
-Route::resource('options', 'OptionsController');
-
-
-/****************************************************************************************
-FOCUS MODE
-****************************************************************************************/
-
-Route::get('/focus/{instance_type}/{id}', 'FocusController@focus');
+Route::post('/run_daily_process', 'DailyProcessController@run_daily_process');

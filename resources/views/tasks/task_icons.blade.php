@@ -1,0 +1,1 @@
+{!! $task->description_html() !!} {!! $task->link_html() !!} {!! $task->is_in_history_html() !!} {!! $task->is_daily_html() !!}

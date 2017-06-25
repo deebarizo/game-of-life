@@ -1,9 +1,9 @@
 @extends('master')
 
 @section('content')
-
-	@include('_form_heading')
 	
+	@include('_form_heading')
+
 	<div class="row">
 
 		<div class="col-lg-12">
@@ -12,132 +12,48 @@
 
 		</div>
 
-		@foreach ($tasks as $task)
+		@foreach ($tasksGroupedByDate as $date => $tasks) 
 
-			<?php 
+			<div class="col-lg-12">
 
-				$isComplete = ($task->is_complete ? 'complete' : '');
-				$description = ($task->description == '' ? '' : '<a class="description" href="#"><img src="'.url('/files/icons/text-lines.png').'"></a><div style="display: none" class="tool-tip-description">'.$task->description.'</div>');
-				$link = ($task->link == '' ? '' : '<a target="_blank" href="'.$task->link.'"><img src="'.url('/files/icons/link.png').'"></a>');
-				$star = ($task->is_in_history ===  1 ? '<img src="'.url('/files/icons/star.png').'">' : '');
+				<div class="panel panel-success">
+				  
+				  	<div class="panel-heading">{{ $date }}</div>
 
-			?>
+					<table class="table">
 
-			<div class="col-lg-4">
+						<thead>
+							<tr>
+								<th style="width: 60%">Name</th> 
+								<th style="width: 40%">Order</th> 
+							</tr> 
+						</thead> 
 
-				<div class="task {{ $isComplete }}" style="height: 250px; border: 1px solid; margin-bottom: 30px" data-task-instance-id="{{ $task->id }}">
-					<h4 class="text-center" style="margin: 18px 18px">{{ $task->name }} {!! $description !!} {!! $link !!} {!! $star !!}</h4>
+						<tbody> 
+							@if (count($tasks) > 0)
+								@foreach ($tasks as $task)
+									<tr>
+										<td><a style="{!! $task->is_complete_html() !!}" href="{{ $task->path().'/edit' }}">{{ $task->name }}</a> @include('tasks.task_icons')</td>
+										<td>{{ $task->order }}</td>
+									</tr>
+								@endforeach
+							@else
+								<tr>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+								</tr>								
+							@endif
+						</tbody>
 
-					<img class="center-block" style="margin-bottom: 27px" src="<?php echo url($task->image_url); ?>">
+					</table>
 
-					<div class="text-center"><a href="/focus/task/{{ $task->id }}"><img src="<?php echo url('/files/icons/target.png'); ?>"></a> <a href="/tasks/{{ $task->id }}/edit"><img src="<?php echo url('/files/icons/edit.png'); ?>"></a> <a class="complete" href="#"><img src="<?php echo url('/files/icons/checked.png'); ?>"></a> <form style="display: inline" method="POST" action="/tasks/{{ $task->id}}" accept-charset="UTF-8" id="form-delete-tasks-{{ $task->id }}"><input name="_method" type="hidden" value="DELETE">{{ csrf_field() }}<a class="data-delete" data-form="tasks-{{ $task->id }}" href="#"><img src="<?php echo url('/files/icons/trash.png'); ?>"></a></form></div>
 				</div>
-
+					
 			</div>
 
 		@endforeach
 
 	</div>
 
-	<script type="text/javascript">
-
-		$(document).ready(function() {
-
-
-			/****************************************************************************************
-			GLOBAL VARIABLES
-			****************************************************************************************/
-
-			var baseUrl = '<?php echo url('/'); ?>';
-
-
-			/****************************************************************************************
-			TOOLTIPS (DESCRIPTIONS)
-			****************************************************************************************/
-
-			$('a.description').on('mouseenter', function(event) {
-
-		        $(this).qtip({
-		        
-		            content: {
-		        
-		                text: $(this).next('.tool-tip-description')
-					},
-
-					position: {
-
-						my: 'left center',
-						at: 'center right',
-						target: $(this)
-					},
-					overwrite: false,
-		            show: {
-		                event: event.type,
-		                ready: true
-		            }
-		        });
-			});
-
-
-			/****************************************************************************************
-			AJAX SETUP
-			****************************************************************************************/
-
-			$.ajaxSetup({ // http://stackoverflow.com/a/37663496/1946525
-			    
-			    headers: {
-			        
-			        'X-CSRF-Token': $('input[name="_token"]').val()
-			    }
-			});
-
-
-			/****************************************************************************************
-			COMPLETING A TASK
-			****************************************************************************************/
-
-			$('a.complete').on('click', function(e) {
-
-				e.preventDefault(e);
-
-				var task = $(this).closest('div.task');
-				var taskInstanceId = task.attr('data-task-instance-id');
-				var isComplete = !task.hasClass('complete');
-
-
-				$.ajax({
-
-		            url: baseUrl+'/tasks/complete',
-		           	type: 'POST',
-		           	data: { 
-		           	
-		           		taskInstanceId: taskInstanceId,
-		           		isComplete: isComplete
-		           	},
-		            success: function() {
-
-		            	isComplete ? task.addClass('complete') : task.removeClass('complete');
-		            }
-		        });
-			})
-
-
-			/****************************************************************************************
-			DELETING A DAILY TASK
-			****************************************************************************************/
-
-			$(function () { // http://laraveldaily.com/resource-controller-delete-how-to-have-link-instead-of-a-submit-button/
-
-				$('.data-delete').on('click', function(e) {
-			    
-			    	if (!confirm('Are you sure you want to delete?')) return;
-			    
-			    		e.preventDefault();
-			    
-			    	$('#form-delete-'+$(this).data('form')).submit();
-			  	});
-			});
-		});		
-
-	</script>
+	@include('tasks.js')
 @stop
