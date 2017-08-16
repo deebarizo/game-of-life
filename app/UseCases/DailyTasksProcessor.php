@@ -7,22 +7,34 @@ class DailyTasksProcessor {
 
     public function generate_daily_tasks($todayDate) 
     {
+        $carbonDate = Task::select('updated_at')->orderBy('updated_at', 'desc')->pluck('updated_at')->first();
+
+        if ($carbonDate) {
+            $dateString = $carbonDate->format('Y-m-d');
+
+            $tasks = Task::where('updated_at', 'LIKE', $dateString.'%')
+                        ->where(function($query) {
+                            return $query->where('is_daily', 1)
+                                        ->orWHere('is_complete', 0);
+                        })
+                        ->orderBy('order', 'asc')->get();
+        } else {
+            $tasks = [];
+        }
+
+        $carbonDate = BadHabit::select('created_at')->orderBy('created_at', 'desc')->pluck('created_at')->first();
+
+        if ($carbonDate) {
+            $dateString = $carbonDate->format('Y-m-d');
+
+            $badHabits = BadHabit::where('created_at', 'LIKE', $dateString.'%')
+                            ->orderBy('id', 'asc')
+                            ->get();
+        } else {
+            $badHabits = [];
+        }
+
         $date = clone $todayDate;
-        $date->modify('-24 hours');
-        $dateString = $date->format('Y-m-d');
-
-        $tasks = Task::where('updated_at', 'LIKE', $dateString.'%')
-        			->where(function($query) {
-        				return $query->where('is_daily', 1)
-	       							->orWHere('is_complete', 0);
-        			})
-        			->orderBy('order', 'asc')->get();
-
-        $badHabits = BadHabit::where('created_at', 'LIKE', $dateString.'%')
-                        ->orderBy('id', 'asc')
-                        ->get();
-
-        $date->modify('+24 hours');
 
         foreach ($tasks as $task) {
         	if ($task->is_complete == 0 && $task->is_daily == 0) {

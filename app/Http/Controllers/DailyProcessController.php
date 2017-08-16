@@ -11,7 +11,6 @@ class DailyProcessController extends Controller
     public function run_daily_process()
     {
         $todayDate = new \DateTime;
-        $dateString = $todayDate->format('Y-m-d');
 
         $dailyTasksProcessor = new DailyTasksProcessor;
 

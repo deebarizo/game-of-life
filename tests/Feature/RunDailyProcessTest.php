@@ -16,7 +16,7 @@ class RunDailyProcessTest extends TestCase
     {
         $task = factory('App\Task')->create([
         	'id' => 1,
-        	'name' => 'Not from Yesterday',
+        	'name' => 'Not from Latest Date',
         	'is_daily' => 1,
         	'updated_at' => '2017-06-12 06:47:39'
         ]);
@@ -47,7 +47,7 @@ class RunDailyProcessTest extends TestCase
         	'order' => 10
         ]);
 
-        $todayDate = new \DateTime('2017-06-14');
+        $todayDate = new \DateTime('2017-06-15');
         $dateString = $todayDate->format('Y-m-d');
 
         $dailyTasksProcessor = new DailyTasksProcessor;
@@ -116,7 +116,7 @@ class RunDailyProcessTest extends TestCase
     {
         $badHabit = factory('App\BadHabit')->create([
             'id' => 1,
-            'name' => 'Not from Yesterday',
+            'name' => 'Not from Latest Date',
             'created_at' => '2017-06-12 06:47:39',
             'is_success' => 1
         ]);
@@ -135,7 +135,7 @@ class RunDailyProcessTest extends TestCase
             'is_success' => 1
         ]);
 
-        $todayDate = new \DateTime('2017-06-14');
+        $todayDate = new \DateTime('2017-06-15');
         $dateString = $todayDate->format('Y-m-d');
 
         $dailyTasksProcessor = new DailyTasksProcessor;
