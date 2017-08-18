@@ -36,16 +36,18 @@ class DailyTasksProcessor {
 
         $date = clone $todayDate;
 
+        # ddAll($tasks);
+
         foreach ($tasks as $task) {
         	if ($task->is_complete == 0 && $task->is_daily == 0) {
-        		$task->updated_at = $date->format('Y-m-d H:i:s');
+        		$task->created_at = $date->format('Y-m-d H:i:s');
         		$task->save();
         		continue;
         	}
 
         	if ($task->is_daily = 1) {
         		$newTask = $task->replicate();
-        		$newTask->updated_at = $date->format('Y-m-d H:i:s'); 
+        		$newTask->created_at = $date->format('Y-m-d H:i:s'); 
                 $newTask->is_complete = 0;
         		$newTask->save();
         	}

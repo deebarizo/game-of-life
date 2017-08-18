@@ -18,14 +18,14 @@ class RunDailyProcessTest extends TestCase
         	'id' => 1,
         	'name' => 'Not from Latest Date',
         	'is_daily' => 1,
-        	'updated_at' => '2017-06-12 06:47:39'
+        	'created_at' => '2017-06-12 06:47:39'
         ]);
 
         $task = factory('App\Task')->create([
         	'id' => 2,
         	'is_daily' => 1,
         	'name' => 'Valid Task #2',
-        	'updated_at' => '2017-06-13 04:53:15',
+        	'created_at' => '2017-06-13 04:53:15',
             'is_complete' => 1, 
         	'order' => 20
         ]);
@@ -35,14 +35,14 @@ class RunDailyProcessTest extends TestCase
         	'is_daily' => 0,
         	'name' => 'Not a Daily Task',
         	'is_complete' => 1,
-        	'updated_at' => '2017-06-13 04:53:15'
+        	'created_at' => '2017-06-13 04:53:15'
         ]);
 
         $task = factory('App\Task')->create([
         	'id' => 4,
         	'is_daily' => 1,
         	'name' => 'Valid Task #1',
-        	'updated_at' => '2017-06-13 04:53:15',
+        	'created_at' => '2017-06-13 04:53:15',
             'is_complete' => 1,
         	'order' => 10
         ]);
@@ -54,7 +54,7 @@ class RunDailyProcessTest extends TestCase
 
         $dailyTasksProcessor->generate_daily_tasks($todayDate);
 
-        $tasks = Task::where('updated_at', 'LIKE', $dateString.'%')->orderBy('order', 'asc')->get();
+        $tasks = Task::where('created_at', 'LIKE', $dateString.'%')->orderBy('order', 'asc')->get();
 
         $this->assertEquals($tasks[0]->name, 'Valid Task #1');
         $this->assertEquals($tasks[1]->name, 'Valid Task #2');
@@ -72,7 +72,7 @@ class RunDailyProcessTest extends TestCase
         	'id' => 2,
         	'is_daily' => 1,
         	'name' => 'Valid Task #2',
-        	'updated_at' => '2017-06-13 04:53:15',
+        	'created_at' => '2017-06-13 04:53:15',
         	'order' => 20
         ]);
 
@@ -90,7 +90,7 @@ class RunDailyProcessTest extends TestCase
         	'id' => 4,
         	'is_daily' => 1,
         	'name' => 'Valid Task #1',
-        	'updated_at' => '2017-06-13 04:53:15',
+        	'created_at' => '2017-06-13 04:53:15',
         	'order' => 10
         ]);
 
@@ -101,13 +101,13 @@ class RunDailyProcessTest extends TestCase
 
         $dailyTasksProcessor->generate_daily_tasks($todayDate);
 
-        $tasks = Task::where('updated_at', 'LIKE', $dateString.'%')->orderBy('order', 'asc')->get();
+        $tasks = Task::where('created_at', 'LIKE', $dateString.'%')->orderBy('order', 'asc')->get();
 
         $this->assertEquals($tasks[0]->name, 'Incomplete Non-Daily Task');
         $this->assertEquals($tasks[1]->name, 'Valid Task #1');
         $this->assertEquals($tasks[2]->name, 'Valid Task #2');
 
-        $dateString = $tasks[2]->updated_at->format('Y-m-d');
+        $dateString = $tasks[2]->created_at->format('Y-m-d');
         $this->assertContains($dateString, '2017-06-14');
     }
 
