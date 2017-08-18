@@ -104,7 +104,7 @@ class TasksController extends Controller
     {
         $this->process_form_submission($task, $request);
 
-        return redirect('/');
+        return redirect('/tasks');
     }
 
     /**
@@ -130,13 +130,23 @@ class TasksController extends Controller
         $order = trim($request->input('order'));
 
         $task->name = request('name');
-        $task->is_complete = $task->is_complete;
         $task->is_daily = request('is_daily');
         $task->image_id = request('image_id');
         $task->is_in_history = request('is_in_history');
         $task->description = request('description');
         $task->link = request('link');
         $task->order = ($order == '' || $order == null ? 0 : $order);
+
+        $isComplete = $request->input('is_complete');
+
+        if ($isComplete) {
+            $date = new \DateTime();
+            $task->completed_at = $date->format("Y-m-d H:i:s");
+        } else {
+            $task->completed_at = null;
+        }
+
+        $task->is_complete = $isComplete;
 
         $task->save();
     }
@@ -153,7 +163,7 @@ class TasksController extends Controller
         $todayDate = new \DateTime;
         $dateString = $todayDate->format('Y-m-d');
 
-        $tasks = Task::where('updated_at', 'LIKE', $dateString.'%')->orderBy('order', 'asc')->get();
+        $tasks = Task::where('created_at', 'LIKE', $dateString.'%')->orderBy('order', 'asc')->get();
     
         return view('tasks/daily_tasks', compact('h2Tag', 'tasks'));
     }

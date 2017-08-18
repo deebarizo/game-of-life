@@ -22,7 +22,7 @@ class CollectionGrouper {
 
             switch ($model) {
                 case 'Task':
-                    $modelsByDate = Task::where('updated_at', 'LIKE', $dateString.'%')->where('is_in_history', true)->orderBy('order', 'asc')->get();
+                    $modelsByDate = Task::where('created_at', 'LIKE', $dateString.'%')->where('is_in_history', true)->orderBy('order', 'asc')->get();
                     break;
                 
                 case 'BadHabit':

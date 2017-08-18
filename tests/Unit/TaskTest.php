@@ -13,31 +13,31 @@ class TaskTest extends TestCase
     {
         $task = factory('App\Task')->create([
         	'id' => 1,
-        	'updated_at' => '2017-06-09 04:42:30',
+        	'created_at' => '2017-06-09 04:42:30',
             'is_in_history' => 1
         ]);
 
         $task = factory('App\Task')->create([
         	'id' => 2,
-        	'updated_at' => '2017-06-12 06:46:55',
+        	'created_at' => '2017-06-12 06:46:55',
             'is_in_history' => 1
         ]);
 
         $task = factory('App\Task')->create([
         	'id' => 3,
-        	'updated_at' => '2017-06-12 06:47:39',
+        	'created_at' => '2017-06-12 06:47:39',
             'is_in_history' => 1
         ]);
 
         $task = factory('App\Task')->create([
         	'id' => 4,
-        	'updated_at' => '2017-06-13 04:53:15',
+        	'created_at' => '2017-06-13 04:53:15',
             'is_in_history' => 1
         ]);
 
         $task = factory('App\Task')->create([
             'id' => 5,
-            'updated_at' => '2017-06-13 04:53:15',
+            'created_at' => '2017-06-13 04:53:15',
             'is_in_history' => 0
         ]);
 

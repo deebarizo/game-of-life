@@ -73,6 +73,16 @@
 </div>
 
 <div class="row">
+	<div class="col-lg-3"> 
+		<div class="form-group">
+			<label for="is_complete">Was This Task Completed?</label><br>
+			<label class="radio-inline"><input type="radio" name="is_complete" value="1" {{ (old('is_complete', $task->is_complete) == 1) ? 'checked="checked"' : '' }}>Yes</label>
+			<label class="radio-inline"><input type="radio" name="is_complete" value="0" {{ (old('is_complete', $task->is_complete) == 0) ? 'checked="checked"' : '' }}>No</label>
+		</div>
+	</div>
+</div>
+
+<div class="row">
 	<div class="col-lg-12" style="margin-top: 25px"> 
 		<input class="btn btn-primary" type="submit" value="{{ $submitButtonText }}">
 	</div>
