@@ -7,12 +7,12 @@ class DailyTasksProcessor {
 
     public function generate_daily_tasks($todayDate) 
     {
-        $carbonDate = Task::select('updated_at')->orderBy('updated_at', 'desc')->pluck('updated_at')->first();
+        $carbonDate = Task::select('created_at')->orderBy('created_at', 'desc')->pluck('created_at')->first();
 
         if ($carbonDate) {
             $dateString = $carbonDate->format('Y-m-d');
 
-            $tasks = Task::where('updated_at', 'LIKE', $dateString.'%')
+            $tasks = Task::where('created_at', 'LIKE', $dateString.'%')
                         ->where(function($query) {
                             return $query->where('is_daily', 1)
                                         ->orWHere('is_complete', 0);
