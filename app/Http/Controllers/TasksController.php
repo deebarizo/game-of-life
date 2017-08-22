@@ -161,6 +161,8 @@ class TasksController extends Controller
         $h2Tag = 'Daily Tasks'; 
 
         $todayDate = new \DateTime;
+        $todayDate->modify('-6 hours');
+
         $dateString = $todayDate->format('Y-m-d');
 
         $tasks = Task::where('created_at', 'LIKE', $dateString.'%')->orderBy('order', 'asc')->get();
