@@ -21,7 +21,7 @@ class BadHabitsController extends Controller
 
         $todayDate = new \DateTime();
 
-        $badHabitsGroupedByDate = BadHabit::groupByDate(5, $todayDate);
+        $badHabitsGroupedByDate = BadHabit::groupByDate(15, $todayDate);
     
         return view('bad_habits/index', compact('h2Tag', 'badHabitsGroupedByDate'));
     }
