@@ -8,6 +8,7 @@ class DailyTasksProcessor {
     public function generate_daily_tasks($todayDate) 
     {
         $carbonDate = Task::select('created_at')->orderBy('created_at', 'desc')->pluck('created_at')->first();
+        $todayDate->modify('-6 hours');
 
         if ($carbonDate) {
             $dateString = $carbonDate->format('Y-m-d');
@@ -41,6 +42,9 @@ class DailyTasksProcessor {
         foreach ($tasks as $task) {
         	if ($task->is_complete == 0 && $task->is_daily == 0) {
         		$task->created_at = $date->format('Y-m-d H:i:s');
+
+                $task->completed_at = null;
+
         		$task->save();
         		continue;
         	}
@@ -48,7 +52,11 @@ class DailyTasksProcessor {
         	if ($task->is_daily = 1) {
         		$newTask = $task->replicate();
         		$newTask->created_at = $date->format('Y-m-d H:i:s'); 
+
                 $newTask->is_complete = 0;
+
+                $task->completed_at = null;
+
         		$newTask->save();
         	}
         }

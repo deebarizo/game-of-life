@@ -140,13 +140,18 @@ class TasksController extends Controller
         $isComplete = $request->input('is_complete');
 
         if ($isComplete) {
-            $date = new \DateTime();
+            $date = new \DateTime;
             $task->completed_at = $date->format("Y-m-d H:i:s");
         } else {
             $task->completed_at = null;
         }
 
         $task->is_complete = $isComplete;
+
+        $todayDate = new \DateTime;
+        $todayDate->modify('-6 hours');
+
+        $task->created_at = $todayDate->format('Y-m-d');
 
         $task->save();
     }
