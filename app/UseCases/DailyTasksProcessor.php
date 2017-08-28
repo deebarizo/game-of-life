@@ -8,7 +8,8 @@ class DailyTasksProcessor {
     public function generate_daily_tasks($todayDate) 
     {
         $carbonDate = Task::select('created_at')->orderBy('created_at', 'desc')->pluck('created_at')->first();
-        $todayDate->modify('-6 hours');
+        $timeDiff = config('settings.time_diff');
+        $todayDate->modify($timeDiff);
 
         if ($carbonDate) {
             $dateString = $carbonDate->format('Y-m-d');
@@ -35,37 +36,43 @@ class DailyTasksProcessor {
             $badHabits = [];
         }
 
-        $date = clone $todayDate;
-
-        # ddAll($tasks);
-
         foreach ($tasks as $task) {
         	if ($task->is_complete == 0 && $task->is_daily == 0) {
-        		$task->created_at = $date->format('Y-m-d H:i:s');
+                $newTask = new Task;
 
-                $task->completed_at = null;
+                $newTask = $task->replicate();
+        		$newTask->created_at = $todayDate->format('Y-m-d H:i:s');
 
-        		$task->save();
+                $newTask->completed_at = null;
+
+        		$newTask->save();
+
         		continue;
         	}
 
         	if ($task->is_daily = 1) {
+                $newTask = new Task;
+
         		$newTask = $task->replicate();
-        		$newTask->created_at = $date->format('Y-m-d H:i:s'); 
+        		$newTask->created_at = $todayDate->format('Y-m-d H:i:s'); 
 
                 $newTask->is_complete = 0;
 
-                $task->completed_at = null;
+                $newTask->completed_at = null;
 
         		$newTask->save();
         	}
         }
 
         foreach ($badHabits as $badHabit) {
+            $newBadHabit = new BadHabit;
+
             $newBadHabit = $badHabit->replicate();
-            $newBadHabit->created_at = $date->format('Y-m-d H:i:s'); 
+            $newBadHabit->created_at = $todayDate->format('Y-m-d H:i:s'); 
             $newBadHabit->is_success = 1;
             $newBadHabit->save();
         }
+
+        return $todayDate->format('Y-m-d');
     }
 }

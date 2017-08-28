@@ -149,7 +149,8 @@ class TasksController extends Controller
         $task->is_complete = $isComplete;
 
         $todayDate = new \DateTime;
-        $todayDate->modify('-6 hours');
+        $timeDiff = config('settings.time_diff');
+        $todayDate->modify($timeDiff);
 
         $task->created_at = $todayDate->format('Y-m-d');
 
@@ -166,7 +167,8 @@ class TasksController extends Controller
         $h2Tag = 'Daily Tasks'; 
 
         $todayDate = new \DateTime;
-        $todayDate->modify('-6 hours');
+        $timeDiff = config('settings.time_diff');
+        $todayDate->modify($timeDiff);
 
         $dateString = $todayDate->format('Y-m-d');
 

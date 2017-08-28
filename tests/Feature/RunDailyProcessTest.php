@@ -48,11 +48,10 @@ class RunDailyProcessTest extends TestCase
         ]);
 
         $todayDate = new \DateTime('2017-06-15');
-        $dateString = $todayDate->format('Y-m-d');
 
         $dailyTasksProcessor = new DailyTasksProcessor;
 
-        $dailyTasksProcessor->generate_daily_tasks($todayDate);
+        $dateString = $dailyTasksProcessor->generate_daily_tasks($todayDate);
 
         $tasks = Task::where('created_at', 'LIKE', $dateString.'%')->orderBy('order', 'asc')->get();
 
@@ -72,7 +71,7 @@ class RunDailyProcessTest extends TestCase
         	'id' => 2,
         	'is_daily' => 1,
         	'name' => 'Valid Task #2',
-        	'created_at' => '2017-06-13 04:53:15',
+        	'created_at' => '2017-06-11 04:53:15',
         	'order' => 20
         ]);
 
@@ -81,8 +80,8 @@ class RunDailyProcessTest extends TestCase
         	'is_daily' => 0,
         	'name' => 'Incomplete Non-Daily Task',
         	'is_complete' => 0,
-            'created_at' => '2017-06-13 04:53:15',
-        	'updated_at' => '2017-06-13 04:53:15',
+            'created_at' => '2017-06-11 04:53:15',
+        	'updated_at' => '2017-06-11 04:53:15',
         	'order' => 5
         ]);
 
@@ -90,16 +89,15 @@ class RunDailyProcessTest extends TestCase
         	'id' => 4,
         	'is_daily' => 1,
         	'name' => 'Valid Task #1',
-        	'created_at' => '2017-06-13 04:53:15',
+        	'created_at' => '2017-06-11 04:53:15',
         	'order' => 10
         ]);
 
         $todayDate = new \DateTime('2017-06-14');
-        $dateString = $todayDate->format('Y-m-d');
 
         $dailyTasksProcessor = new DailyTasksProcessor;
 
-        $dailyTasksProcessor->generate_daily_tasks($todayDate);
+        $dateString = $dailyTasksProcessor->generate_daily_tasks($todayDate);
 
         $tasks = Task::where('created_at', 'LIKE', $dateString.'%')->orderBy('order', 'asc')->get();
 
@@ -107,8 +105,8 @@ class RunDailyProcessTest extends TestCase
         $this->assertEquals($tasks[1]->name, 'Valid Task #1');
         $this->assertEquals($tasks[2]->name, 'Valid Task #2');
 
-        $dateString = $tasks[2]->created_at->format('Y-m-d');
-        $this->assertContains($dateString, '2017-06-14');
+        $createdAtDateString = $tasks[2]->created_at->format('Y-m-d');
+        $this->assertContains($dateString, $createdAtDateString);
     }
 
     /** @test */
@@ -136,11 +134,10 @@ class RunDailyProcessTest extends TestCase
         ]);
 
         $todayDate = new \DateTime('2017-06-15');
-        $dateString = $todayDate->format('Y-m-d');
 
         $dailyTasksProcessor = new DailyTasksProcessor;
 
-        $dailyTasksProcessor->generate_daily_tasks($todayDate);
+        $dateString = $dailyTasksProcessor->generate_daily_tasks($todayDate);
 
         $badHabits = BadHabit::where('created_at', 'LIKE', $dateString.'%')->orderBy('id', 'asc')->get();
 
