@@ -21,6 +21,8 @@ class TasksController extends Controller
         $h2Tag = 'Tasks'; 
 
         $todayDate = new \DateTime();
+        $timeDiff = config('settings.time_diff');
+        $todayDate->modify($timeDiff);
 
         $tasksGroupedByDate = Task::groupByDate(15, $todayDate);
     

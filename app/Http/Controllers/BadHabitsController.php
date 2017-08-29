@@ -20,6 +20,8 @@ class BadHabitsController extends Controller
         $h2Tag = 'Bad Habits'; 
 
         $todayDate = new \DateTime();
+        $timeDiff = config('settings.time_diff');
+        $todayDate->modify($timeDiff);
 
         $badHabitsGroupedByDate = BadHabit::groupByDate(15, $todayDate);
     
