@@ -106,7 +106,7 @@ class TasksController extends Controller
     {
         $this->process_form_submission($task, $request);
 
-        return redirect('/tasks');
+        return redirect('/');
     }
 
     /**
