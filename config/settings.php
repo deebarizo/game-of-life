@@ -15,5 +15,5 @@ return [
     |
     */
 
-    'time_diff' => env('TIME_DIFF','-4 hours')
+    'time_diff' => env('TIME_DIFF','+0 hours')
 ];

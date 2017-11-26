@@ -24,8 +24,9 @@
 
 						<thead>
 							<tr>
-								<th style="width: 60%">Name</th> 
-								<th style="width: 40%">Order</th> 
+								<th style="width: 30%">Name</th> 
+								<th style="width: 60%">Description</th> 
+								<th style="width: 10%">Order</th> 
 							</tr> 
 						</thead> 
 
@@ -34,6 +35,7 @@
 								@foreach ($tasks as $task)
 									<tr>
 										<td><a style="{!! $task->is_complete_html() !!}" href="{{ $task->path().'/edit' }}">{{ $task->name }}</a> @include('tasks.task_icons_for_index')</td>
+										<td>{{ $task->description }}</td>
 										<td>{{ $task->order }}</td>
 									</tr>
 								@endforeach
